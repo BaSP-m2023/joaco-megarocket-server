@@ -18,11 +18,11 @@ Start the server:
  npm start
 ```
 
- View the server at: http://localhost:4000
+View the server at: http://localhost:4000
 
 <br>
 
- ### Running Linters
+### Running Linters
 
 To run the linters tool [Eslint](https://eslint.org/), first install the dependencies, then run:
 
@@ -41,11 +41,9 @@ npm run lint:fix
 ### Members
 
 (example)
-|Photo | Name  | Mail | Github
+|Photo | Name | Mail | Github
 | :-----: | :-----: | :-----: | :-----: |
 <img src="https://avatars.githubusercontent.com/u/20587232?v=4" height="50" width="50">| Esteban Frare | esteban.frare@radiumrocket.com | [@estefrare](https://github.com/estefrare)
-
-
 
 <br>
 
