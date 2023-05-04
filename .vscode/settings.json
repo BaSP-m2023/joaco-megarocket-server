@@ -15,4 +15,5 @@
   "[json]": {
     "editor.defaultFormatter": "vscode.json-language-features"
   },
+  "git.mergeEditor": false
 }
