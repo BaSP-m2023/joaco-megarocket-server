@@ -6,7 +6,7 @@ import cors from 'cors';
 const admins = require('./data/admins.json');
 
 const app = express();
-const port = process.env.PORT || 4001;
+const port = process.env.PORT || 4002;
 
 app.use(cors());
 app.use(express.json());
