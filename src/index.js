@@ -7,7 +7,11 @@ const admins = require('./data/admins.json');
 
 const app = express();
 const port = process.env.PORT || 4002;
+//
+const superadminRouter = require('./resources/super-admins');
 
+app.use('/superadmin', superadminRouter);
+//
 app.use(cors());
 app.use(express.json());
 
