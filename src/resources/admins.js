@@ -26,4 +26,21 @@ router.post('/', (req, res) => {
   }
 });
 
+router.delete('/:id', (req, res) => {
+  const adminId = req.params.id;
+  const existsAdmin = admins.some((admin) => admin.id === adminId);
+  if (existsAdmin) {
+    const filtered = admins.filter((admin) => admin.id !== adminId);
+    fs.writeFile('src/data/admins.json', JSON.stringify(filtered, null, 2), (err) => {
+      if (err) {
+        res.status(400).json({ msg: `Error! Admin with ID ${adminId} cannot be deleted` });
+      } else {
+        res.status(200).json({ msg: `Admin with ID ${adminId} was deleted succesfully!` });
+      }
+    });
+  } else {
+    res.status(400).json({ msg: `Admin with ID ${adminId} does not exist` });
+  }
+});
+
 module.exports = router;
