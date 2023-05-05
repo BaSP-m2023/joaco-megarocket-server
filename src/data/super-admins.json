@@ -12,5 +12,19 @@
     "last_name": "Cosgreave",
     "email": "lcosgreave1@home.pl",
     "password": "lQNpDf"
+  },
+  {
+    "id": "3",
+    "first_name": "Vic",
+    "last_name": "Sol",
+    "email": "vicsol@reverbnation.com",
+    "password": "ddwKKvP"
+  },
+  {
+    "id": "3",
+    "first_name": "Caca",
+    "last_name": "Cacas",
+    "email": "caca0@reverbnation.com",
+    "password": "ddwKKvP"
   }
 ]
