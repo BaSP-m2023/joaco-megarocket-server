@@ -25,3 +25,6 @@ app.listen(port, () => {
   // eslint-disable-next-line no-console
   console.log(`Example app listening on port ${port}`);
 });
+
+const activityRouter = require('./resources/activity');
+app.use('/activity', activityRouter);
