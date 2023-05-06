@@ -7,12 +7,18 @@ const members = require('../data/member.json');
 router.use(express.urlencoded({ extended: false }));
 
 router.get('/', (req, res) => {
-  res.send(members);
+  const { firstName } = req.query;
+  if (!firstName) {
+    res.send(members);
+  }
+  const filteredMembers = members.filter((member) => member.first_name === firstName);
+  res.send(filteredMembers);
 });
 
 router.get('/:id', (req, res) => {
   const { id } = req.params;
   const memberFound = members.find((member) => member.id.toString() === id);
+  // eslint-disable-next-line no-unused-expressions
   (memberFound) ? res.send(memberFound) : res.send('Member not exist');
 });
 
@@ -23,27 +29,10 @@ router.delete('/:id', (req, res) => {
     'src/data/member.json',
     JSON.stringify(filterMembers, null),
     (err) => {
-      err ? res.send('Member cannot deleted') : res.send('Member Deleted!');
+      // eslint-disable-next-line no-unused-expressions
+      err ? res.send('Member cannot be deleted') : res.send('Member Deleted!');
     },
   );
-});
-
-router.post('/', (req, res) => {
-  const member = req.body;
-  members.push(member);
-  res.send(`Usuario agregado: ${JSON.stringify(member.name)}`);
-});
-
-router.post('/', (req, res) => {
-  const member = req.body;
-  fs.readFile('src/data/member.json', (err) => {
-    if (err) throw err;
-    members.push(member);
-    fs.writeFile('src/data/member.json', JSON.stringify(members), (err) => {
-      if (err) throw err;
-      res.send(`Usuario agregado: ${JSON.stringify(member.name)}`);
-    });
-  });
 });
 
 module.exports = router;
