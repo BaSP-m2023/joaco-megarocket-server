@@ -8,23 +8,9 @@
   },
   {
     "id": "2",
-    "first_name": "Lois",
-    "last_name": "Cosgreave",
-    "email": "lcosgreave1@home.pl",
-    "password": "lQNpDf"
-  },
-  {
-    "id": "3",
-    "first_name": "Vic",
-    "last_name": "Sol",
-    "email": "vicsol@reverbnation.com",
-    "password": "ddwKKvP"
-  },
-  {
-    "id": "3",
-    "first_name": "Caca",
-    "last_name": "Cacas",
-    "email": "caca0@reverbnation.com",
+    "first_name": "Baby",
+    "last_name": "Shark",
+    "email": "sharks@reverbnation.com",
     "password": "ddwKKvP"
   }
 ]

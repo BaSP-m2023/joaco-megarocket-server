@@ -18,13 +18,25 @@ router.get('/getById/:id', (req, res) => {
 });
 
 router.post('/post', (req, res) => {
-  const newSuperAdmin = req.body;
-  superadmin.push(newSuperAdmin);
+  const newSuperadmin = req.body;
+  superadmin.push(newSuperadmin);
   fs.writeFile('src/data/super-admins.json', JSON.stringify(superadmin, null, 2), (err) => {
     if (err) {
       res.send('Superadmin cannot be created');
     } else {
       res.send('Superadmin created');
+    }
+  });
+});
+
+router.delete('/:id', (req, res) => {
+  const superadminId = req.params.id;
+  const filteredUsers = superadmin.filter((user) => user.id !== superadminId);
+  fs.writeFile('src/data/super-admins.json', JSON.stringify(filteredUsers, null, 2), (err) => {
+    if (err) {
+      res.send('Superadmin cannot be deleted');
+    } else {
+      res.send('Superadmin deleted');
     }
   });
 });
