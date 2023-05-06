@@ -9,8 +9,8 @@ router.get('/', (req, res) => {
 });
 
 router.get('/:id', (req, res) => {
-  const userId = req.params.id;
-  const found = superadmins.find((user) => user.id === userId);
+  const superadminId = req.params.id;
+  const found = superadmins.find((user) => user.id === superadminId);
   if (found) {
     res.send(found);
   } else {
@@ -20,14 +20,24 @@ router.get('/:id', (req, res) => {
 
 router.post('/', (req, res) => {
   const newSuperadmin = req.body;
-  superadmins.push(newSuperadmin);
-  fs.writeFile('src/data/super-admins.json', JSON.stringify(superadmins, null, 2), (err) => {
-    if (err) {
-      res.send('Superadmin cannot be created');
-    } else {
-      res.send('Superadmin created');
-    }
-  });
+  const found = superadmins.find((superadmin) => superadmin.id === newSuperadmin.id);
+  if (found) {
+    res.send('A superadmin with that ID already exists');
+  } else if (!newSuperadmin.first_name
+             || !newSuperadmin.last_name
+             || !newSuperadmin.email
+             || !newSuperadmin.password) {
+    res.send('Please send complete information');
+  } else {
+    superadmins.push(newSuperadmin);
+    fs.writeFile('src/data/super-admins.json', JSON.stringify(superadmins, null, 2), (err) => {
+      if (err) {
+        res.send('Superadmin cannot be created');
+      } else {
+        res.send('Superadmin created');
+      }
+    });
+  }
 });
 
 router.delete('/:id', (req, res) => {
@@ -51,7 +61,15 @@ router.put('/:id', (req, res) => {
     found.last_name = updSuperadmin.last_name ? updSuperadmin.last_name : found.last_name;
     found.email = updSuperadmin.email ? updSuperadmin.email : found.email;
     found.password = updSuperadmin.password ? updSuperadmin.password : found.password;
-    res.send(found);
+    const toReplace = superadmins.indexOf(found);
+    superadmins.splice(toReplace, 1, found);
+    fs.writeFile('src/data/super-admins.json', JSON.stringify(superadmins, null, 2), (err) => {
+      if (err) {
+        res.send('Superadmin cannot be edited');
+      } else {
+        res.send('Superadmin edited');
+      }
+    });
   } else {
     res.send('A superadmin with that ID doesnt exist');
   }

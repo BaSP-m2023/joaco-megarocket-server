@@ -1,14 +1,21 @@
 [
   {
     "id": "1",
-    "first_name": "Barby",
-    "last_name": "Ketch",
+    "first_name": "Ale",
+    "last_name": "Gomas",
     "email": "bketch0@reverbnation.com",
-    "password": "ddwKKvP"
+    "password": "barbucha"
   },
   {
     "id": "2",
     "first_name": "Baby",
+    "last_name": "Shark",
+    "email": "sharks@reverbnation.com",
+    "password": "ddwKKvP"
+  },
+  {
+    "id": "3",
+    "first_name": "Martus",
     "last_name": "Shark",
     "email": "sharks@reverbnation.com",
     "password": "ddwKKvP"
