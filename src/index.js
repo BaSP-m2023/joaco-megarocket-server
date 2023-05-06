@@ -27,4 +27,5 @@ app.listen(port, () => {
 });
 
 const activityRouter = require('./resources/activity');
+
 app.use('/activity', activityRouter);
