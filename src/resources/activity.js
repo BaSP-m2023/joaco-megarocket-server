@@ -1,6 +1,7 @@
 /* eslint-disable no-const-assign */
 /* eslint-disable radix */
 const express = require('express');
+const fs = require('fs');
 const activities = require('../data/activity.json');
 
 const router = express.Router();
@@ -23,11 +24,20 @@ router.get('/getById/:id', (req, res) => {
 
 router.post('/post', (req, res) => {
   const newActivity = req.body;
+  const activityRepeat = activities.find((activity) => activity.id === newActivity.id);
+  if (activityRepeat) {
+    res.send('Activity already exists');
+  }
   activities.push(newActivity);
-  res.send('Activity created!');
+  fs.writeFile('src/data/activity.json', JSON.stringify(activities, null, 2), (error) => {
+    if (error) {
+      res.send('Activity can not be created');
+    }
+    res.send('Activity created');
+  });
 });
 
-router.put('/actividades/:id', (req, res) => {
+router.put('/activities/:id', (req, res) => {
   const activityid = parseInt(req.params.id);
   const foundActivity = activities.find(
     (activity) => activity.id === activityid,
