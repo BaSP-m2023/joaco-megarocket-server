@@ -53,5 +53,27 @@
     "email": "lchastel4@github.io",
     "password": "0NIQUm",
     "membership": "Only Classes"
+  },
+  {
+    "id": 6,
+    "first_name": "Delfi",
+    "last_name": "Chastel",
+    "address": "Suite 10",
+    "date": "6/28/2022",
+    "phone": "(247) 7502533",
+    "email": "lchastel4@gasd.com",
+    "password": "0NIQUm",
+    "membership": "clases"
+  },
+  {
+    "id": 7,
+    "first_name": "Fran",
+    "last_name": "Chastel",
+    "address": "Suite 10",
+    "date": "6/28/2022",
+    "phone": "(247) 7502533",
+    "email": "lchastel4@gasd.com",
+    "password": "0NIQUm",
+    "membership": "clases"
   }
 ]
