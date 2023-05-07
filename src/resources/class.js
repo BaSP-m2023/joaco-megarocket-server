@@ -25,7 +25,7 @@ router.post('/new', (req, res) => {
     if (err) {
       res.send('User cannot be created');
     } else {
-      res.send('User created!');
+      res.send('User created successfully!');
     }
   });
 });
