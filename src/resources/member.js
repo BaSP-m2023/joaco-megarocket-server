@@ -19,11 +19,15 @@ router.get('/:id', (req, res) => {
   const { id } = req.params;
   const memberFound = members.find((member) => member.id.toString() === id);
   // eslint-disable-next-line no-unused-expressions
-  (memberFound) ? res.send(memberFound) : res.send('Member not exist');
+  (memberFound) ? res.send(memberFound) : res.send("Member doesn't exists");
 });
 
 router.delete('/:id', (req, res) => {
   const { id } = req.params;
+  const memberFounded = members.find((member) => member.id.toString() === id);
+  if (!memberFounded) {
+    res.send("Member doesn't exists");
+  }
   const filterMembers = members.filter((member) => member.id.toString() !== id);
   fs.writeFile(
     'src/data/member.json',
