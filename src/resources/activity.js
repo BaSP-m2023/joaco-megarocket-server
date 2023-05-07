@@ -1,7 +1,5 @@
-/* eslint-disable no-const-assign */
-/* eslint-disable radix */
 const express = require('express');
-const activities = require('../data/activity.json');
+let activities = require('../data/activity.json');
 
 const router = express.Router();
 
@@ -27,16 +25,16 @@ router.post('/post', (req, res) => {
   res.send('Activity created!');
 });
 
-router.put('/actividades/:id', (req, res) => {
-  const activityid = parseInt(req.params.id);
-  const foundActivity = activities.find(
-    (activity) => activity.id === activityid,
+router.put('/', (req, res) => {
+  const activityPut = req.params.id;
+  const editedActivity = activities.find(
+    (activity) => activity.id === activityPut,
   );
 
-  if (foundActivity) {
+  if (editedActivity) {
     const activityUpdated = req.body;
     activities = activities.map((activity) => {
-      if (activity.id === activityid) {
+      if (activity.id === activityPut) {
         return { ...activity, ...activityUpdated };
       }
       return activity;
@@ -48,14 +46,14 @@ router.put('/actividades/:id', (req, res) => {
   }
 });
 
-router.delete('/activities/:id', (req, res) => {
-  const activityid = parseInt(req.params.id);
-  const foundActivity = activities.find(
-    (activity) => activity.id === activityid,
+router.delete('/:id', (req, res) => {
+  const activityDelete = req.params.id;
+  const deletedActivity = activities.find(
+    (activity) => activity.id === activityDelete,
   );
 
-  if (foundActivity) {
-    activities = activities.filter((activity) => activity.id !== activityid);
+  if (deletedActivity) {
+    activities = activities.filter((activity) => activity.id !== activityDelete);
     res.send('Activity deleted!');
   } else {
     res.send('Activity not found');
