@@ -1,0 +1,52 @@
+[
+  {
+    "id": 1,
+    "email": "cede0@pbs.org",
+    "Password": "GOhrytVfXY7",
+    "first_name": "Cody",
+    "last_name": "Ede",
+    "DNI": 8879824,
+    "phone": "262-996-6807",
+    "location": "045 Sullivan Trail"
+  },
+  {
+    "id": 2,
+    "email": "mbraunthal1@ehow.com",
+    "Password": "qJ03wGiti0ok",
+    "first_name": "Merissa",
+    "last_name": "Braunthal",
+    "DNI": 9090734,
+    "phone": "385-592-0544",
+    "location": "8 Sutherland Trail"
+  },
+  {
+    "id": 3,
+    "email": "bquinion2@amazon.co.jp",
+    "Password": "WBZr1bX4SL",
+    "first_name": "Betteann",
+    "last_name": "Quinion",
+    "DNI": 10213903,
+    "phone": "559-527-6891",
+    "location": "56977 Clarendon Pass"
+  },
+  {
+    "id": 4,
+    "email": "pivakhin3@state.gov",
+    "Password": "h6R7BkouRIiM",
+    "first_name": "Pearline",
+    "last_name": "Ivakhin",
+    "DNI": 22194633,
+    "phone": "835-838-4205",
+    "location": "975 American Avenue"
+  },
+  {
+    "id": 5,
+    "email": "cvilla4@fc2.com",
+    "Password": "MDMbNUD",
+    "first_name": "Caron",
+    "last_name": "Villa",
+    "DNI": 1479498,
+    "phone": "365-467-5551",
+    "location": "3877 Lerdahl Lane"
+  }
+]
