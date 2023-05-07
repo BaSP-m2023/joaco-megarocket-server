@@ -1,4 +1,5 @@
 const express = require('express');
+const fs = require('fs');
 let activities = require('../data/activity.json');
 
 const router = express.Router();
@@ -21,26 +22,40 @@ router.get('/getById/:id', (req, res) => {
 
 router.post('/post', (req, res) => {
   const newActivity = req.body;
+  const activityRepeat = activities.find((activity) => activity.id === newActivity.id);
+  if (activityRepeat) {
+    res.send('Activity already exists');
+  }
   activities.push(newActivity);
-  res.send('Activity created!');
+  fs.writeFile('src/data/activity.json', JSON.stringify(activities, null, 2), (error) => {
+    if (error) {
+      res.send('Activity can not be created');
+    }
+    res.send('Activity created');
+  });
 });
 
-router.put('/', (req, res) => {
+router.put('/activities/:id', (req, res) => {
   const activityPut = req.params.id;
-  const editedActivity = activities.find(
-    (activity) => activity.id === activityPut,
-  );
+  const activityToUpdate = activities.find((activity) => activity.id === activityPut);
 
-  if (editedActivity) {
-    const activityUpdated = req.body;
+  if (activityToUpdate) {
+    const { description } = req.body;
+    const updatedActivity = { ...activityToUpdate, description };
     activities = activities.map((activity) => {
       if (activity.id === activityPut) {
-        return { ...activity, ...activityUpdated };
+        return updatedActivity;
       }
       return activity;
     });
 
-    res.send('Activity updated!');
+    fs.writeFile('src/data/activity.json', JSON.stringify(activities, null, 2), (error) => {
+      if (error) {
+        res.send('Error updating activity');
+      } else {
+        res.send('Activity updated successfully');
+      }
+    });
   } else {
     res.send('Activity not found');
   }
@@ -48,16 +63,14 @@ router.put('/', (req, res) => {
 
 router.delete('/:id', (req, res) => {
   const activityDelete = req.params.id;
-  const deletedActivity = activities.find(
-    (activity) => activity.id === activityDelete,
-  );
-
-  if (deletedActivity) {
-    activities = activities.filter((activity) => activity.id !== activityDelete);
-    res.send('Activity deleted!');
-  } else {
-    res.send('Activity not found');
-  }
+  const filterActivity = activities.filter((activity) => activity.id !== activityDelete);
+  fs.writeFile('src/data/activity.json', JSON.stringify(filterActivity, null, 2), (error) => {
+    if (error) {
+      res.send('Activity can not be deleted');
+    } else {
+      res.send('Activity deleted');
+    }
+  });
 });
 
 module.exports = router;
