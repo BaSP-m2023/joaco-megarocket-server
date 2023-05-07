@@ -4,25 +4,26 @@ const admins = require('../data/admins.json');
 
 const router = express.Router();
 
-router.get('/', (req, res) => {
-  res.status(200).json({
-    data: admins,
-  });
-});
-
 router.post('/', (req, res) => {
   const newAdmin = req.body;
-  if (Object.keys(newAdmin).length > 0) {
-    admins.push(newAdmin);
-    fs.writeFile('src/data/admins.json', JSON.stringify(admins, null, 2), (err) => {
-      if (err) {
-        res.status(400).json({ msg: 'Error! Admin cannot be created' });
-      } else {
-        res.status(200).json({ msg: 'Admin created succesfully!' });
-      }
-    });
+  const requiredInfo = ['id', 'email', 'password', 'first_name', 'last_name', 'dni', 'phone'];
+  if (requiredInfo.every((field) => Object.prototype.hasOwnProperty.call(newAdmin, field)
+  && newAdmin[field])) {
+    const idExists = admins.some((admin) => admin.id === newAdmin.id);
+    if (idExists) {
+      res.status(400).json({ msg: `ID ${newAdmin.id} is already in use by another admin` });
+    } else {
+      admins.push(newAdmin);
+      fs.writeFile('src/data/admins.json', JSON.stringify(admins, null, 2), (err) => {
+        if (err) {
+          res.status(400).json({ msg: 'Error! Admin cannot be created' });
+        } else {
+          res.status(200).json({ msg: 'Admin created succesfully!' });
+        }
+      });
+    }
   } else {
-    res.status(400).json({ msg: 'Admin info is required' });
+    res.status(400).json({ msg: 'Admin info is incomplete or incorrect' });
   }
 });
 
