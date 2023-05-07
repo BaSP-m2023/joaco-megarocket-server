@@ -19,14 +19,14 @@ router.get('/:id', (req, res) => {
   const { id } = req.params;
   const memberFound = members.find((member) => member.id.toString() === id);
   // eslint-disable-next-line no-unused-expressions
-  (memberFound) ? res.send(memberFound) : res.send("Member doesn't exists");
+  (memberFound) ? res.status(200).send(memberFound) : res.status(400).send("Member doesn't exists");
 });
 
 router.delete('/:id', (req, res) => {
   const { id } = req.params;
   const memberFounded = members.find((member) => member.id.toString() === id);
   if (!memberFounded) {
-    res.send("Member doesn't exists");
+    res.status(400).send("Member doesn't exists");
   }
   const filterMembers = members.filter((member) => member.id.toString() !== id);
   fs.writeFile(
@@ -34,7 +34,7 @@ router.delete('/:id', (req, res) => {
     JSON.stringify(filterMembers, null),
     (err) => {
       // eslint-disable-next-line no-unused-expressions
-      err ? res.send('Member cannot be deleted') : res.send('Member Deleted!');
+      err ? res.status(400).send('Member cannot be deleted') : res.status(200).send('Member Deleted!');
     },
   );
 });
