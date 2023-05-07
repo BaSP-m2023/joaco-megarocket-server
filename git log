@@ -1,0 +1,38 @@
+[33mcommit b5af316f01a117db9a0a64ba2b67f89c4eb828b7[m[33m ([m[1;36mHEAD -> [m[1;32mmaster[m[33m, [m[1;31morigin/master[m[33m, [m[1;31morigin/HEAD[m[33m)[m
+Merge: c4ff13c 4906b6f
+Author: Joaquin Leimeter <leimeter.joaquin@gmail.com>
+Date:   Thu May 4 12:26:18 2023 -0300
+
+    Merge pull request #1 from BaSP-m2023/feature/MR/test
+    
+    MR: Change port
+
+[33mcommit 4906b6ffeef66d06f5bf72434ed1367f65d9810b[m
+Author: leimeter-joaquin <leimeter.joaquin@gmail.com>
+Date:   Thu May 4 12:23:00 2023 -0300
+
+    MR: resolve issue with port number
+
+[33mcommit 5542472ee906c21cf0ca9f690320562955bf576a[m
+Author: leimeter-joaquin <leimeter.joaquin@gmail.com>
+Date:   Thu May 4 11:54:30 2023 -0300
+
+    MR: Change port
+
+[33mcommit c4ff13c75b96b672f65990dcdc96d59ebbaed007[m
+Author: leimeter-joaquin <leimeter.joaquin@gmail.com>
+Date:   Thu May 4 09:44:33 2023 -0300
+
+    disable new merge editor from workspace
+
+[33mcommit 92082869d52b05f2397bf859ed70167933f923d7[m
+Author: leimeter-joaquin <leimeter.joaquin@gmail.com>
+Date:   Wed May 3 15:34:37 2023 -0300
+
+    modify formatter settings to match the airbnb config
+
+[33mcommit dc725f456ca449523941ccd37d0f0f6071a82189[m
+Author: Radium Rocket Learning <94553403+radiumlearning@users.noreply.github.com>
+Date:   Mon Apr 24 17:35:58 2023 -0300
+
+    Initial commit

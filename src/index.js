@@ -1,9 +1,11 @@
 // use "import" to import libraries
 import express from 'express';
 import cors from 'cors';
+// import classes from './resources/class';
 
 // use "require" to import JSON files
 const admins = require('./data/admins.json');
+const classRoute = require('./resources/class');
 
 const app = express();
 const port = process.env.PORT || 4002;
@@ -20,6 +22,9 @@ app.get('/admins', (req, res) => {
     data: admins,
   });
 });
+
+// app.use('/class', classes);
+app.use('/class', classRoute);
 
 app.listen(port, () => {
   // eslint-disable-next-line no-console
