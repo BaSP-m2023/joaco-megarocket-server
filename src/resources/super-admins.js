@@ -4,8 +4,28 @@ const superadmins = require('../data/super-admins.json');
 
 const router = express.Router();
 
-router.get('/', (req, res) => {
-  res.send(superadmins);
+router.get('/filter', (req, res) => {
+  let filtered = superadmins;
+  const { id, email } = req.query;
+  const firstName = req.query.first_name;
+  const lastName = req.query.last_name;
+
+  if (id) {
+    filtered = superadmins.filter((superadmin) => superadmin.id === id.toString());
+  }
+  if (firstName) {
+    filtered = superadmins.filter((superadmin) => superadmin.first_name === firstName);
+  }
+  if (lastName) {
+    filtered = superadmins.filter((superadmin) => superadmin.last_name === lastName);
+  }
+  if (email) {
+    filtered = superadmins.filter((superadmin) => superadmin.email === email);
+  }
+  if (filtered.length === 0) {
+    res.send('Superadmin not found');
+  }
+  res.send(filtered);
 });
 
 router.get('/:id', (req, res) => {
@@ -16,6 +36,10 @@ router.get('/:id', (req, res) => {
   } else {
     res.send('Superadmin not found');
   }
+});
+
+router.get('/', (req, res) => {
+  res.send(superadmins);
 });
 
 router.post('/', (req, res) => {
@@ -42,14 +66,19 @@ router.post('/', (req, res) => {
 
 router.delete('/:id', (req, res) => {
   const superadminId = req.params.id;
-  const filteredUsers = superadmins.filter((user) => user.id !== superadminId);
-  fs.writeFile('src/data/super-admins.json', JSON.stringify(filteredUsers, null, 2), (err) => {
-    if (err) {
-      res.send('Superadmin cannot be deleted');
-    } else {
-      res.send('Superadmin deleted');
-    }
-  });
+  const found = superadmins.find((superadmin) => superadmin.id === superadminId);
+  if (found) {
+    const filteredUsers = superadmins.filter((user) => user.id !== superadminId);
+    fs.writeFile('src/data/super-admins.json', JSON.stringify(filteredUsers, null, 2), (err) => {
+      if (err) {
+        res.send('Superadmin cannot be deleted');
+      } else {
+        res.send('Superadmin deleted');
+      }
+    });
+  } else {
+    res.send('A superadmin with that ID doesnt exist');
+  }
 });
 
 router.put('/:id', (req, res) => {
