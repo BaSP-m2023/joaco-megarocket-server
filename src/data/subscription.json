@@ -1,1 +1,37 @@
-[]
+[
+  {
+    "id": 1,
+    "Class": "Functional",
+    "memberId": 1,
+    "date": "9/21/2022",
+    "hour": "15:00"
+  },
+  {
+    "id": 2,
+    "Class": "Boxing",
+    "memberId": 2,
+    "date": "10/12/2022",
+    "hour": "13:00"
+  },
+  {
+    "id": 3,
+    "Class": "Crossfit",
+    "memberId": 3,
+    "date": "11/10/2022",
+    "hour": "09:00"
+  },
+  {
+    "id": 4,
+    "Class": "Spinning",
+    "memberId": 4,
+    "date": "12/1/2022",
+    "hour": "11:00"
+  },
+  {
+    "id": 5,
+    "Class": "Musculation",
+    "memberId": 5,
+    "date": "6/17/2022",
+    "hour": "13:00"
+  }
+]
