@@ -38,5 +38,17 @@
   {
     "id": "Crossfit",
     "Description": "Works on strength and endurance, developing all muscle groups."
+  },
+  {
+    "id": "Box",
+    "Description": "Basic training that consists of throwing soft punches into the air with fluid movements."
+  },
+  {
+    "id": "Box",
+    "Description": "Basic training that consists of throwing soft punches into the air with fluid movements."
+  },
+  {
+    "id": "Spinning",
+    "Description": "Aerobic and cardiovascular exercise performed on a stationary bicycle to tone legs and improve endurance."
   }
 ]
