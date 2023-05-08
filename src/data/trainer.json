@@ -1,0 +1,47 @@
+[
+  {
+    "id": 1,
+    "email": "rfries0@newyorker.com",
+    "password": "QFFbCLm4vv",
+    "first_name": "Raddy",
+    "last_name": "Fries",
+    "phone": "349-274-3898",
+    "address": "382 Bunting Road"
+  },
+  {
+    "id": 2,
+    "email": "tdengel1@typepad.com",
+    "password": "kRaONy",
+    "first_name": "Tyne",
+    "last_name": "Dengel",
+    "phone": "187-382-0459",
+    "address": "12 Dawn Road"
+  },
+  {
+    "id": 3,
+    "email": "gslyde2@parallels.com",
+    "password": "VFeh8q",
+    "first_name": "Gerrie",
+    "last_name": "Slyde",
+    "phone": "988-294-4607",
+    "address": "4201 Merrick Circle"
+  },
+  {
+    "id": 4,
+    "email": "aberick3@tumblr.com",
+    "password": "z87fs23MDpy",
+    "first_name": "Arie",
+    "last_name": "Berick",
+    "phone": "571-963-7187",
+    "address": "53149 Larry Parkway"
+  },
+  {
+    "id": 5,
+    "email": "hhewins4@ted.com",
+    "password": "zho51DQCD9",
+    "first_name": "Haroun",
+    "last_name": "Hewins",
+    "phone": "407-821-9060",
+    "address": "77 Paget Road"
+  }
+]
