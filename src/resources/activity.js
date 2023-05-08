@@ -14,9 +14,9 @@ router.get('/getById/:id', (req, res) => {
     (activity) => activity.id === activityid,
   );
   if (foundActivity) {
-    res.send(foundActivity);
+    res.status(200).json(foundActivity);
   } else {
-    res.send('Activity not found');
+    res.status(404).json({ msg: 'Activity not found' });
   }
 });
 
@@ -24,18 +24,18 @@ router.post('/post', (req, res) => {
   const newActivity = req.body;
   const activityRepeat = activities.find((activity) => activity.id === newActivity.id);
   if (activityRepeat) {
-    res.send('Activity already exists');
+    res.status(400).json({ msg: 'Activity already exists' });
   }
   activities.push(newActivity);
   fs.writeFile('src/data/activity.json', JSON.stringify(activities, null, 2), (error) => {
     if (error) {
-      res.send('Activity can not be created');
+      res.status(400).json({ msg: 'Activity can not be created' });
     }
-    res.send('Activity created');
+    res.status(201).json({ msg: 'Activity created', newActivity });
   });
 });
 
-router.put('/activities/:id', (req, res) => {
+router.put('/:id', (req, res) => {
   const activityPut = req.params.id;
   const activityToUpdate = activities.find((activity) => activity.id === activityPut);
 
@@ -51,13 +51,13 @@ router.put('/activities/:id', (req, res) => {
 
     fs.writeFile('src/data/activity.json', JSON.stringify(activities, null, 2), (error) => {
       if (error) {
-        res.send('Error updating activity');
+        res.status(400).json({ msg: 'Error updating activity' });
       } else {
-        res.send('Activity updated successfully');
+        res.status(200).json({ msg: 'Activity updated successfully', updatedActivity });
       }
     });
   } else {
-    res.send('Activity not found');
+    res.status(404).json({ msg: 'Activity not found' });
   }
 });
 
@@ -66,9 +66,10 @@ router.delete('/:id', (req, res) => {
   const filterActivity = activities.filter((activity) => activity.id !== activityDelete);
   fs.writeFile('src/data/activity.json', JSON.stringify(filterActivity, null, 2), (error) => {
     if (error) {
-      res.send('Activity can not be deleted');
+      res.status(400).json({ msg: 'Activity can not be deleted' });
     } else {
-      res.send('Activity deleted');
+      activities = filterActivity;
+      res.status(200).json({ msg: 'Activity deleted' });
     }
   });
 });
