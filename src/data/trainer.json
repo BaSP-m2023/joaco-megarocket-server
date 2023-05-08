@@ -5,9 +5,8 @@
     "password": "GOhrytVfXY7",
     "first_name": "Cody",
     "last_name": "Ede",
-    "DNI": 8879824,
     "phone": "262-996-6807",
-    "location": "045 Sullivan Trail"
+    "address": "045 Sullivan Trail"
   },
   {
     "id": 2,
@@ -15,9 +14,8 @@
     "password": "qJ03wGiti0ok",
     "first_name": "Merissa",
     "last_name": "Brish",
-    "DNI": 9090734,
     "phone": "100-874-0544",
-    "location": "8 Sutherland Trail"
+    "address": "8 Sutherland Trail"
   },
   {
     "id": 3,
@@ -25,9 +23,8 @@
     "password": "WBZr1bX4SL",
     "first_name": "Betteann",
     "last_name": "Quinion",
-    "DNI": 10213903,
     "phone": "559-527-6891",
-    "location": "56977 Clarendon Pass"
+    "address": "56977 Clarendon Pass"
   },
   {
     "id": 4,
@@ -35,9 +32,8 @@
     "password": "asdasd",
     "first_name": "qwe",
     "last_name": "Brish",
-    "DNI": 22194633,
     "phone": "100-874-0544",
-    "location": "8 Suthaseasrland Trail"
+    "address": "8 Suthaseasrland Trail"
   },
   {
     "id": 5,
@@ -45,8 +41,7 @@
     "password": "MDMbNUD",
     "first_name": "Caron",
     "last_name": "Villa",
-    "DNI": 1479498,
     "phone": "365-467-5551",
-    "location": "3877 Lerdahl Lane"
+    "address": "3877 Lerdahl Lane"
   }
 ]

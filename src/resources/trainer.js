@@ -38,7 +38,7 @@ router.put('/:id', (req, res) => {
   trainerFound.first_name = trainerUpd.first_name ? trainerUpd.first_name : trainerFound.first_name;
   trainerFound.last_name = trainerUpd.last_name ? trainerUpd.last_name : trainerFound.last_name;
   trainerFound.phone = trainerUpd.phone ? trainerUpd.phone : trainerFound.phone;
-  trainerFound.location = trainerUpd.location ? trainerUpd.location : trainerFound.location;
+  trainerFound.address = trainerUpd.address ? trainerUpd.address : trainerFound.address;
   trainers[indexFound] = trainerFound;
   fs.writeFile('src/data/trainer.json', JSON.stringify(trainers, null, 2), (err) => {
     if (err) throw err;
