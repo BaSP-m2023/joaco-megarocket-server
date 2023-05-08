@@ -24,7 +24,7 @@
   {
     "id": 3,
     "first_name": "Renard",
-    "last_name": "Rugg",
+    "last_name": "juancito",
     "address": "10th Floor",
     "date": "1/12/2023",
     "phone": "(405) 2973426",
@@ -75,5 +75,16 @@
     "email": "lchastel4@gasd.com",
     "password": "0NIQUm",
     "membership": "clases"
+  },
+  {
+    "id": 8,
+    "first_name": "Joako",
+    "last_name": "juancito",
+    "address": "10th Floor",
+    "date": "1/12/2023",
+    "phone": "(405) 2973426",
+    "email": "rrugg2@asd.com",
+    "password": "RUsVBQF",
+    "membership": "Classic"
   }
 ]

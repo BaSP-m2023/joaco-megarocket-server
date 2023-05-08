@@ -67,17 +67,19 @@ router.post('/', (req, res) => {
 
   if (memberExists) {
     res.status(400).json({ message: 'This member already exists' });
+    return;
   }
 
   if (Object.entries(newMember).length === 0 || !condition || !equalKeys) {
     res.status(400).json({ message: 'You must complete all the properties:', properties: `${Object.keys(memberKeys)}` });
-  } else {
-    members.push(newMember);
-    fs.writeFile('src/data/member.json', JSON.stringify(members, null, 2), (err) => {
-      if (err) throw err;
-      res.status(200).json({ message: 'User added successfuly!', members });
-    });
+    return;
   }
+
+  members.push(newMember);
+  fs.writeFile('src/data/member.json', JSON.stringify(members, null, 2), (err) => {
+    if (err) throw err;
+    res.status(200).json({ message: 'User added successfuly!', members });
+  });
 });
 
 module.exports = router;
