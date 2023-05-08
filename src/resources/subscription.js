@@ -9,7 +9,7 @@ router.use(express.urlencoded({ extended: false }));
 // GET All subscriptions
 
 router.get('/', (req, res) => {
-  res.send(subscriptions);
+  res.status(200).json({ msg: subscriptions });
 });
 
 // GET Single Subscription by filter
@@ -19,7 +19,7 @@ router.get('/:id', (req, res) => {
   const foundSubscription = subscriptions.filter(
     (subscription) => subscription.id.toString() === subscriptionId,
   );
-  res.send(!foundSubscription ? 'Subscription does not exist yet' : foundSubscription);
+  res.status(200).json({ msg: !foundSubscription ? 'Subscription does not exist yet' : foundSubscription });
 });
 
 module.exports = router;
@@ -48,11 +48,8 @@ router.delete('/:id', (req, res) => {
     (subscription) => subscription.id.toString() !== subscriptionId,
   );
   fs.writeFile('src/data/subscription.json', JSON.stringify(filteredSubscriptions, null, 2), (err) => {
-    if (err) {
-      res.send('Error! Subscription cannot be deleted');
-    } else {
-      res.send('Subscription deleted!');
-    }
+    if (err) throw err;
+    res.status(200).json({ msg: `Subscription ${subscriptionId} deleted`, filteredSubscriptions });
   });
 });
 
