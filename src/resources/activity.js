@@ -27,11 +27,11 @@ router.post('/post', (req, res) => {
     res.send('Activity already exists');
   }
   activities.push(newActivity);
-  fs.writeFile('src/data/activity.json', JSON.stringify(activities, null, 2), (error) => {
-    if (error) {
+  fs.writeFile('src/data/activity.json', JSON.stringify(activities, null, 2), (err) => {
+    if (err) {
       res.send('Activity can not be created');
     }
-    res.send('Activity created');
+    res.status(200).json({ msg: 'Activity created', newActivity });
   });
 });
 
@@ -48,23 +48,20 @@ router.put('/:id', (req, res) => {
 
   activities[activityIndex] = activityToUpdate;
 
-  fs.writeFile('src/data/activity.json', JSON.stringify(activities, null, 2), (error) => {
-    if (error) {
-      res.send('Error updating activity');
-    } else {
-      res.json({ msg: 'Activity updated successfully', activityToUpdate });
-    }
+  fs.writeFile('src/data/activity.json', JSON.stringify(activities, null, 2), (err) => {
+    if (err) throw err;
+    res.status(200).json({ msg: 'Activity updated successfully', activityToUpdate });
   });
 });
 
 router.delete('/:id', (req, res) => {
   const activityDelete = req.params.id;
   const filterActivity = activities.filter((activity) => activity.id !== activityDelete);
-  fs.writeFile('src/data/activity.json', JSON.stringify(filterActivity, null, 2), (error) => {
-    if (error) {
+  fs.writeFile('src/data/activity.json', JSON.stringify(filterActivity, null, 2), (err) => {
+    if (err) {
       res.send('Activity can not be deleted');
     } else {
-      res.send('Activity deleted');
+      res.status(200).json({ msg: 'Activity deleted', activityDelete });
     }
   });
 });
