@@ -14,7 +14,7 @@ router.get('/', (req, res) => res.json(trainers));
 router.get('/:id', (req, res) => {
   const trainerFound = trainers.find((trainer) => trainer.id.toString() === req.params.id);
   if (trainerFound) {
-    res.json(trainers.filter((trainer) => trainer.id.toString() === req.params.id));
+    res.send(trainerFound);
   } else {
     res.status(400).json({ msg: `No trainer with the id of ${req.params.id}` });
   }
