@@ -76,5 +76,44 @@
     "start_time": "17:00",
     "end_time": "19:00",
     "recurrence": "Only"
+  },
+  {
+    "id": 7,
+    "class_title": "Spinning low",
+    "related_activity": "Spinning",
+    "difficulty": "Low",
+    "assigned_coach": "Robert Y",
+    "space_available": 15,
+    "assigned_place": "Main spinning room",
+    "date": "28/05/2023",
+    "start_time": "17:00",
+    "end_time": "19:00",
+    "recurrence": "Only"
+  },
+  {
+    "id": 8,
+    "class_title": "Spinning very low",
+    "related_activity": "Spinning",
+    "difficulty": "Low",
+    "assigned_coach": "Robert Yanez",
+    "space_available": 10,
+    "assigned_place": "Main spinning room",
+    "date": "28/05/2023",
+    "start_time": "17:00",
+    "end_time": "19:00",
+    "recurrence": "Only"
+  },
+  {
+    "id": 9,
+    "class_title": "Spinning very very low",
+    "related_activity": "Spinning",
+    "difficulty": "Low",
+    "assigned_coach": "Robert Yanez",
+    "space_available": 10,
+    "assigned_place": "Main spinning room",
+    "date": "28/05/2023",
+    "start_time": "17:30",
+    "end_time": "19:00",
+    "recurrence": "Only"
   }
 ]
