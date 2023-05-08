@@ -2,7 +2,7 @@
   {
     "id": 1,
     "email": "cede0@pbs.org",
-    "Password": "GOhrytVfXY7",
+    "password": "GOhrytVfXY7",
     "first_name": "Cody",
     "last_name": "Ede",
     "DNI": 8879824,
@@ -11,18 +11,18 @@
   },
   {
     "id": 2,
-    "email": "mbraunthal1@ehow.com",
-    "Password": "qJ03wGiti0ok",
+    "email": "mbraunthal1@how.com",
+    "password": "qJ03wGiti0ok",
     "first_name": "Merissa",
-    "last_name": "Braunthal",
+    "last_name": "Brish",
     "DNI": 9090734,
-    "phone": "385-592-0544",
+    "phone": "100-874-0544",
     "location": "8 Sutherland Trail"
   },
   {
     "id": 3,
     "email": "bquinion2@amazon.co.jp",
-    "Password": "WBZr1bX4SL",
+    "password": "WBZr1bX4SL",
     "first_name": "Betteann",
     "last_name": "Quinion",
     "DNI": 10213903,
@@ -31,18 +31,18 @@
   },
   {
     "id": 4,
-    "email": "pivakhin3@state.gov",
-    "Password": "h6R7BkouRIiM",
-    "first_name": "Pearline",
-    "last_name": "Ivakhin",
+    "email": "mbraunthal1@how.com",
+    "password": "asdasd",
+    "first_name": "qwe",
+    "last_name": "Brish",
     "DNI": 22194633,
-    "phone": "835-838-4205",
-    "location": "975 American Avenue"
+    "phone": "100-874-0544",
+    "location": "8 Suthaseasrland Trail"
   },
   {
     "id": 5,
     "email": "cvilla4@fc2.com",
-    "Password": "MDMbNUD",
+    "password": "MDMbNUD",
     "first_name": "Caron",
     "last_name": "Villa",
     "DNI": 1479498,
