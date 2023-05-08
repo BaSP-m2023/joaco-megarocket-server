@@ -22,8 +22,6 @@ router.get('/:id', (req, res) => {
   res.status(200).json({ msg: !foundSubscription ? 'Subscription does not exist yet' : foundSubscription });
 });
 
-module.exports = router;
-
 // POST
 
 router.post('/', (req, res) => {
@@ -77,3 +75,5 @@ router.put('/:id', (req, res) => {
     res.status(200).json({ msg: `Subscription ${subscriptionId} modified`, found });
   });
 });
+
+module.exports = router;
