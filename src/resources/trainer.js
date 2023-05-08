@@ -15,7 +15,7 @@ router.post('/', (req, res) => {
     const lastId = parseInt(trainers[trainers.length - 1].id, 10);
     newTrainer = { id: (lastId + 1).toString(), ...newTrainer };
     trainers.push(newTrainer);
-    fs.writeFile('src/data/trainer.json', JSON.stringify(trainers, null, 2), (err) => {
+    fs.writeFileSync('src/data/trainer.json', JSON.stringify(trainers, null, 2), (err) => {
       if (err) {
         res.status(400).json({ msg: 'Error! Trainer user cannot be created' });
       } else {
@@ -29,9 +29,9 @@ router.post('/', (req, res) => {
 
 router.delete('/:id', (req, res) => {
   const trainerId = req.params.id;
-  const existTrainer = trainers.some((trainer) => trainer.id === trainerId);
+  const existTrainer = trainers.some((trainer) => trainer.id.toString() === trainerId);
   if (existTrainer) {
-    const filtered = trainers.filter((trainer) => trainer.id !== trainerId);
+    const filtered = trainers.filter((trainer) => trainer.id.toString() !== trainerId);
     fs.writeFile('src/data/trainer.json', JSON.stringify(filtered, null, 2), (err) => {
       if (err) {
         res.status(400).json({ msg: `Error! Trainer with ID ${trainerId} cannot be deleted` });

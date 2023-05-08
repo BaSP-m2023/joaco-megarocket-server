@@ -6,7 +6,7 @@ import cors from 'cors';
 const trainersRoute = require('./resources/trainer');
 
 const app = express();
-const port = process.env.PORT || 4002;
+const port = process.env.PORT || 4003;
 
 app.use(cors());
 app.use(express.json());
