@@ -17,7 +17,7 @@ router.get('/:id', (req, res) => {
   if (getAdmin) {
     res.status(200).json(getAdmin);
   } else {
-    res.status(400).json({ error: 'admin not found' });
+    res.status(400).json({ msg: 'admin not found' });
   }
 });
 
