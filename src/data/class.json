@@ -63,5 +63,18 @@
     "start_time": "16:00",
     "end_time": "17:30",
     "recurrence": "Only"
+  },
+  {
+    "id": 6,
+    "class_title": "Spinning intermediate",
+    "related_activity": "Spinning",
+    "difficulty": "Low",
+    "assigned_coach": "Libbi Kalker",
+    "space_available": 15,
+    "assigned_place": "Main spinning room",
+    "date": "28/05/2023",
+    "start_time": "17:00",
+    "end_time": "19:00",
+    "recurrence": "Only"
   }
 ]

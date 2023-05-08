@@ -63,11 +63,14 @@ router.put('/:id', (req, res) => {
         classe.end_time = updateClass.end_time ? updateClass.end_time : classe.end_time;
         classe.recurrence = updateClass.recurrence ? updateClass.recurrence : classe.recurrence;
 
-        res.json({ msg: 'Class edited successfully', classe });
+        fs.writeFile('src/data/class.json', JSON.stringify(classes, null, 2), (err) => {
+          if (err) throw err;
+          res.status(200).json({ msg: 'Class edited successfully', classe });
+        });
       }
     });
   } else {
-    res.status(400).json({ msg: `No class winth that ID ${classId}` });
+    res.status(400).json({ msg: `No classes found with the Id: ${classId}` });
   }
 });
 
