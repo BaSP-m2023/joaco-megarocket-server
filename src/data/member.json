@@ -1,1 +1,46 @@
-[{"id":1,"first_name":"Gert","last_name":"Holtum","address":"Room 1384","date":"8/24/2022","phone":"(325) 8851994","email":"gholtum0@live.com","password":"Dgx8Dz","membership":"Black"},{"id":8,"first_name":"Mario","last_name":"Chastel","address":"Suite 10","date":"6/28/2022","phone":"(247) 7506333","email":"lchastel4@github.io","password":"0NIQUm","membership":"Only Classes"}]
+[
+  {
+    "id": 1,
+    "first_name": "Gert",
+    "last_name": "Holtum",
+    "address": "Room 1384",
+    "date": "8/24/2022",
+    "phone": "(325) 8851994",
+    "email": "gholtum0@live.com",
+    "password": "Dgx8Dz",
+    "membership": "Black"
+  },
+  {
+    "id": 8,
+    "first_name": "Mario",
+    "last_name": "Chastel",
+    "address": "Suite 10",
+    "date": "6/28/2022",
+    "phone": "(247) 7506333",
+    "email": "lchastel4@github.io",
+    "password": "0NIQUm",
+    "membership": "Only Classes"
+  },
+  {
+    "id": 5,
+    "first_name": "Anakin",
+    "last_name": "Skywalker",
+    "address": "Tatooine 3400",
+    "date": "6/28/2022",
+    "phone": "(247) 7506333",
+    "email": "lchastel4@github.io",
+    "password": "0NIQUm",
+    "membership": "Black"
+  },
+  {
+    "id": 6,
+    "first_name": "Anakin",
+    "last_name": "Skywalker",
+    "address": "Tatooine 3400",
+    "date": "6/28/2022",
+    "phone": "(247) 7506333",
+    "email": "lchastel4@github.io",
+    "password": "0NIQUm",
+    "membership": "Black"
+  }
+]
