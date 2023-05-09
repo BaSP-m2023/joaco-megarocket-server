@@ -57,6 +57,8 @@ npm run lint:fix
 <img src="https://avatars.githubusercontent.com/u/93749172?v=4" height="50" width="50">| Gino Boca | gnoboca@gmail.com | [@GinoBoca](https://github.com/Ginoboca1 )
 <img src="https://avatars.githubusercontent.com/u/127460882?v=4" height="50" width="50">| Mateo Carciente | mateocarciente1@gmail.com| [@MateoCarciente](https://github.com/victoriassol )
 <img src="https://avatars.githubusercontent.com/u/110502493?v=4" height="50" width="50">| Robert José Yanez Evariste | robert.yaev@gmail.com | [@RobertYanez](https://github.com/ryaev )
+<img src="https://avatars.githubusercontent.com/u/99230234?v=4" height="50" width="50">| Iara Criscenti | iaracriscenti@gmail.com | [@IaraCriscenti](https://github.com/iaracriscenti )
+<img src="https://avatars.githubusercontent.com/u/53354878?v=4" height="50" width="50">| Joaquin Leimeter | joaquin.leimeter@radiumrocket.com| [@JoaquinLeimeter](https://github.com/leimeter-joaquin )
 
 
 <br>
