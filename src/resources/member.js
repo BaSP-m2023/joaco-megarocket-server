@@ -16,7 +16,7 @@ router.get('/', (req, res) => {
     // eslint-disable-next-line no-unused-expressions
     (filteredName.length === 0)
       ? res.status(400).send(`${firstName} ${errorMessage}`)
-      : res.send(filteredName);
+      : res.status(200).send(filteredName);
   }
 
   if (membership) {
@@ -24,7 +24,7 @@ router.get('/', (req, res) => {
     // eslint-disable-next-line no-unused-expressions
     (filteredMembership.length === 0)
       ? res.status(400).send(`${membership} is not a valid membership`)
-      : res.send(filteredMembership);
+      : res.status(200).send(filteredMembership);
   }
 
   if (email) {
@@ -32,11 +32,11 @@ router.get('/', (req, res) => {
     // eslint-disable-next-line no-unused-expressions
     (!filteredEmail)
       ? res.status(400).send(`${email} ${errorMessage}`)
-      : res.send(filteredEmail);
+      : res.status(200).send(filteredEmail);
   }
 
   if (!firstName || !membership || !email) {
-    res.send(members);
+    res.status(200).send(members);
   }
 });
 
