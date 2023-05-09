@@ -29,9 +29,9 @@ router.post('/', (req, res) => {
 
 router.delete('/:id', (req, res) => {
   const trainerId = req.params.id;
-  const existTrainer = trainers.some((trainer) => trainer.id.toString() === trainerId);
+  const existTrainer = trainers.some((trainer) => trainer.id === trainerId);
   if (existTrainer) {
-    const filtered = trainers.filter((trainer) => trainer.id.toString() !== trainerId);
+    const filtered = trainers.filter((trainer) => trainer.id !== trainerId);
     fs.writeFile('src/data/trainer.json', JSON.stringify(filtered, null, 2), (err) => {
       if (err) {
         res.status(400).json({ msg: `Error! Trainer with ID ${trainerId} cannot be deleted` });
