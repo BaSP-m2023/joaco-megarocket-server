@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 const express = require('express');
 const fs = require('fs');
 const superadmins = require('../data/super-admins.json');
@@ -6,59 +7,54 @@ const router = express.Router();
 
 router.get('/filter', (req, res) => {
   let filtered = superadmins;
-  const { id, email } = req.query;
-  const firstName = req.query.first_name;
-  const lastName = req.query.last_name;
+  const { email, first_name, last_name } = req.query;
 
-  if (id) {
-    filtered = superadmins.filter((superadmin) => superadmin.id === id.toString());
+  if (first_name) {
+    filtered = superadmins.filter((superadmin) => superadmin.first_name === first_name);
   }
-  if (firstName) {
-    filtered = superadmins.filter((superadmin) => superadmin.first_name === firstName);
-  }
-  if (lastName) {
-    filtered = superadmins.filter((superadmin) => superadmin.last_name === lastName);
+  if (last_name) {
+    filtered = superadmins.filter((superadmin) => superadmin.last_name === last_name);
   }
   if (email) {
     filtered = superadmins.filter((superadmin) => superadmin.email === email);
   }
   if (filtered.length === 0) {
-    res.send('Superadmin not found');
+    res.status(400).json({ msg: 'Superadmin not found' });
   }
-  res.send(filtered);
+  res.status(200).json({ data: filtered });
 });
 
 router.get('/:id', (req, res) => {
   const superadminId = req.params.id;
   const found = superadmins.find((user) => user.id === superadminId);
   if (found) {
-    res.send(found);
+    res.status(200).json({ data: found });
   } else {
-    res.send('Superadmin not found');
+    res.status(400).json({ msg: 'Superadmin not found' });
   }
 });
 
 router.get('/', (req, res) => {
-  res.send(superadmins);
+  res.status(200).json({ data: superadmins });
 });
 
 router.post('/', (req, res) => {
   const newSuperadmin = req.body;
   const found = superadmins.find((superadmin) => superadmin.id === newSuperadmin.id);
   if (found) {
-    res.send('A superadmin with that ID already exists');
+    res.status(400).json({ msg: 'A superadmin with that ID already exists' });
   } else if (!newSuperadmin.first_name
              || !newSuperadmin.last_name
              || !newSuperadmin.email
              || !newSuperadmin.password) {
-    res.send('Please send complete information');
+    res.status(400).json({ msg: 'Please send complete information' });
   } else {
     superadmins.push(newSuperadmin);
     fs.writeFile('src/data/super-admins.json', JSON.stringify(superadmins, null, 2), (err) => {
       if (err) {
-        res.send('Superadmin cannot be created');
+        res.status(400).json({ msg: 'Superadmin cannot be created' });
       } else {
-        res.send('Superadmin created');
+        res.status(200).json({ msg: 'Superadmin created' });
       }
     });
   }
@@ -71,13 +67,13 @@ router.delete('/:id', (req, res) => {
     const filteredUsers = superadmins.filter((user) => user.id !== superadminId);
     fs.writeFile('src/data/super-admins.json', JSON.stringify(filteredUsers, null, 2), (err) => {
       if (err) {
-        res.send('Superadmin cannot be deleted');
+        res.status(400).json({ msg: 'Superadmin cannot be deleted' });
       } else {
-        res.send('Superadmin deleted');
+        res.status(200).json({ msg: 'Superadmin deleted' });
       }
     });
   } else {
-    res.send('A superadmin with that ID doesnt exist');
+    res.status(400).json({ msg: 'A superadmin with that ID doesnt exist' });
   }
 });
 
@@ -94,13 +90,13 @@ router.put('/:id', (req, res) => {
     superadmins.splice(toReplace, 1, found);
     fs.writeFile('src/data/super-admins.json', JSON.stringify(superadmins, null, 2), (err) => {
       if (err) {
-        res.send('Superadmin cannot be edited');
+        res.status(400).json({ msg: 'Superadmin cannot be edited' });
       } else {
-        res.send('Superadmin edited');
+        res.status(200).json({ msg: 'Superadmin edited' });
       }
     });
   } else {
-    res.send('A superadmin with that ID doesnt exist');
+    res.status(400).json({ msg: 'A superadmin with that ID doesnt exist' });
   }
 });
 
