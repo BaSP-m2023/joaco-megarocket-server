@@ -1,7 +1,6 @@
 // use "import" to import libraries
 import express from 'express';
 import cors from 'cors';
-// import classes from './resources/class';
 
 // use "require" to import JSON files
 const admins = require('./data/admins.json');
@@ -23,7 +22,6 @@ app.get('/admins', (req, res) => {
   });
 });
 
-// app.use('/class', classes);
 app.use('/class', classRoute);
 
 app.listen(port, () => {
