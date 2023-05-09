@@ -29,9 +29,11 @@ router.put('/:id', (req, res) => {
   const indexFound = trainers.indexOf(trainerFound);
   if (!trainerFound) {
     res.status(400).json({ msg: `The trainer ${trainerId} doesn't exist` });
+    return;
   }
   if (Object.entries(trainerUpd).length === 0) {
     res.status(400).json({ msg: 'Please fill the empty fields' });
+    return;
   }
   trainerFound.email = trainerUpd.email ? trainerUpd.email : trainerFound.email;
   trainerFound.password = trainerUpd.password ? trainerUpd.password : trainerFound.password;
