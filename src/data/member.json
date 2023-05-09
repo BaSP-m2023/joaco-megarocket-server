@@ -1,0 +1,90 @@
+[
+  {
+    "id": 1,
+    "first_name": "Pepito",
+    "last_name": "Holtum",
+    "address": "Room 1384",
+    "date": "8/24/2022",
+    "phone": "(325) 8851994",
+    "email": "gholtum0@live.com",
+    "password": "Dgx8Dz",
+    "membership": "Black"
+  },
+  {
+    "id": 2,
+    "first_name": "Shauna",
+    "last_name": "Josephi",
+    "address": "Apt 1838",
+    "date": "11/1/2022",
+    "phone": "(982) 6184324",
+    "email": "sjosephi1@comcast.net",
+    "password": "G5Oge7uCF",
+    "membership": "Only Classes"
+  },
+  {
+    "id": 3,
+    "first_name": "Renard",
+    "last_name": "juancito",
+    "address": "10th Floor",
+    "date": "1/12/2023",
+    "phone": "(405) 2973426",
+    "email": "rrugg2@reuters.com",
+    "password": "RUsVBQF",
+    "membership": "Classic"
+  },
+  {
+    "id": 4,
+    "first_name": "Benn",
+    "last_name": "Rahlof",
+    "address": "Apt 413",
+    "date": "12/28/2022",
+    "phone": "(365) 2020784",
+    "email": "brahlof3@wordpress.com",
+    "password": "IvbHvZ",
+    "membership": "Black"
+  },
+  {
+    "id": 5,
+    "first_name": "Luigi",
+    "last_name": "Chastel",
+    "address": "Suite 10",
+    "date": "6/28/2022",
+    "phone": "(247) 7502533",
+    "email": "lchastel4@github.io",
+    "password": "0NIQUm",
+    "membership": "Only Classes"
+  },
+  {
+    "id": 6,
+    "first_name": "Delfi",
+    "last_name": "Chastel",
+    "address": "Suite 10",
+    "date": "6/28/2022",
+    "phone": "(247) 7502533",
+    "email": "lchastel4@gasd.com",
+    "password": "0NIQUm",
+    "membership": "clases"
+  },
+  {
+    "id": 7,
+    "first_name": "Fran",
+    "last_name": "Chastel",
+    "address": "Suite 10",
+    "date": "6/28/2022",
+    "phone": "(247) 7502533",
+    "email": "lchastel4@gasd.com",
+    "password": "0NIQUm",
+    "membership": "clases"
+  },
+  {
+    "id": 8,
+    "first_name": "Joako",
+    "last_name": "juancito",
+    "address": "10th Floor",
+    "date": "1/12/2023",
+    "phone": "(405) 2973426",
+    "email": "rrugg2@asd.com",
+    "password": "RUsVBQF",
+    "membership": "Classic"
+  }
+]
