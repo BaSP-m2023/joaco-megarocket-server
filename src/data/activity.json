@@ -11,7 +11,7 @@
   },
   {
     "id": 3,
-    "name":"Fitness",
+    "name": "Fitness",
     "Description": "Training rutine in which specific exercises are applied according to the desired body area to tone."
   },
   {
@@ -48,5 +48,10 @@
     "id": 10,
     "name": "Crossfit",
     "Description": "Works on strength and endurance, developing all muscle groups."
+  },
+  {
+    "id": "11",
+    "name": "Kangoo Power",
+    "Description": "Aerobic activity producing less impact than running, working on balance and coordination."
   }
 ]
