@@ -10,6 +10,7 @@ const port = process.env.PORT || 4002;
 
 app.use(cors());
 app.use(express.json());
+app.use('/resources/member', require('./resources/member'));
 
 app.get('/', (req, res) => {
   res.send('Hello World!');
