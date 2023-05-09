@@ -29,12 +29,9 @@
   },
   {
     "id": 5,
-    "class": "Musculation",
+    "class": "Boxing",
     "memberId": 5,
     "date": "6/17/2022",
     "hour": "13:00"
-  },
-  {
-    "id": 6
   }
 ]

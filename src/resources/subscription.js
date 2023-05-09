@@ -16,10 +16,14 @@ router.get('/', (req, res) => {
 
 router.get('/:id', (req, res) => {
   const subscriptionId = req.params.id;
-  const foundSubscription = subscriptions.filter(
+  const foundSubscription = subscriptions.find(
     (subscription) => subscription.id.toString() === subscriptionId,
   );
-  res.status(200).json({ msg: !foundSubscription ? 'Subscription does not exist yet' : foundSubscription });
+  if (!foundSubscription) {
+    res.status(404).json({ error: `Subscription ${subscriptionId} not found` });
+  } else {
+    res.status(200).json({ subscription: foundSubscription });
+  }
 });
 
 // POST
@@ -42,12 +46,19 @@ router.post('/', (req, res) => {
 
 router.delete('/:id', (req, res) => {
   const subscriptionId = req.params.id;
+  const subscriptionToDelete = subscriptions.find(
+    (subscription) => subscription.id.toString() === subscriptionId,
+  );
+  if (!subscriptionToDelete) {
+    res.status(400).json({ msg: `Subscription ${subscriptionId} does not exist` });
+    return;
+  }
   const filteredSubscriptions = subscriptions.filter(
     (subscription) => subscription.id.toString() !== subscriptionId,
   );
   fs.writeFile('src/data/subscription.json', JSON.stringify(filteredSubscriptions, null, 2), (err) => {
     if (err) throw err;
-    res.status(200).json({ msg: `Subscription ${subscriptionId} deleted`, filteredSubscriptions });
+    res.status(200).json({ msg: `Subscription ${subscriptionId} was deleted`, filteredSubscriptions });
   });
 });
 
