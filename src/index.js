@@ -14,8 +14,8 @@ app.use(cors());
 app.use(express.json());
 app.use('/resources/member', require('./resources/member'));
 
-app.use('/trainer', trainers);
 app.use('/admin', adminRoute);
+app.use('/trainer', trainers);
 
 app.get('/', (req, res) => {
   res.send('Hello World!');
