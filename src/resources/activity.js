@@ -1,6 +1,6 @@
 const express = require('express');
 const fs = require('fs');
-const activities = require('../data/activity.json');
+let activities = require('../data/activity.json');
 
 const router = express.Router();
 
@@ -14,9 +14,9 @@ router.get('/getById/:id', (req, res) => {
     (activity) => activity.id === activityid,
   );
   if (foundActivity) {
-    res.send(foundActivity);
+    res.status(200).json(foundActivity);
   } else {
-    res.send('Activity not found');
+    res.status(400).json({ msg: 'Activity not found' });
   }
 });
 
@@ -24,12 +24,12 @@ router.post('/post', (req, res) => {
   const newActivity = req.body;
   const activityRepeat = activities.find((activity) => activity.id === newActivity.id);
   if (activityRepeat) {
-    res.send('Activity already exists');
+    res.status(400).json({ msg: 'Activity already exists' });
   }
   activities.push(newActivity);
-  fs.writeFile('src/data/activity.json', JSON.stringify(activities, null, 2), (err) => {
-    if (err) {
-      res.send('Activity can not be created');
+  fs.writeFile('src/data/activity.json', JSON.stringify(activities, null, 2), (error) => {
+    if (error) {
+      res.status(400).json({ msg: 'Activity can not be created' });
     }
     res.status(200).json({ msg: 'Activity created', newActivity });
   });
@@ -42,8 +42,9 @@ router.put('/:id', (req, res) => {
   const activityIndex = activities.indexOf(activityToUpdate);
 
   if (!activityToUpdate) {
-    res.send('Activity not found');
+    res.status(400).json('Activity not found');
   }
+  activityToUpdate.name = updatedActivity.name || activityToUpdate.name;
   activityToUpdate.Description = updatedActivity.Description || activityToUpdate.Description;
 
   activities[activityIndex] = activityToUpdate;
@@ -57,11 +58,12 @@ router.put('/:id', (req, res) => {
 router.delete('/:id', (req, res) => {
   const activityDelete = req.params.id;
   const filterActivity = activities.filter((activity) => activity.id !== activityDelete);
-  fs.writeFile('src/data/activity.json', JSON.stringify(filterActivity, null, 2), (err) => {
-    if (err) {
-      res.send('Activity can not be deleted');
+  fs.writeFile('src/data/activity.json', JSON.stringify(filterActivity, null, 2), (error) => {
+    if (error) {
+      res.status(400).json({ msg: 'Activity can not be deleted' });
     } else {
-      res.status(200).json({ msg: 'Activity deleted', activityDelete });
+      activities = filterActivity;
+      res.status(200).json({ msg: 'Activity deleted' });
     }
   });
 });
