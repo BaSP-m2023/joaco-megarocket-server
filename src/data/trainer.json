@@ -1,0 +1,47 @@
+[
+  {
+    "id": 1,
+    "email": "cede0@pbs.org",
+    "password": "GOhrytVfXY7",
+    "first_name": "Cody",
+    "last_name": "Ede",
+    "phone": "262-996-6807",
+    "address": "045 Sullivan Trail"
+  },
+  {
+    "id": 2,
+    "email": "mbraunthal1@how.com",
+    "password": "qJ03wGiti0ok",
+    "first_name": "Merissa",
+    "last_name": "Brish",
+    "phone": "100-874-0544",
+    "address": "8 Sutherland Trail"
+  },
+  {
+    "id": 3,
+    "email": "bquinion2@amazon.co.jp",
+    "password": "WBZr1bX4SL",
+    "first_name": "Betteann",
+    "last_name": "Quinion",
+    "phone": "559-527-6891",
+    "address": "56977 Clarendon Pass"
+  },
+  {
+    "id": 4,
+    "email": "mbraunthal1@how.com",
+    "password": "asdasd",
+    "first_name": "qwe",
+    "last_name": "Brish",
+    "phone": "100-874-0544",
+    "address": "8 Suthaseasrland Trail"
+  },
+  {
+    "id": 5,
+    "email": "cvilla4@fc2.com",
+    "password": "MDMbNUD",
+    "first_name": "Caron",
+    "last_name": "Villa",
+    "phone": "365-467-5551",
+    "address": "3877 Lerdahl Lane"
+  }
+]
