@@ -42,7 +42,7 @@ router.put('/:id', (req, res) => {
   const activityIndex = activities.indexOf(activityToUpdate);
 
   if (!activityToUpdate) {
-    res.status(400).json('Activity not found');
+    res.status(400).json({ msg: 'Activity not found' });
   }
   activityToUpdate.name = updatedActivity.name || activityToUpdate.name;
   activityToUpdate.Description = updatedActivity.Description || activityToUpdate.Description;
