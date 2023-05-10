@@ -1,6 +1,7 @@
 // use "import" to import libraries
 import express from 'express';
 import cors from 'cors';
+import subscription from './resources/subscription';
 
 // use "require" to import JSON files
 // const admins = require('./data/admins.json');
@@ -25,6 +26,8 @@ app.use('/trainer', trainers);
 app.get('/', (req, res) => {
   res.send('Hello World!');
 });
+
+app.use('/subscription', subscription);
 
 app.listen(port, () => {
   // eslint-disable-next-line no-console
