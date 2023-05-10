@@ -1,4 +1,3 @@
-/* eslint-disable camelcase */
 const express = require('express');
 const fs = require('fs');
 const superadmins = require('../data/super-admins.json');
@@ -7,13 +6,15 @@ const router = express.Router();
 
 router.get('/filter', (req, res) => {
   let filtered = superadmins;
-  const { email, first_name, last_name } = req.query;
+  const { email } = req.query;
+  const firstName = req.query.first_name;
+  const lastName = req.query.last_name;
 
-  if (first_name) {
-    filtered = superadmins.filter((superadmin) => superadmin.first_name === first_name);
+  if (firstName) {
+    filtered = superadmins.filter((superadmin) => superadmin.first_name === firstName);
   }
-  if (last_name) {
-    filtered = superadmins.filter((superadmin) => superadmin.last_name === last_name);
+  if (lastName) {
+    filtered = superadmins.filter((superadmin) => superadmin.last_name === lastName);
   }
   if (email) {
     filtered = superadmins.filter((superadmin) => superadmin.email === email);
