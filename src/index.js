@@ -1,43 +1,26 @@
 // use "import" to import libraries
 import express from 'express';
 import cors from 'cors';
-import subscription from './resources/subscription';
 
-// use "require" to import JSON files
-const trainersRoute = require('./resources/trainer');
+const mongoose = require('mongoose');
 
-const adminRoute = require('./resources/admins');
-const classRoute = require('./resources/class');
+const url = 'mongodb+srv://joaco-team:1q248tHUzroQSLTL@megarocket-databases.inpprte.mongodb.net/';
+
+mongoose.connect(url).then(() => console.log('MongoDB connected'));
 
 const app = express();
 const port = process.env.PORT || 4002;
-
-app.use(express.json());
-const superadminRouter = require('./resources/super-admins');
-
-app.use('/superadmin', superadminRouter);
+const index = require('./routes/index');
 
 app.use(cors());
 app.use(express.json());
-app.use('/resources/member', require('./resources/member'));
-
-app.use('/admin', adminRoute);
-
-app.use('/trainer', trainersRoute);
 
 app.get('/', (req, res) => {
-  res.send('Hello World!');
+  res.send('Base page');
 });
-
-app.use('/subscription', subscription);
-
-app.use('/class', classRoute);
+app.use('/index', index);
 
 app.listen(port, () => {
   // eslint-disable-next-line no-console
   console.log(`Example app listening on port ${port}`);
 });
-
-const activityRouter = require('./resources/activity');
-
-app.use('/activity', activityRouter);
