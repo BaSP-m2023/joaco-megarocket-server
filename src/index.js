@@ -6,11 +6,15 @@ const mongoose = require('mongoose');
 
 const url = 'mongodb+srv://joaco-team:1q248tHUzroQSLTL@megarocket-databases.inpprte.mongodb.net/';
 
-mongoose.connect(url).then(() => console.log('MongoDB connected'));
+mongoose.connect(url)
+  // eslint-disable-next-line no-console
+  .then(() => console.log('MongoDB connected'))
+  // eslint-disable-next-line no-console
+  .catch((e) => console.log(e));
 
 const app = express();
 const port = process.env.PORT || 4002;
-const index = require('./routes/index');
+const router = require('./routes');
 
 app.use(cors());
 app.use(express.json());
@@ -18,7 +22,7 @@ app.use(express.json());
 app.get('/', (req, res) => {
   res.send('Base page');
 });
-app.use('/index', index);
+app.use('/api', router);
 
 app.listen(port, () => {
   // eslint-disable-next-line no-console
