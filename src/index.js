@@ -4,8 +4,9 @@ import cors from 'cors';
 import subscription from './resources/subscription';
 
 // use "require" to import JSON files
-// const admins = require('./data/admins.json');
+
 const adminRoute = require('./resources/admins');
+const classRoute = require('./resources/class');
 
 const app = express();
 const port = process.env.PORT || 4002;
@@ -28,6 +29,8 @@ app.get('/', (req, res) => {
 });
 
 app.use('/subscription', subscription);
+
+app.use('/class', classRoute);
 
 app.listen(port, () => {
   // eslint-disable-next-line no-console
