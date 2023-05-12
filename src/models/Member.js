@@ -10,18 +10,22 @@ const memberSchema = new Schema({
   firstName: {
     type: String,
     required: true,
+    minLenght: 3,
   },
   lastName: {
     type: String,
     required: true,
+    minLenght: 3,
   },
   dni: {
     type: Number,
     required: true,
+    minLenght: 7,
   },
   phone: {
     type: Number,
     required: true,
+    minLenght: 10,
   },
   email: {
     type: String,
@@ -30,6 +34,7 @@ const memberSchema = new Schema({
   city: {
     type: String,
     required: true,
+    minLenght: 3,
   },
   birthday: {
     type: Date,
@@ -38,6 +43,7 @@ const memberSchema = new Schema({
   postal_code: {
     type: Number,
     required: true,
+    minLenght: 4,
   },
   is_active: {
     type: Boolean,
