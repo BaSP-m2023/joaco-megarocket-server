@@ -3,7 +3,6 @@ const mongoose = require('mongoose');
 const { Schema } = mongoose;
 
 const activitySchema = new Schema({
-  id: new mongoose.Types.ObjectId(),
   name: {
     type: String,
     required: true,
