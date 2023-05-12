@@ -14,6 +14,7 @@ mongoose.connect(url)
 
 const app = express();
 const port = process.env.PORT || 4002;
+// eslint-disable-next-line import/no-unresolved
 const router = require('./routes');
 
 app.use(cors());
