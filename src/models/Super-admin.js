@@ -4,7 +4,6 @@ const { Schema } = mongoose;
 
 const SuperAdminSchema = new Schema({
 
-  id: new mongoose.Types.ObjectId(),
   email: String,
   password: String,
 
