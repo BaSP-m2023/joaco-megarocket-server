@@ -4,7 +4,7 @@ import cors from 'cors';
 
 const mongoose = require('mongoose');
 
-const url = 'mongodb+srv://joaco-team:1q248tHUzroQSLTL@megarocket-databases.inpprte.mongodb.net/';
+const url = 'mongodb+srv://joaco-team:1q248tHUzroQSLTL@megarocket-databases.inpprte.mongodb.net/joaco-database';
 
 mongoose.connect(url)
   // eslint-disable-next-line no-console
