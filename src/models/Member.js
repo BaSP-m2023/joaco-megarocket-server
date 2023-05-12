@@ -3,10 +3,6 @@ const mongoose = require('mongoose');
 const { Schema } = mongoose;
 
 const memberSchema = new Schema({
-  id: {
-    type: Schema.Types.ObjectId,
-    required: true,
-  },
   firstName: {
     type: String,
     required: true,
