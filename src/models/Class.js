@@ -3,10 +3,6 @@ const mongoose = require('mongoose');
 const { Schema } = mongoose;
 
 const classSchema = new Schema({
-  id: {
-    type: Schema.Types.ObjectId,
-    required: true,
-  },
   day: {
     type: String,
     enum: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
