@@ -1,9 +1,8 @@
-/* eslint-disable camelcase */
 const Member = require('../models/Member');
 
 const createMember = (req, res) => {
   const {
-    firstName, lastName, dni, phone, email, city, birthday, postal_code, is_active, membership,
+    firstName, lastName, dni, phone, email, city, birthday, postalCode, isActive, membership,
   } = req.body;
 
   Member.create({
@@ -14,8 +13,8 @@ const createMember = (req, res) => {
     email,
     city,
     birthday,
-    postal_code,
-    is_active,
+    postalCode,
+    isActive,
     membership,
   })
 

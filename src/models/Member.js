@@ -36,12 +36,12 @@ const memberSchema = new Schema({
     type: Date,
     required: true,
   },
-  postal_code: {
+  postalCode: {
     type: Number,
     required: true,
     minLenght: 4,
   },
-  is_active: {
+  isActive: {
     type: Boolean,
     default: false,
   },
