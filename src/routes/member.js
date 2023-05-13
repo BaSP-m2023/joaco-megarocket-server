@@ -5,6 +5,6 @@ const memberController = require('../controllers/member');
 
 router
   .get('/', memberController.getAllMembers)
-  .get('/id', memberController.getMembersById);
+  .get('/:id', memberController.getMembersById);
 
 module.exports = router;
