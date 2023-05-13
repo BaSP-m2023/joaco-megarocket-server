@@ -47,16 +47,48 @@ const getActivityByID = (req, res) => {
     }));
 };
 
-const createActivity = () => {
+const createActivity = (req, res) => {
+  const { name, description, isActive } = req.body;
 
+  Activity.create({
+    name,
+    description,
+    isActive,
+  })
+    .then((newActivity) => res.status(201).json({
+      message: 'Activity created successfuly',
+      data: newActivity,
+      error: false,
+    }))
+    .catch((error) => res.status(500).json({
+      message: 'An error ocurred',
+      data: undefined,
+      error,
+    }));
 };
 
 const updateActivity = () => {
 
 };
 
-const deleteActivity = () => {
-
+const deleteActivity = (req, res) => {
+  const { id } = req.params;
+  Activity.findByIdAndDelete(id)
+    .then((activity) => {
+      if (!activity) {
+        return res.status(404).json({
+          message: 'Activity not found',
+          data: undefined,
+          error: true,
+        });
+      }
+      return res.status(204).json({});
+    })
+    .catch((error) => res.status(500).json({
+      message: 'An error ocurred',
+      data: undefined,
+      error,
+    }));
 };
 
 module.exports = {
