@@ -7,6 +7,7 @@ const router = express.Router();
 
 router
   .post('/', validations.validateCreation, adminsController.createAdmin)
+  .put('/:id', validations.validateUpdate, adminsController.updateAdmin)
   .get('/', adminsController.getAllAdmins)
   .get('/:id', adminsController.getAdminById);
 
