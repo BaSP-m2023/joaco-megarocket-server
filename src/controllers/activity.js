@@ -1,3 +1,4 @@
+const { default: mongoose } = require('mongoose');
 const Activity = require('../models/Activity');
 
 const getAllActivities = (req, res) => {
@@ -6,8 +7,8 @@ const getAllActivities = (req, res) => {
       if (activities.length === 0) {
         return res.status(404).json({
           message: 'There are no activities',
-          data: undefined,
-          error: true,
+          data: activities,
+          error: false,
         });
       }
       return res.status(200).json({
@@ -25,7 +26,15 @@ const getAllActivities = (req, res) => {
 
 const getActivityByID = (req, res) => {
   const { id } = req.params;
-  Activity.findById(id)
+  if (!mongoose.isValidObjectId(id)) {
+    return res.status(400).json({
+      message: 'Invalid ID',
+      data: id,
+      error: true,
+    });
+  }
+
+  return Activity.findById(id)
     .then((activity) => {
       if (!activity) {
         return res.status(404).json({
@@ -69,9 +78,17 @@ const createActivity = (req, res) => {
 
 const updateActivity = (req, res) => {
   const { id } = req.params;
+  if (!mongoose.isValidObjectId(id)) {
+    return res.status(400).json({
+      message: 'Invalid ID',
+      data: id,
+      error: true,
+    });
+  }
+
   const { name, description, isActive } = req.body;
 
-  Activity.findByIdAndUpdate(
+  return Activity.findByIdAndUpdate(
     id,
     {
       name,
@@ -86,13 +103,6 @@ const updateActivity = (req, res) => {
           message: `The activity with the ID: ${activity.id} doesn't exists`,
           data: undefined,
           error: true,
-        });
-      }
-      if (!activity.isModified()) {
-        return res.status(200).json({
-          message: 'There were no changes',
-          data: activity,
-          error: false,
         });
       }
       return res.status(200).json({
@@ -110,7 +120,16 @@ const updateActivity = (req, res) => {
 
 const deleteActivity = (req, res) => {
   const { id } = req.params;
-  Activity.findByIdAndDelete(id)
+
+  if (!mongoose.isValidObjectId(id)) {
+    return res.status(400).json({
+      message: 'Invalid ID',
+      data: id,
+      error: true,
+    });
+  }
+
+  return Activity.findByIdAndDelete(id)
     .then((activity) => {
       if (!activity) {
         return res.status(404).json({
