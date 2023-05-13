@@ -10,7 +10,7 @@ const validateCreation = (req, res, next) => {
     city: Joi.string().min(3).required(),
     birthday: Joi.date().required(),
     postal_code: Joi.number().min(4).required(),
-    is_active: Joi.boolean().required(),
+    is_active: Joi.boolean(),
     membership: Joi.string().required(),
   });
 

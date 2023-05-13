@@ -43,7 +43,7 @@ const memberSchema = new Schema({
   },
   is_active: {
     type: Boolean,
-    required: true,
+    default: false,
   },
   membership: {
     type: String,
