@@ -5,12 +5,12 @@ const { Schema } = mongoose;
 const activitySchema = new Schema({
   name: {
     type: String,
-    minLenght: 3,
+    minLength: 3,
     required: true,
   },
   description: {
     type: String,
-    minLenght: 40,
+    minLength: 40,
     required: true,
   },
   isActive: {

@@ -67,8 +67,45 @@ const createActivity = (req, res) => {
     }));
 };
 
-const updateActivity = () => {
+const updateActivity = (req, res) => {
+  const { id } = req.params;
+  const { name, description, isActive } = req.body;
 
+  Activity.findByIdAndUpdate(
+    id,
+    {
+      name,
+      description,
+      isActive,
+    },
+    { new: true },
+  )
+    .then((activity) => {
+      if (!activity) {
+        return res.status(404).json({
+          message: `The activity with the ID: ${activity.id} doesn't exists`,
+          data: undefined,
+          error: true,
+        });
+      }
+      if (!activity.isModified()) {
+        return res.status(200).json({
+          message: 'There were no changes',
+          data: activity,
+          error: false,
+        });
+      }
+      return res.status(200).json({
+        message: 'Activity updated successfuly!',
+        data: activity,
+        error: false,
+      });
+    })
+    .catch((error) => res.status(500).json({
+      message: 'An error ocurred',
+      data: undefined,
+      error,
+    }));
 };
 
 const deleteActivity = (req, res) => {
