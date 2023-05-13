@@ -8,5 +8,6 @@ router.get('/', (req, res) => {
   res.send('you have reached the api route');
 });
 
-router.use('/admin', admins);
+router.use('/admins', admins);
+
 module.exports = router;
