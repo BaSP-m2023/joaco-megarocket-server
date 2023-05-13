@@ -22,7 +22,7 @@ const getAdminById = (req, res) => {
       data: admin,
       error: false,
     }))
-    .catch((error) => res.json({
+    .catch((error) => res.status(500).json({
       message: 'An error ocurred',
       error,
     }));
