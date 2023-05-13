@@ -9,8 +9,8 @@ const validateCreation = (req, res, next) => {
     email: Joi.string().email().required(),
     city: Joi.string().min(3).required(),
     birthday: Joi.date().required(),
-    postal_code: Joi.number().min(4).required(),
-    is_active: Joi.boolean(),
+    postalCode: Joi.number().min(4).required(),
+    isActive: Joi.boolean(),
     membership: Joi.string().required(),
   });
 
