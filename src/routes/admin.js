@@ -9,6 +9,7 @@ router
   .post('/', validations.validateCreation, adminsController.createAdmin)
   .put('/:id', validations.validateUpdate, adminsController.updateAdmin)
   .get('/', adminsController.getAllAdmins)
-  .get('/:id', adminsController.getAdminById);
+  .get('/:id', adminsController.getAdminById)
+  .delete('/:id', adminsController.deleteAdmin);
 
 module.exports = router;

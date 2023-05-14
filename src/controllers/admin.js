@@ -8,7 +8,11 @@ const createAdmin = (req, res) => {
   Admin.create({
     firstName, lastName, dni, phone, email, city, password,
   })
-    .then((result) => res.status(201).json(result))
+    .then((result) => res.status(201).json({
+      msg: 'New admin created',
+      result,
+      error: false,
+    }))
     .catch((error) => res.status(400).json({
       message: 'An error ocurred!',
       error,
@@ -40,7 +44,11 @@ const updateAdmin = (req, res) => {
           error: true,
         });
       }
-      return res.status(200).json(result);
+      return res.status(200).json({
+        msg: `Admin ${id} updated`,
+        result,
+        error: false,
+      });
     })
     .catch((error) => res.status(400).json(error));
 };
@@ -73,9 +81,37 @@ const getAdminById = (req, res) => {
     }));
 };
 
+const deleteAdmin = (req, res) => {
+  const { id } = req.params;
+
+  if (!mongoose.Types.ObjectId.isValid(id)) {
+    return res.status(404).json({
+      msg: 'Id is not a valid one',
+      error: true,
+    });
+  }
+
+  return Admin.findByIdAndDelete(id)
+    .then((result) => {
+      if (!result) {
+        return res.status(404).json({
+          msg: `Admin with id ${id} was not found`,
+        });
+      }
+      return res.status(200).json({
+        msg: `Admin ${id} deleted`,
+      });
+    })
+    .catch((error) => res.status(400).json({
+      message: 'An error ocurred',
+      error,
+    }));
+};
+
 module.exports = {
   createAdmin,
   updateAdmin,
   getAllAdmins,
   getAdminById,
+  deleteAdmin,
 };
