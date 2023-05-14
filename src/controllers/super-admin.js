@@ -35,7 +35,41 @@ const getSuperAdminsById = (req, res) => {
   }
 };
 
+const createSuperAdmin = (req, res) => {
+  const { email, password } = req.body;
+
+  SuperAdmin.create({ email, password })
+    .then((result) => res.status(201).json(result))
+    .catch((error) => res.status(400).json({
+      message: 'An error ocurred',
+      error,
+    }));
+};
+
+const deleteAdminsById = (req, res) => {
+  const { id } = req.params;
+
+  if (!id) {
+    res.status(404).json({
+      message: 'Id not found',
+      error: true,
+    });
+  } else {
+    SuperAdmin.deleteOne({ _id: id })
+      .then(() => res.status(200).json({
+        message: `The super admins with id: ${id} was deleted`,
+        error: false,
+      }))
+      .catch((error) => res.status(400).json({
+        message: 'An error ocurred',
+        error,
+      }));
+  }
+};
+
 module.exports = {
   getAllSuperAdmins,
   getSuperAdminsById,
+  createSuperAdmin,
+  deleteAdminsById,
 };
