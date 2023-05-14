@@ -29,3 +29,10 @@ app.listen(port, () => {
   // eslint-disable-next-line no-console
   console.log(`Example app listening on port ${port}`);
 });
+
+const trainers = require('./routes/trainer');
+
+router.get('/', (req, res) => {
+  res.send('you have reached the api route');
+});
+router.use('/trainers', trainers);
