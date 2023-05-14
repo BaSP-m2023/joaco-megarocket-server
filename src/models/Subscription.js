@@ -4,9 +4,8 @@ const { Schema } = mongoose;
 
 const subscriptionSchema = new Schema({
   classes: {
-    type: String,
+    type: Schema.Types.ObjectId,
     required: true,
-    enum: ['Crossfit', 'Box', 'Functional', 'Spinning', 'Fitness'],
   },
   member: {
     type: Schema.Types.ObjectId,
@@ -19,4 +18,3 @@ const subscriptionSchema = new Schema({
 });
 
 module.export = mongoose.model('Subscription', subscriptionSchema);
-
