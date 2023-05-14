@@ -25,6 +25,29 @@ const validateCreation = (req, res, next) => {
   });
 };
 
+const validateUpdate = (req, res, next) => {
+  const superAdminUpdate = joi.object({
+    email: joi.string().email(),
+    password: joi.string()
+      .min(8)
+      .regex(RGXPassword)
+      .messages({
+        'message.min': 'Password must be at least 8 characters',
+        'message.pattern.base': 'Password must contain at least one uppercase letter, one lowercase letter, and one number        ',
+      }),
+  });
+
+  const validation = superAdminUpdate.validate(req.body);
+
+  if (!validation.error) return next();
+  return res.status(400).json({
+    message: 'Error: password or email incorrect',
+    data: undefined,
+    error: true,
+  });
+};
+
 module.exports = {
   validateCreation,
+  validateUpdate,
 };

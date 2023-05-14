@@ -67,9 +67,33 @@ const deleteAdminsById = (req, res) => {
   }
 };
 
+const updateAdminsById = (req, res) => {
+  const { id } = req.params;
+  const { email, password } = req.body;
+
+  if (id) {
+    SuperAdmin.findByIdAndUpdate(id, { email, password }, { new: true })
+      .then((superAdmins) => res.status(201).json({
+        message: 'Super admin update succesfully',
+        data: superAdmins,
+        error: false,
+      }))
+      .catch((error) => res.status(400).json({
+        message: 'An error ocurred',
+        error,
+      }));
+  } else {
+    res.status(404).json({
+      message: 'Id not found',
+      error: true,
+    });
+  }
+};
+
 module.exports = {
   getAllSuperAdmins,
   getSuperAdminsById,
   createSuperAdmin,
   deleteAdminsById,
+  updateAdminsById,
 };
