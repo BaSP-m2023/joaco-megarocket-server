@@ -23,6 +23,7 @@ app.use(express.json());
 app.get('/', (req, res) => {
   res.send('Base page');
 });
+
 app.use('/api', router);
 
 app.listen(port, () => {
