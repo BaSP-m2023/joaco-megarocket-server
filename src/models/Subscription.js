@@ -1,12 +1,12 @@
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
 
 const { Schema } = mongoose;
 
 const subscriptionSchema = new Schema({
-  class: {
+  classes: {
     type: String,
     required: true,
-    enum: ["Crossfit", "Box", "Functional", "Spinning", "Fitness"],
+    enum: ['Crossfit', 'Box', 'Functional', 'Spinning', 'Fitness'],
   },
   member: {
     type: Schema.Types.ObjectId,
@@ -18,4 +18,4 @@ const subscriptionSchema = new Schema({
   },
 });
 
-module.export = mongoose.model("Subscription", subscriptionSchema);
+module.export = mongoose.model('Subscription', subscriptionSchema);
