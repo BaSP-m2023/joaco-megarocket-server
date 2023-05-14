@@ -1,3 +1,5 @@
+const { ObjectId } = require('mongoose').Types;
+
 const Trainer = require('../models/Trainer');
 
 const getAllTrainer = (req, res) => {
@@ -5,22 +7,53 @@ const getAllTrainer = (req, res) => {
     .then((trainer) => {
       if (!trainer) {
         return res.status(404).json({
-          message: 'Trainer not found',
+          message: 'Trainers not found',
           error: true,
         });
       }
       return res.status(200).json({
-        message: 'Trainer list',
+        message: 'Trainers list',
         data: trainer,
         error: false,
       });
     })
     .catch((error) => res.status(400).json({
-      message: 'An error ocurred',
+      message: 'An error ocurred to find the trainers',
+      error,
+    }));
+};
+
+const getTrainerById = (req, res) => {
+  const { id } = req.params;
+
+  if (!ObjectId.isValid(id)) {
+    res.status(400).json({
+      message: 'Invalid id',
+      error: true,
+    });
+  }
+
+  Trainer.findById(id, 'firstName lastName email')
+    .then((trainer) => {
+      if (!trainer) {
+        return res.status(404).json({
+          message: `Trainer ID ${id} was not found`,
+          error: true,
+        });
+      }
+      return res.status(200).json({
+        message: `Trainer found ${trainer.firstName} ${trainer.lastName}`,
+        data: trainer,
+        error: false,
+      });
+    })
+    .catch((error) => res.status(400).json({
+      message: `An error occurred to find the trainer with ID ${id}`,
       error,
     }));
 };
 
 module.exports = {
   getAllTrainer,
+  getTrainerById,
 };
