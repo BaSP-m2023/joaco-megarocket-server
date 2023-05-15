@@ -21,7 +21,7 @@ app.use(cors());
 app.use(express.json());
 
 app.get('/', (req, res) => {
-  res.send('Server running');
+  res.send('MegaRocket Server');
 });
 app.use('/api', router);
 
