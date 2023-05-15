@@ -8,6 +8,6 @@ router.get('/', (req, res) => {
 
 const SuperAdmin = require('./super-admin');
 
-router.use('/SuperAdmin', SuperAdmin);
+router.use('/super-admin', SuperAdmin);
 
 module.exports = router;

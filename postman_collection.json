@@ -23,7 +23,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:4002/api/SuperAdmin",
+							"raw": "http://localhost:4002/api/super-admin",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -31,7 +31,7 @@
 							"port": "4002",
 							"path": [
 								"api",
-								"SuperAdmin"
+								"super-admin"
 							]
 						}
 					},
@@ -43,7 +43,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:4002/api/SuperAdmin/64613dc56b18b79d79323d97",
+							"raw": "http://localhost:4002/api/super-admin/64613dc56b18b79d79323d97",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -51,7 +51,7 @@
 							"port": "4002",
 							"path": [
 								"api",
-								"SuperAdmin",
+								"super-admin",
 								"64613dc56b18b79d79323d97"
 							]
 						}
@@ -73,7 +73,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:4002/api/SuperAdmin",
+							"raw": "http://localhost:4002/api/super-admin",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -81,7 +81,7 @@
 							"port": "4002",
 							"path": [
 								"api",
-								"SuperAdmin"
+								"super-admin"
 							]
 						}
 					},
@@ -102,7 +102,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:4002/api/SuperAdmin/64613ec1668dbc97cfe8142b",
+							"raw": "http://localhost:4002/api/super-admin/64613ec1668dbc97cfe8142b",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -110,7 +110,7 @@
 							"port": "4002",
 							"path": [
 								"api",
-								"SuperAdmin",
+								"super-admin",
 								"64613ec1668dbc97cfe8142b"
 							]
 						}
@@ -123,7 +123,7 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:4002/api/SuperAdmin/646149e9f7798233f5d8520f",
+							"raw": "http://localhost:4002/api/super-admin/646149e9f7798233f5d8520f",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -131,7 +131,7 @@
 							"port": "4002",
 							"path": [
 								"api",
-								"SuperAdmin",
+								"super-admin",
 								"646149e9f7798233f5d8520f"
 							]
 						}
