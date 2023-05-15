@@ -7,6 +7,6 @@ router.get('/', (req, res) => {
   res.send('you have reached the api route');
 });
 
-router.use('/member', members);
+router.use('/members', members);
 
 module.exports = router;

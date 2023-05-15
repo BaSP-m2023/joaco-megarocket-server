@@ -1,13 +1,22 @@
+const mongoose = require('mongoose');
 const Member = require('../models/Member');
 
 const getAllMembers = (req, res) => {
   Member.find()
-    .then((members) => res.status(200).json({
-      message: 'Complete list of members',
-      data: members,
-      error: false,
-    }))
-    .catch((error) => res.status(500).json({
+    .then((member) => {
+      if (!member) {
+        return res.status(404).json({
+          message: 'Member not found',
+          error: true,
+        });
+      }
+      return res.status(200).json({
+        message: 'Complete list of members',
+        data: member,
+        error: false,
+      });
+    })
+    .catch((error) => res.status(400).json({
       message: 'An error has ocurred',
       data: error,
     }));
@@ -16,16 +25,32 @@ const getAllMembers = (req, res) => {
 const getMembersById = (req, res) => {
   const { id } = req.params;
 
-  Member.findById(id)
-    .then((members) => res.status(200).json({
-      message: `The member with the id ${id} is ${members.firstName}`,
-      data: members,
-      error: false,
-    }))
-    .catch((error) => res.status(500).json({
-      message: 'An error has ocurred',
-      data: error,
-    }));
+  if (!mongoose.isValidObjectId(id)) {
+    res.status(400).json({
+      message: 'Invalid id',
+      data: id,
+      error: true,
+    });
+  } else {
+    Member.findById(id)
+      .then((member) => {
+        if (!member) {
+          return res.status(404).json({
+            message: 'Member not found',
+            error: true,
+          });
+        }
+        return res.status(200).json({
+          message: 'Member found',
+          data: member,
+          error: false,
+        });
+      })
+      .catch((error) => res.status(400).json({
+        message: `An error occurred with the ID: ${id}`,
+        data: error,
+      }));
+  }
 };
 
 module.exports = {
