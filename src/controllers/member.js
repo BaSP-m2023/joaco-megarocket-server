@@ -6,7 +6,7 @@ const getAllMembers = (req, res) => {
     .then((member) => {
       if (!member) {
         return res.status(404).json({
-          message: 'Member not found',
+          message: 'Members are empty',
           error: true,
         });
       }
