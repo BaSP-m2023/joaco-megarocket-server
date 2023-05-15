@@ -92,8 +92,8 @@ const deleteMember = (req, res) => {
           message: `Member with ID: ${id} was not found`,
         });
       }
-      return res.status(204).json({
-        message: 'Member success deleted!',
+      return res.status(200).json({
+        message: 'Member was deleted succesfully!',
         data: result,
         error: false,
       });
