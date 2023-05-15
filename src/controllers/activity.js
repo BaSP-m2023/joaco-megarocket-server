@@ -18,9 +18,9 @@ const getAllActivities = (req, res) => {
       });
     })
     .catch((error) => res.status(500).json({
-      message: 'An error ocurred',
+      message: `An error ocurred: ${error}`,
       data: undefined,
-      error,
+      error: true,
     }));
 };
 
@@ -50,9 +50,9 @@ const getActivityByID = (req, res) => {
       });
     })
     .catch((error) => res.status(500).json({
-      message: 'An error ocurred',
+      message: `An error ocurred: ${error}`,
       data: undefined,
-      error,
+      error: true,
     }));
 };
 
@@ -79,9 +79,9 @@ const createActivity = async (req, res) => {
       error: false,
     }))
     .catch((error) => res.status(500).json({
-      message: 'An error ocurred',
+      message: `An error ocurred: ${error}`,
       data: undefined,
-      error,
+      error: true,
     }));
 };
 
@@ -139,9 +139,9 @@ const updateActivity = async (req, res) => {
       });
     })
     .catch((error) => res.status(500).json({
-      message: 'An error ocurred',
+      message: `An error ocurred: ${error}`,
       data: undefined,
-      error,
+      error: true,
     }));
 };
 
@@ -168,9 +168,9 @@ const deleteActivity = (req, res) => {
       return res.status(204).json({});
     })
     .catch((error) => res.status(500).json({
-      message: 'An error ocurred',
+      message: `An error ocurred: ${error}`,
       data: undefined,
-      error,
+      error: true,
     }));
 };
 
