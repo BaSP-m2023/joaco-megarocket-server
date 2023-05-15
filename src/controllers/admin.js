@@ -98,9 +98,7 @@ const deleteAdmin = (req, res) => {
           msg: `Admin with id ${id} was not found`,
         });
       }
-      return res.status(200).json({
-        msg: `Admin ${id} deleted`,
-      });
+      return res.status(204).json();
     })
     .catch((error) => res.status(400).json({
       message: 'An error ocurred',
