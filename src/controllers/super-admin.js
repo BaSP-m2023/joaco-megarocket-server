@@ -26,12 +26,26 @@ const getSuperAdminsById = (req, res) => {
   const { id } = req.params;
 
   if (!mongoose.isValidObjectId(id)) {
+    res.status(404).json({
+      message: 'Id no valid',
+      error: true,
+    });
+  } else {
     SuperAdmin.findById(id, 'email')
-      .then((superAdmins) => res.status(200).json({
-        message: 'Super admin found',
-        data: superAdmins,
-        error: false,
-      }))
+      .then((superAdmin) => {
+        if (!superAdmin) {
+          res.status(400).json({
+            message: `This super admins with id: ${id} not exist`,
+            error: true,
+          });
+        } else {
+          res.status(200).json({
+            message: 'Super admin found',
+            data: superAdmin,
+            error: false,
+          });
+        }
+      })
       .catch((error) => res.status(400).json({
         message: 'An error ocurred',
         error,
