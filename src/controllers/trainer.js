@@ -1,4 +1,4 @@
-const { ObjectId } = require('mongoose').Types;
+const { default: mongoose } = require('mongoose');
 
 const Trainer = require('../models/Trainer');
 
@@ -26,33 +26,32 @@ const getAllTrainer = (req, res) => {
 const getTrainerById = (req, res) => {
   const { id } = req.params;
 
-  if (!ObjectId.isValid(id)) {
+  if (!mongoose.isValidObjectId(id)) {
     res.status(400).json({
       message: 'Invalid id',
       error: true,
     });
-  }
-
-  Trainer.findById(id, 'firstName lastName email')
-    .then((trainer) => {
-      if (!trainer) {
-        return res.status(404).json({
-          message: `Trainer ID ${id} was not found`,
-          error: true,
+  } else {
+    Trainer.findById(id, 'firstName lastName email')
+      .then((trainer) => {
+        if (!trainer) {
+          return res.status(404).json({
+            message: `Trainer ID ${id} was not found`,
+            error: true,
+          });
+        }
+        return res.status(200).json({
+          message: `Trainer found ${trainer.firstName} ${trainer.lastName}`,
+          data: trainer,
+          error: false,
         });
-      }
-      return res.status(200).json({
-        message: `Trainer found ${trainer.firstName} ${trainer.lastName}`,
-        data: trainer,
-        error: false,
-      });
-    })
-    .catch((error) => res.status(400).json({
-      message: `An error occurred to find the trainer with ID ${id}`,
-      error,
-    }));
+      })
+      .catch((error) => res.status(400).json({
+        message: `An error occurred to find the trainer with ID ${id}`,
+        error,
+      }));
+  }
 };
-
 module.exports = {
   getAllTrainer,
   getTrainerById,
