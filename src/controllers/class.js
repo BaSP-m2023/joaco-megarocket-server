@@ -53,7 +53,62 @@ const deleteClass = (req, res) => {
     }));
 };
 
+const updateClass = (req, res) => {
+  const { id } = req.params;
+  const {
+    day, hour, trainer, activity, slots,
+  } = req.body;
+
+  if (!mongoose.isValidObjectId(id)) {
+    return res.status(400).json({
+      message: `Format of ID ${id} is incorrect`,
+      data: undefined,
+      error: true,
+    });
+  }
+  return Class.findByIdAndUpdate(id, {
+    day,
+    hour,
+    trainer,
+    activity,
+    slots,
+  })
+    .then((result) => {
+      if (!result) {
+        return res.status(404).json({
+          message: `Class with ID ${id} was not found`,
+          data: undefined,
+          error: true,
+        });
+      }
+
+      const updatedClass = {
+        ...result.toObject(),
+        ...req.body,
+      };
+      if (JSON.stringify(updatedClass) === JSON.stringify(result.toObject())) {
+        return res.status(400).json({
+          message: 'There were no changes in the class',
+          data: undefined,
+          error: true,
+        });
+      }
+
+      return res.status(201).json({
+        message: 'Class updated!',
+        data: updatedClass,
+        error: false,
+      });
+    })
+    .catch((error) => res.status(400).json({
+      message: `An error ocurred: ${error}`,
+      data: undefined,
+      error: true,
+    }));
+};
+
 module.exports = {
   createClass,
   deleteClass,
+  updateClass,
 };

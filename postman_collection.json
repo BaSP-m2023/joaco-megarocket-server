@@ -70,6 +70,36 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "Update Class",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": " {\r\n    \"day\": \"Tuesday\",\r\n    \"hour\": \"18:00\",\r\n    \"slots\": 20\r\n }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:4002/api/classes/645ffc20a42624d2b80b94b4",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4002",
+							"path": [
+								"api",
+								"classes",
+								"645ffc20a42624d2b80b94b4"
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		},
