@@ -1,9 +1,9 @@
 {
 	"info": {
-		"_postman_id": "a65b31f5-b257-41c4-9508-3c7a93e225a1",
+		"_postman_id": "08c94ce5-c80f-4be5-bde6-6969d58428cc",
 		"name": "MR-test",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "27129592"
+		"_exporter_id": "27252988"
 	},
 	"item": [
 		{
@@ -24,7 +24,32 @@
 		},
 		{
 			"name": "member",
-			"item": []
+			"item": [
+				{
+					"name": "Add Member",
+					"request": {
+						"method": "POST",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "Edit Member",
+					"request": {
+						"method": "PUT",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Member",
+					"request": {
+						"method": "DELETE",
+						"header": []
+					},
+					"response": []
+				}
+			]
 		},
 		{
 			"name": "subscription",
