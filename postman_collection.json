@@ -1,14 +1,94 @@
 {
 	"info": {
-		"_postman_id": "a65b31f5-b257-41c4-9508-3c7a93e225a1",
+		"_postman_id": "7a0bef17-e7b4-4781-9053-de65969723b6",
 		"name": "MR-test",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "27129592"
+		"_exporter_id": "21425335",
+		"_collection_link": "https://universal-crater-195775.postman.co/workspace/superadmin~8f71472e-0fbc-43a5-93c8-e6463b9f79b4/collection/21425335-7a0bef17-e7b4-4781-9053-de65969723b6?action=share&creator=21425335&source=collection_link"
 	},
 	"item": [
 		{
 			"name": "admins",
-			"item": []
+			"item": [
+				{
+					"name": "Create admin",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "localhost:4002/api/admins",
+							"host": [
+								"localhost"
+							],
+							"port": "4002",
+							"path": [
+								"api",
+								"admins"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get all admins",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:4002/api/admins",
+							"host": [
+								"localhost"
+							],
+							"port": "4002",
+							"path": [
+								"api",
+								"admins"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update admin",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "localhost:4002/api/admins/",
+							"host": [
+								"localhost"
+							],
+							"port": "4002",
+							"path": [
+								"api",
+								"admins",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "New Request",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:4002/api/admins/",
+							"host": [
+								"localhost"
+							],
+							"port": "4002",
+							"path": [
+								"api",
+								"admins",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
 		},
 		{
 			"name": "trainer",

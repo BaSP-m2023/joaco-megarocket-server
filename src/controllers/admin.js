@@ -5,12 +5,22 @@ const createAdmin = (req, res) => {
   const {
     firstName, lastName, dni, phone, email, city, password,
   } = req.body;
-  Admin.create({
-    firstName, lastName, dni, phone, email, city, password,
-  })
+  Admin.findOne({ dni })
+    .then((found) => {
+      if (found) {
+        return res.status(404).json({
+          msg: `An admin with DNI ${dni} already exists`,
+          data: undefined,
+          error: true,
+        });
+      }
+      return Admin.create({
+        firstName, lastName, dni, phone, email, city, password,
+      });
+    })
     .then((result) => res.status(201).json({
       msg: 'New admin created',
-      result,
+      data: result,
       error: false,
     }))
     .catch((error) => res.status(400).json({
@@ -19,7 +29,7 @@ const createAdmin = (req, res) => {
     }));
 };
 
-const updateAdmin = (req, res) => {
+const updateAdmin = async (req, res) => {
   const { id } = req.params;
   const {
     firstName, lastName, dni, phone, email, city, password,
@@ -27,7 +37,24 @@ const updateAdmin = (req, res) => {
   if (!mongoose.Types.ObjectId.isValid(id)) {
     return res.status(404).json({
       msg: 'Id is not a valid one',
+      data: undefined,
       error: true,
+    });
+  }
+  const actualAdmin = await Admin.findById(id);
+  const adminProperties = Object.keys(actualAdmin.toObject()).slice(1, -1);
+  let changes = false;
+  adminProperties.forEach((property) => {
+    if (req.body[property]
+    && req.body[property].toString() !== actualAdmin[property].toString()) {
+      changes = true;
+    }
+  });
+  if (!changes) {
+    return res.status(200).json({
+      message: 'There were no changes',
+      data: undefined,
+      error: false,
     });
   }
   return Admin.findByIdAndUpdate(
@@ -41,6 +68,7 @@ const updateAdmin = (req, res) => {
       if (!result) {
         return res.status(404).json({
           msg: `Admin with id ${id} was not found`,
+          data: undefined,
           error: true,
         });
       }
@@ -62,6 +90,7 @@ const getAllAdmins = (req, res) => {
     }))
     .catch((error) => res.status(400).json({
       message: 'An error ocurred',
+      data: undefined,
       error,
     }));
 };
@@ -77,6 +106,7 @@ const getAdminById = (req, res) => {
     }))
     .catch((error) => res.status(400).json({
       message: 'An error ocurred',
+      data: undefined,
       error,
     }));
 };
@@ -86,7 +116,8 @@ const deleteAdmin = (req, res) => {
 
   if (!mongoose.Types.ObjectId.isValid(id)) {
     return res.status(404).json({
-      msg: 'Id is not a valid one',
+      message: 'Id is not a valid one',
+      data: undefined,
       error: true,
     });
   }
@@ -95,13 +126,16 @@ const deleteAdmin = (req, res) => {
     .then((result) => {
       if (!result) {
         return res.status(404).json({
-          msg: `Admin with id ${id} was not found`,
+          message: `Admin with id ${id} was not found`,
+          data: undefined,
+          error: true,
         });
       }
       return res.status(204).json();
     })
     .catch((error) => res.status(400).json({
       message: 'An error ocurred',
+      data: undefined,
       error,
     }));
 };
