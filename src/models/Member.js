@@ -33,7 +33,7 @@ const memberSchema = new Schema({
     minLenght: 3,
   },
   birthday: {
-    type: Date,
+    type: String,
     required: true,
   },
   postalCode: {

@@ -19,7 +19,11 @@ const createMember = (req, res) => {
     membership,
   })
 
-    .then((result) => res.status(201).json(result))
+    .then((result) => res.status(201).json({
+      message: `Member ${result.id} was created successfully!`,
+      data: result,
+      error: false,
+    }))
 
     .catch((error) => res.status(400).json({
       message: 'Failed to create an Member',
@@ -35,7 +39,7 @@ const editMember = (req, res) => {
 
   if (!mongoose.Types.ObjectId.isValid(id)) {
     res.status(404).json({
-      message: `ID: ${id} is not valid`,
+      message: `ID: ${id} format is not valid`,
     });
   }
 
@@ -61,9 +65,17 @@ const editMember = (req, res) => {
           message: `Member with ID: ${id} was not found`,
         });
       }
-      return res.status(200).json(result);
+      return res.status(200).json({
+        message: 'Member was edited succesfully!',
+        data: result,
+        error: false,
+      });
     })
-    .catch((e) => res.status(400).json(e));
+    .catch((error) => res.status(400).json({
+      message: 'Error in the request',
+      data: error,
+      error,
+    }));
 };
 
 const deleteMember = (req, res) => {
@@ -80,11 +92,17 @@ const deleteMember = (req, res) => {
           message: `Member with ID: ${id} was not found`,
         });
       }
-      return res.status(200).json({
+      return res.status(204).json({
         message: 'Member success deleted!',
+        data: result,
+        error: false,
       });
     })
-    .catch((e) => res.status(400).json(e));
+    .catch((error) => res.status(400).json({
+      message: 'Request error',
+      data: error,
+      error,
+    }));
 };
 
 module.exports = {
