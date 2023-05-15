@@ -60,15 +60,25 @@ const updateTrainer = (req, res) => {
     },
     { new: true },
   )
-    .then((result) => {
-      if (!result) {
+    .then((trainer) => {
+      if (!trainer) {
         return res.status(404).json({
-          msg: `Trainer with the id: ${id} was not fount`,
+          message: `Trainer with the id: ${id} was not fount`,
+          data: undefined,
+          error: true,
         });
       }
-      return res.status(201).json(result);
+      return res.status(201).json({
+        message: 'Trainer updated succesfully',
+        data: trainer,
+        error: false,
+      });
     })
-    .catch((error) => res.status(400).json(error));
+    .catch((error) => res.status(400).json({
+      message: 'An error ocurred',
+      data: undefined,
+      error,
+    }));
 };
 
 const deleteTrainer = (req, res) => {
@@ -87,13 +97,19 @@ const deleteTrainer = (req, res) => {
       if (!result) {
         return res.status(404).json({
           message: `Trainer with ID: ${id} was not found`,
+          data: undefined,
+          error: true,
         });
       }
       return res.status(204).json({
         message: 'Trainer success deleted!',
       });
     })
-    .catch((error) => res.status(400).json(error));
+    .catch((error) => res.status(400).json({
+      message: 'An error ocurred',
+      data: undefined,
+      error,
+    }));
 };
 
 module.exports = {
