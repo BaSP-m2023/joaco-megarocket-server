@@ -29,7 +29,29 @@
 					"name": "Add Member",
 					"request": {
 						"method": "POST",
-						"header": []
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:4002/api/members/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4002",
+							"path": [
+								"api",
+								"members",
+								""
+							]
+						}
 					},
 					"response": []
 				},
@@ -37,7 +59,26 @@
 					"name": "Edit Member",
 					"request": {
 						"method": "PUT",
-						"header": []
+						"header": [],
+						"url": {
+							"raw": "http://localhost:4002/api/members/:id",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4002",
+							"path": [
+								"api",
+								"members",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": null
+								}
+							]
+						}
 					},
 					"response": []
 				},
@@ -45,7 +86,26 @@
 					"name": "Delete Member",
 					"request": {
 						"method": "DELETE",
-						"header": []
+						"header": [],
+						"url": {
+							"raw": "http://localhost:4002/api/members/:id",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4002",
+							"path": [
+								"api",
+								"members",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": null
+								}
+							]
+						}
 					},
 					"response": []
 				}
