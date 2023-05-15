@@ -28,7 +28,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"day\": \"Friday\",\r\n    \"hour\": \"20:00\",\r\n    \"slots\": 100\r\n}",
+							"raw": "{\r\n    \"day\": \"Tuesday\",\r\n    \"hour\": \"18:00\",\r\n    \"slots\": 6\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -56,7 +56,7 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:4002/api/classes/64600a74e42d4177acb8153a",
+							"raw": "http://localhost:4002/api/classes/646227bffef46a471ade3f35",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -65,7 +65,7 @@
 							"path": [
 								"api",
 								"classes",
-								"64600a74e42d4177acb8153a"
+								"646227bffef46a471ade3f35"
 							]
 						}
 					},
@@ -78,7 +78,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": " {\r\n    \"day\": \"Tuesday\",\r\n    \"hour\": \"18:00\",\r\n    \"slots\": 20\r\n }",
+							"raw": " {\r\n    \"slots\": 8\r\n }",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -86,7 +86,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:4002/api/classes/645ffc20a42624d2b80b94b4",
+							"raw": "http://localhost:4002/api/classes/64600b11c51d8d472e32c678",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -95,7 +95,7 @@
 							"path": [
 								"api",
 								"classes",
-								"645ffc20a42624d2b80b94b4"
+								"64600b11c51d8d472e32c678"
 							]
 						}
 					},
