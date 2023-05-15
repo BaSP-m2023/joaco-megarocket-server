@@ -1,14 +1,23 @@
+const { default: mongoose } = require('mongoose');
 const SuperAdmin = require('../models/Super-admin');
 
 const getAllSuperAdmins = (req, res) => {
   SuperAdmin.find()
-    .then((superAdmins) => res.status(200).json({
-      message: 'Succesfully',
-      data: superAdmins,
-      error: false,
-    }))
+    .then((superAdmins) => {
+      if (superAdmins.length > 0) {
+        res.status(200).json({
+          message: 'Successfully',
+          data: superAdmins,
+          error: false,
+        });
+      } else {
+        res.status(400).json({
+          message: 'There are no super admins yet',
+        });
+      }
+    })
     .catch((error) => res.status(500).json({
-      message: 'An error ocurred',
+      message: 'An error occurred',
       error,
     }));
 };
@@ -16,7 +25,7 @@ const getAllSuperAdmins = (req, res) => {
 const getSuperAdminsById = (req, res) => {
   const { id } = req.params;
 
-  if (id) {
+  if (!mongoose.isValidObjectId(id)) {
     SuperAdmin.findById(id, 'email')
       .then((superAdmins) => res.status(200).json({
         message: 'Super admin found',
@@ -27,11 +36,6 @@ const getSuperAdminsById = (req, res) => {
         message: 'An error ocurred',
         error,
       }));
-  } else {
-    res.status(404).json({
-      message: 'Id not found',
-      error: true,
-    });
   }
 };
 
@@ -39,7 +43,11 @@ const createSuperAdmin = (req, res) => {
   const { email, password } = req.body;
 
   SuperAdmin.create({ email, password })
-    .then((result) => res.status(201).json(result))
+    .then((result) => res.status(201).json({
+      message: 'Succesfully created',
+      data: result,
+      error: false,
+    }))
     .catch((error) => res.status(400).json({
       message: 'An error ocurred',
       error,
