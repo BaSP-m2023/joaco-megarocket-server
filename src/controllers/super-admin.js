@@ -18,6 +18,7 @@ const getAllSuperAdmins = (req, res) => {
     })
     .catch((error) => res.status(500).json({
       message: 'An error occurred',
+      data: undefined,
       error,
     }));
 };
@@ -28,6 +29,7 @@ const getSuperAdminsById = (req, res) => {
   if (!mongoose.isValidObjectId(id)) {
     res.status(404).json({
       message: 'Id no valid',
+      data: undefined,
       error: true,
     });
   } else {
@@ -36,6 +38,7 @@ const getSuperAdminsById = (req, res) => {
         if (!superAdmin) {
           res.status(400).json({
             message: `This super admins with id: ${id} not exist`,
+            data: undefined,
             error: true,
           });
         } else {
@@ -48,6 +51,7 @@ const getSuperAdminsById = (req, res) => {
       })
       .catch((error) => res.status(400).json({
         message: 'An error ocurred',
+        data: undefined,
         error,
       }));
   }
@@ -64,6 +68,7 @@ const createSuperAdmin = (req, res) => {
     }))
     .catch((error) => res.status(400).json({
       message: 'An error ocurred',
+      data: undefined,
       error,
     }));
 };
@@ -74,16 +79,19 @@ const deleteAdminsById = (req, res) => {
   if (!id) {
     res.status(404).json({
       message: 'Id not found',
+      data: undefined,
       error: true,
     });
   } else {
     SuperAdmin.deleteOne({ _id: id })
       .then(() => res.status(200).json({
         message: `The super admins with id: ${id} was deleted`,
+        data: undefined,
         error: false,
       }))
       .catch((error) => res.status(400).json({
         message: 'An error ocurred',
+        data: undefined,
         error,
       }));
   }
@@ -102,11 +110,13 @@ const updateAdminsById = (req, res) => {
       }))
       .catch((error) => res.status(400).json({
         message: 'An error ocurred',
+        data: undefined,
         error,
       }));
   } else {
     res.status(404).json({
       message: 'Id not found',
+      data: undefined,
       error: true,
     });
   }
