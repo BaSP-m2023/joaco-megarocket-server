@@ -76,7 +76,7 @@ const createActivity = (req, res) => {
     }));
 };
 
-const updateActivity = (req, res) => {
+const updateActivity = async (req, res) => {
   const { id } = req.params;
   if (!mongoose.isValidObjectId(id)) {
     return res.status(400).json({
@@ -87,6 +87,24 @@ const updateActivity = (req, res) => {
   }
 
   const { name, description, isActive } = req.body;
+
+  const actualActivity = await Activity.findById(id);
+  const activityProperties = Object.keys(actualActivity.toObject()).slice(1, -1);
+  let changes = false;
+  activityProperties.forEach((property) => {
+    if (req.body[property]
+    && req.body[property].toString() !== actualActivity[property].toString()) {
+      changes = true;
+    }
+  });
+
+  if (!changes) {
+    return res.status(200).json({
+      message: 'There were no changes',
+      data: actualActivity,
+      error: false,
+    });
+  }
 
   return Activity.findByIdAndUpdate(
     id,
