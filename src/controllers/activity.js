@@ -59,7 +59,16 @@ const getActivityByID = (req, res) => {
 const createActivity = (req, res) => {
   const { name, description, isActive } = req.body;
 
-  Activity.create({
+  const activityExists = Activity.findOne({ name });
+  if (activityExists) {
+    return res.status(400).json({
+      message: `${name} activity already exists`,
+      data: undefined,
+      error: true,
+    });
+  }
+
+  return Activity.create({
     name,
     description,
     isActive,
