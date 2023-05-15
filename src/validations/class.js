@@ -7,7 +7,7 @@ const validateCreation = (req, res, next) => {
       .required(),
     trainer: Joi.isSchema(),
     activity: Joi.isSchema(),
-    slots: Joi.number().positive().min(5).max(100)
+    slots: Joi.number().positive().min(2).max(15)
       .optional(),
   });
 
@@ -28,7 +28,7 @@ const validateUpdate = (req, res, next) => {
       .optional(),
     trainer: Joi.isSchema(),
     activity: Joi.isSchema(),
-    slots: Joi.number().positive().min(5).max(100)
+    slots: Joi.number().positive().min(2).max(15)
       .optional(),
   }).min(1);
 

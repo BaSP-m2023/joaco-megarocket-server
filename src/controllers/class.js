@@ -12,11 +12,20 @@ const createClass = (req, res) => {
     trainer,
     activity,
     slots,
-  }).then((result) => res.status(201).json({
-    message: 'Class created',
-    data: result,
-    error: false,
-  }))
+  }).then((result) => {
+    if (result.day === day && result.hour === hour) {
+      return res.status(400).json({
+        message: `Class of day ${day} and hour ${hour} already exists`,
+        data: undefined,
+        error: true,
+      });
+    }
+    return res.status(201).json({
+      message: 'Class created',
+      data: result,
+      error: false,
+    });
+  })
     .catch((error) => res.status(400).json({
       message: `An error ocurred: ${error}`,
       data: undefined,
@@ -44,7 +53,7 @@ const deleteClass = (req, res) => {
           error: true,
         });
       }
-      return res.status(204).end();
+      return res.status(204).json({});
     })
     .catch((error) => res.status(400).json({
       message: `An error ocurred: ${error}`,
@@ -66,13 +75,7 @@ const updateClass = (req, res) => {
       error: true,
     });
   }
-  return Class.findByIdAndUpdate(id, {
-    day,
-    hour,
-    trainer,
-    activity,
-    slots,
-  })
+  return Class.findById(id)
     .then((result) => {
       if (!result) {
         return res.status(404).json({
@@ -86,22 +89,30 @@ const updateClass = (req, res) => {
         ...result.toObject(),
         ...req.body,
       };
-      if (JSON.stringify(updatedClass) === JSON.stringify(result.toObject())) {
-        return res.status(400).json({
-          message: 'There were no changes in the class',
-          data: undefined,
+
+      if (JSON.stringify(result) === JSON.stringify(updatedClass)) {
+        return res.status(200).json({
+          message: 'No changes were made to the class',
+          data: updatedClass,
           error: true,
         });
       }
 
-      return res.status(201).json({
-        message: 'Class updated!',
-        data: updatedClass,
-        error: false,
-      });
+      return Class.findByIdAndUpdate(id, {
+        day,
+        hour,
+        trainer,
+        activity,
+        slots,
+      }, { new: true })
+        .then((data) => res.status(201).json({
+          message: 'Class updated',
+          data,
+          error: false,
+        }));
     })
     .catch((error) => res.status(400).json({
-      message: `An error ocurred: ${error}`,
+      message: `An error occurred: ${error}`,
       data: undefined,
       error: true,
     }));
