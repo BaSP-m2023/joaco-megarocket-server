@@ -21,7 +21,7 @@ app.use(cors());
 app.use(express.json());
 
 app.get('/', (req, res) => {
-  res.send('Base page');
+  res.send('Server running');
 });
 app.use('/api', router);
 
