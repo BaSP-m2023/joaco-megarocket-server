@@ -12,7 +12,7 @@ const createClass = (req, res) => {
         return res.status(400).json({
           message: `Class of day ${day} and hour ${hour} already exists`,
           data: undefined,
-          erorr: true,
+          error: true,
         });
       }
       return Class.create({
