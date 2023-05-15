@@ -58,7 +58,7 @@
             "header": [],
             "body": {
               "mode": "raw",
-              "raw": "        {\r\n            \"firstName\": \"Cosme\",\r\n            \"lastName\": \"Fulanito\",\r\n            \"dni\": 1234576,\r\n            \"phone\": 1234567890,\r\n            \"email\": \"c.fulanito8@gmail.com\",\r\n            \"city\": \"Santa Fe\",\r\n            \"password\": \"Contraseña123\",\r\n            \"salary\": 95000,\r\n            \"isActive\": \"true\"\r\n        }",
+              "raw": "        {\r\n            \"firstName\": \"Iara\",\r\n            \"lastName\": \"Fulanito\",\r\n            \"dni\": 1234576,\r\n            \"phone\": 1234567890,\r\n            \"email\": \"c.fulanito8@gmail.com\",\r\n            \"city\": \"Santa Fe\",\r\n            \"password\": \"Contraseña123\",\r\n            \"salary\": 95000,\r\n            \"isActive\": \"true\"\r\n        }",
               "options": {
                 "raw": {
                   "language": "json"
@@ -85,8 +85,33 @@
           "request": {
             "method": "PUT",
             "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n            \"firstName\": \"Ema\",\r\n            \"lastName\": \"Siempreviva\",\r\n            \"dni\": 1234576,\r\n            \"phone\": 1234567890,\r\n            \"email\": \"c.fulanito8@gmail.com\",\r\n            \"city\": \"Santa Fe\",\r\n            \"password\": \"Contraseña123\",\r\n            \"salary\": 95000,\r\n            \"isActive\": \"false\"\r\n        }",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
             "url": {
-              "raw": ""
+              "raw": "http://localhost:4002/api/trainers/:id",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "4002",
+              "path": [
+                "api",
+                "trainers",
+                ":id"
+              ],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "645fc6089435a014c7e59a8d"
+                }
+              ]
             }
           },
           "response": []
