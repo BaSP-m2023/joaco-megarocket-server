@@ -41,7 +41,7 @@ const trainerSchema = new Schema({
     type: Number,
     required: true,
   },
-  is_active: {
+  isActive: {
     type: Boolean,
     default: true,
   },
