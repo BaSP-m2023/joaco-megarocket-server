@@ -6,26 +6,27 @@ const createClass = (req, res) => {
     day, hour, trainer, activity, slots,
   } = req.body;
 
-  Class.create({
-    day,
-    hour,
-    trainer,
-    activity,
-    slots,
-  }).then((result) => {
-    if (result.day === day && result.hour === hour) {
-      return res.status(400).json({
-        message: `Class of day ${day} and hour ${hour} already exists`,
-        data: undefined,
-        error: true,
-      });
-    }
-    return res.status(201).json({
-      message: 'Class created',
-      data: result,
-      error: false,
-    });
-  })
+  Class.findOne({ day, hour })
+    .then((classExists) => {
+      if (classExists) {
+        return res.status(400).json({
+          message: `Class of day ${day} and hour ${hour} already exists`,
+          data: undefined,
+          erorr: true,
+        });
+      }
+      return Class.create({
+        day,
+        hour,
+        trainer,
+        activity,
+        slots,
+      }).then((result) => res.status(201).json({
+        message: 'Class created',
+        data: result,
+        error: false,
+      }));
+    })
     .catch((error) => res.status(400).json({
       message: `An error ocurred: ${error}`,
       data: undefined,

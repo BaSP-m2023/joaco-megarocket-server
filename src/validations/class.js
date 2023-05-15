@@ -4,7 +4,10 @@ const validateCreation = (req, res, next) => {
   const classValidation = Joi.object({
     day: Joi.string().min(6).max(9).required(),
     hour: Joi.string().min(5).max(5).regex(/^([01]\d|2[0-3]):([0-5]\d)$/)
-      .required(),
+      .required()
+      .messages({
+        'string.pattern.base': 'Hour must be of format hh:mm',
+      }),
     trainer: Joi.isSchema(),
     activity: Joi.isSchema(),
     slots: Joi.number().positive().min(2).max(15)
@@ -25,7 +28,10 @@ const validateUpdate = (req, res, next) => {
   const classValidation = Joi.object({
     day: Joi.string().min(6).max(9).optional(),
     hour: Joi.string().min(5).max(5).regex(/^([01]\d|2[0-3]):([0-5]\d)$/)
-      .optional(),
+      .optional()
+      .messages({
+        'string.patter.base': 'Hour must be of format hh:mm',
+      }),
     trainer: Joi.isSchema(),
     activity: Joi.isSchema(),
     slots: Joi.number().positive().min(2).max(15)
