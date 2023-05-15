@@ -1,38 +1,103 @@
 {
-	"info": {
-		"_postman_id": "a65b31f5-b257-41c4-9508-3c7a93e225a1",
-		"name": "MR-test",
-		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "27129592"
-	},
-	"item": [
-		{
-			"name": "admins",
-			"item": []
-		},
-		{
-			"name": "trainer",
-			"item": []
-		},
-		{
-			"name": "super-admin",
-			"item": []
-		},
-		{
-			"name": "class",
-			"item": []
-		},
-		{
-			"name": "member",
-			"item": []
-		},
-		{
-			"name": "subscription",
-			"item": []
-		},
-		{
-			"name": "activity",
-			"item": []
-		}
-	]
+  "info": {
+    "_postman_id": "c6308765-89f1-486d-a803-c8dedfcbb852",
+    "name": "MR-test",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "27281201"
+  },
+  "item": [
+    {
+      "name": "admins",
+      "item": []
+    },
+    {
+      "name": "trainer",
+      "item": [
+        {
+          "name": "Create new trainer",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "        {\r\n            \"firstName\": \"Cosme\",\r\n            \"lastName\": \"Fulanito\",\r\n            \"dni\": 1234576,\r\n            \"phone\": 1234567890,\r\n            \"email\": \"c.fulanito8@gmail.com\",\r\n            \"city\": \"Santa Fe\",\r\n            \"password\": \"Contraseña123\",\r\n            \"salary\": 95000,\r\n            \"isActive\": \"true\"\r\n        }",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:4002/api/trainers",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "4002",
+              "path": [
+                "api",
+                "trainers"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update trainer",
+          "request": {
+            "method": "PUT",
+            "header": []
+          },
+          "response": []
+        },
+        {
+          "name": "Delete trainer",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:4002/api/trainers/:id",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "4002",
+              "path": [
+                "api",
+                "trainers",
+                ":id"
+              ],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "64619c24f8712cbd498c1deb"
+                }
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "super-admin",
+      "item": []
+    },
+    {
+      "name": "class",
+      "item": []
+    },
+    {
+      "name": "member",
+      "item": []
+    },
+    {
+      "name": "subscription",
+      "item": []
+    },
+    {
+      "name": "activity",
+      "item": []
+    }
+  ]
 }
