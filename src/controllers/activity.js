@@ -56,10 +56,10 @@ const getActivityByID = (req, res) => {
     }));
 };
 
-const createActivity = (req, res) => {
+const createActivity = async (req, res) => {
   const { name, description, isActive } = req.body;
 
-  const activityExists = Activity.findOne({ name });
+  const activityExists = await Activity.findOne({ name });
   if (activityExists) {
     return res.status(400).json({
       message: `${name} activity already exists`,
