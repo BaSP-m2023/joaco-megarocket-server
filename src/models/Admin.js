@@ -2,26 +2,28 @@ const mongoose = require('mongoose');
 
 const { Schema } = mongoose;
 
-const memberSchema = new Schema({
+const adminSchema = new Schema({
   firstName: {
     type: String,
     required: true,
-    minLenght: 3,
+    minLenght: 4,
   },
   lastName: {
     type: String,
     required: true,
-    minLenght: 3,
+    minLenght: 4,
   },
   dni: {
     type: Number,
     required: true,
     minLenght: 7,
+    maxLenght: 8,
   },
   phone: {
     type: Number,
     required: true,
     minLenght: 10,
+    maxLenght: 10,
   },
   email: {
     type: String,
@@ -30,26 +32,13 @@ const memberSchema = new Schema({
   city: {
     type: String,
     required: true,
-    minLenght: 3,
-  },
-  birthday: {
-    type: String,
-    required: true,
-  },
-  postalCode: {
-    type: Number,
-    required: true,
     minLenght: 4,
   },
-  isActive: {
-    type: Boolean,
-    default: false,
-  },
-  membership: {
+  password: {
     type: String,
     required: true,
-    enum: ['Black Membership', 'Classic Membership', 'Only Classes Membership'],
+    minLenght: 8,
   },
 });
 
-module.exports = mongoose.model('Member', memberSchema);
+module.exports = mongoose.model('Admin', adminSchema);
