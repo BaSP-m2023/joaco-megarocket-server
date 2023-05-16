@@ -8,12 +8,14 @@ const trainers = require('./trainer');
 
 router.use('/activities', activities);
 
+const admins = require('./admin');
+
 router.get('/', (req, res) => {
   res.send('you have reached the api route');
 });
 
-router.use('/members', members);
-router.use('/classes', classes);
-router.use('/trainers', trainers);
+
+
+router.use('/admins', admins);
 
 module.exports = router;

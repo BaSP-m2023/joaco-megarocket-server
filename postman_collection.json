@@ -8,7 +8,49 @@
 	"item": [
 		{
 			"name": "admins",
-			"item": []
+			"item": [
+        {
+          "name": "Get All Admins",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:4002/api/admins",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "4002",
+              "path": [
+                "api",
+                "admins"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Admin By Id",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:4002/api/admins/646223b3731da1b875752bda",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "4002",
+              "path": [
+                "api",
+                "admins",
+                "646223b3731da1b875752bda"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
 		},
 		{
 			"name": "trainer",
