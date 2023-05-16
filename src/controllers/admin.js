@@ -9,7 +9,7 @@ const createAdmin = (req, res) => {
     .then((found) => {
       if (found) {
         return res.status(404).json({
-          msg: `An admin with DNI ${dni} already exists`,
+          message: `An admin with DNI ${dni} already exists`,
           data: undefined,
           error: true,
         });
@@ -19,7 +19,7 @@ const createAdmin = (req, res) => {
       });
     })
     .then((result) => res.status(201).json({
-      msg: 'New admin created',
+      message: 'New admin created',
       data: result,
       error: false,
     }))
@@ -36,7 +36,7 @@ const updateAdmin = async (req, res) => {
   } = req.body;
   if (!mongoose.Types.ObjectId.isValid(id)) {
     return res.status(404).json({
-      msg: 'Id is not a valid one',
+      message: 'Id is not a valid one',
       data: undefined,
       error: true,
     });
@@ -67,13 +67,13 @@ const updateAdmin = async (req, res) => {
     .then((result) => {
       if (!result) {
         return res.status(404).json({
-          msg: `Admin with id ${id} was not found`,
+          message: `Admin with id ${id} was not found`,
           data: undefined,
           error: true,
         });
       }
       return res.status(201).json({
-        msg: `Admin ${id} updated`,
+        message: `Admin ${id} updated`,
         result,
         error: false,
       });
