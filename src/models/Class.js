@@ -22,7 +22,7 @@ const classSchema = new Schema({
   },
   slots: {
     type: Number,
-    default: 50,
+    default: 10,
   },
 }, {
   versionKey: false,
