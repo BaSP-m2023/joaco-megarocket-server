@@ -9,8 +9,8 @@ router.get('/', (req, res) => {
   res.send('you have reached the api route');
 });
 
-router.use('/classes', classes);
 router.use('/members', members);
+router.use('/classes', classes);
 router.use('/trainers', trainers);
 
 module.exports = router;
