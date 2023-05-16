@@ -5,8 +5,8 @@ const validations = require('../validations/subscription');
 const router = express.Router();
 
 router
-  .get('/', subscriptionController.getSubcriptions)
-  .get('/:id', subscriptionController.getSubscriptionByID)
+  .get('/', subscriptionController.getSubscriptions)
+  .get('/:id', subscriptionController.getSubscriptionsByID)
   .post('/', validations.createValidation, subscriptionController.createSubscription)
   .put('/:id', validations.updateValidation, subscriptionController.updateSubscription)
   .delete('/:id', subscriptionController.deleteSubscription);
