@@ -33,17 +33,17 @@ const memberSchema = new Schema({
     minLenght: 3,
   },
   birthday: {
-    type: Date,
+    type: String,
     required: true,
   },
-  postal_code: {
+  postalCode: {
     type: Number,
     required: true,
     minLenght: 4,
   },
-  is_active: {
+  isActive: {
     type: Boolean,
-    required: true,
+    default: false,
   },
   membership: {
     type: String,

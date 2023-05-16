@@ -98,9 +98,17 @@ const getAllAdmins = (req, res) => {
 const getAdminById = (req, res) => {
   const { id } = req.params;
 
-  Admin.findById(id)
+  if (!mongoose.isValidObjectId(id)) {
+    return res.status(400).json({
+      message: 'The indicated ID is invalid',
+      data: id,
+      error: true,
+    });
+  }
+
+  return Admin.findById(id)
     .then((admin) => res.status(200).json({
-      message: `Admin found: it was ${admin.firstName}`,
+      message: `Admin user found: ${admin.firstName} ${admin.lastName}`,
       data: admin,
       error: false,
     }))
