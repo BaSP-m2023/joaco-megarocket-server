@@ -9,8 +9,8 @@ const getSubscriptions = (req, res) => {
       error: false,
     }))
     .catch((error) => res.status(500).json({
-      error,
-      message: 'An error occurred',
+      error: true,
+      message: error,
       data: error,
     }));
 };
@@ -40,8 +40,8 @@ const getSubscriptionsByID = (req, res) => {
       });
     })
     .catch((error) => res.status(500).json({
-      error,
-      message: 'An error occurred',
+      error: true,
+      message: error,
       data: undefined,
     }));
 };
@@ -59,8 +59,8 @@ const createSubscription = (req, res) => {
       data: newSubscription,
     }))
     .catch((error) => res.status(500).json({
-      error,
-      message: 'An error ocurred',
+      error: true,
+      message: error,
       data: undefined,
     }));
 };
@@ -99,8 +99,8 @@ const updateSubscription = (req, res) => {
       });
     })
     .catch((error) => res.status(500).json({
-      error,
-      message: 'An error occurred',
+      error: true,
+      message: error,
       data: undefined,
     }));
 };
@@ -128,8 +128,8 @@ const deleteSubscription = (req, res) => {
       });
     })
     .catch((error) => res.status(500).json({
-      error,
-      message: 'An error ocurred',
+      error: true,
+      message: error,
       data: undefined,
     }));
 };
