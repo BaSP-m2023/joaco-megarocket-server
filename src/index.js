@@ -29,3 +29,7 @@ app.listen(port, () => {
   // eslint-disable-next-line no-console
   console.log(`Example app listening on port ${port}`);
 });
+
+const classRouter = require('./routes/class');
+
+app.use(classRouter);

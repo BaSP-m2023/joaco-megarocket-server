@@ -25,6 +25,7 @@ const classSchema = new Schema({
     default: 10,
   },
 }, {
+  versionKey: false,
   timestamps: true,
 });
 

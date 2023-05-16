@@ -1,21 +1,16 @@
 const express = require('express');
 const activities = require('./activity');
-
-const router = express.Router();
 const classes = require('./class');
 const members = require('./member');
 const trainers = require('./trainer');
-
-router.use('/activities', activities);
-
 const admins = require('./admin');
 
-router.get('/', (req, res) => {
-  res.send('you have reached the api route');
-});
+const router = express.Router();
 
-
-
+router.use('/classes', classes);
+router.use('/members', members);
+router.use('/trainers', trainers);
 router.use('/admins', admins);
+router.use('/activities', activities);
 
 module.exports = router;
