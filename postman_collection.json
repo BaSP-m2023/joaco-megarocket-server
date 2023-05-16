@@ -1,814 +1,924 @@
 {
-	"info": {
-		"_postman_id": "594412e3-a638-48d6-9983-c3c0bcc58a3b",
-		"name": "MR-test",
-		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "27129592"
-	},
-	"item": [
-		{
-			"name": "admins",
-			"item": [
-				{
-					"name": "Get All Admins",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:4002/api/admins",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "4002",
-							"path": [
-								"api",
-								"admins"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Get Admin By Id",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:4002/api/admins/646223b3731da1b875752bda",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "4002",
-							"path": [
-								"api",
-								"admins",
-								"646223b3731da1b875752bda"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Update admin",
-					"request": {
-						"method": "PUT",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"firstName\": \"Valentina\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "localhost:4002/api/admins/646223b3731da1b875752bda",
-							"host": [
-								"localhost"
-							],
-							"port": "4002",
-							"path": [
-								"api",
-								"admins",
-								"646223b3731da1b875752bda"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "New Request",
-					"request": {
-						"method": "DELETE",
-						"header": [],
-						"url": {
-							"raw": "localhost:4002/api/admins/646286c756d725773968075c",
-							"host": [
-								"localhost"
-							],
-							"port": "4002",
-							"path": [
-								"api",
-								"admins",
-								"646286c756d725773968075c"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Create admin",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\"firstName\": \"Victoria\",\r\n            \"lastName\": \"Yandel\",\r\n            \"dni\": 41345678,\r\n            \"phone\": 3534567890,\r\n            \"email\": \"rob@gmail.com\",\r\n            \"city\": \"Montevideo\",\r\n            \"password\": \"hola123123\"}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "localhost:4002/api/admins",
-							"host": [
-								"localhost"
-							],
-							"port": "4002",
-							"path": [
-								"api",
-								"admins"
-							]
-						}
-					},
-					"response": []
-				}
-			]
-		},
-		{
-			"name": "trainer",
-			"item": [
-				{
-					"name": "Get",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "localhost:4002/api/trainers",
-							"host": [
-								"localhost"
-							],
-							"port": "4002",
-							"path": [
-								"api",
-								"trainers"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Get By Id",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "localhost:4002/api/trainers/64613fbb0a9261076cdd83e3",
-							"host": [
-								"localhost"
-							],
-							"port": "4002",
-							"path": [
-								"api",
-								"trainers",
-								"64613fbb0a9261076cdd83e3"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Create new trainer",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "        {\r\n            \"firstName\": \"Iara\",\r\n            \"lastName\": \"Fulanito\",\r\n            \"dni\": 1234576,\r\n            \"phone\": 1234567890,\r\n            \"email\": \"c.fulanito8@gmail.com\",\r\n            \"city\": \"Santa Fe\",\r\n            \"password\": \"Contraseña123\",\r\n            \"salary\": 95000,\r\n            \"isActive\": \"true\"\r\n        }",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://localhost:4002/api/trainers",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "4002",
-							"path": [
-								"api",
-								"trainers"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Update trainer",
-					"request": {
-						"method": "PUT",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n            \"firstName\": \"Ema\",\r\n            \"lastName\": \"Siempreviva\",\r\n            \"dni\": 1234576,\r\n            \"phone\": 1234567890,\r\n            \"email\": \"c.fulanito8@gmail.com\",\r\n            \"city\": \"Santa Fe\",\r\n            \"password\": \"Contraseña123\",\r\n            \"salary\": 95000,\r\n            \"isActive\": \"false\"\r\n        }",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://localhost:4002/api/trainers/:id",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "4002",
-							"path": [
-								"api",
-								"trainers",
-								":id"
-							],
-							"variable": [
-								{
-									"key": "id",
-									"value": "645fc6089435a014c7e59a8d"
-								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Delete trainer",
-					"request": {
-						"method": "DELETE",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:4002/api/trainers/:id",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "4002",
-							"path": [
-								"api",
-								"trainers",
-								":id"
-							],
-							"variable": [
-								{
-									"key": "id",
-									"value": "64619c24f8712cbd498c1deb"
-								}
-							]
-						}
-					},
-					"response": []
-				}
-			]
-		},
-		{
-			"name": "class",
-			"item": [
-				{
-					"name": "Create Class",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"day\": \"Tuesday\",\r\n    \"hour\": \"18:00\",\r\n    \"slots\": 6\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://localhost:4002/api/classes",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "4002",
-							"path": [
-								"api",
-								"classes"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Delete Class",
-					"request": {
-						"method": "DELETE",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:4002/api/classes/646227bffef46a471ade3f35",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "4002",
-							"path": [
-								"api",
-								"classes",
-								"646227bffef46a471ade3f35"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Update Class",
-					"request": {
-						"method": "PUT",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": " {\r\n    \"slots\": 8\r\n }",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://localhost:4002/api/classes/64600b11c51d8d472e32c678",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "4002",
-							"path": [
-								"api",
-								"classes",
-								"64600b11c51d8d472e32c678"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "GET BY ID",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
-					"request": {
-						"method": "GET",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://localhost:4002/api/classes/64600b11c51d8d472e32c678",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "4002",
-							"path": [
-								"api",
-								"classes",
-								"64600b11c51d8d472e32c678"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "GET classes",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:4002/api/classes",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "4002",
-							"path": [
-								"api",
-								"classes"
-							]
-						}
-					},
-					"response": []
-				}
-			]
-		},
-		{
-			"name": "member",
-			"item": [
-				{
-					"name": "Get All",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "localhost:4002/api/members",
-							"host": [
-								"localhost"
-							],
-							"port": "4002",
-							"path": [
-								"api",
-								"members"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Get By ID",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "localhost:4002/api/members/646179b7d04433154a2ae9da",
-							"host": [
-								"localhost"
-							],
-							"port": "4002",
-							"path": [
-								"api",
-								"members",
-								"646179b7d04433154a2ae9da"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Add Member",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n  \"firstName\": \"Elon\",\r\n  \"lastName\": \"Musk\",\r\n  \"dni\": 42180329,\r\n  \"phone\": 12345678910,\r\n  \"email\": \"gnoboca@gmail.com\",\r\n  \"city\": \"Gotham\",\r\n  \"birthday\": \"20/20/2020\",\r\n  \"postalCode\": 2132,\r\n  \"isActive\": true,\r\n  \"membership\": \"Classic Membership\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://localhost:4002/api/members/",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "4002",
-							"path": [
-								"api",
-								"members",
-								""
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Edit Member",
-					"request": {
-						"method": "PUT",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"firstName\":\"Susana\",\r\n    \"lastName\": \"Horia\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://localhost:4002/api/members/:id",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "4002",
-							"path": [
-								"api",
-								"members",
-								":id"
-							],
-							"variable": [
-								{
-									"key": "id",
-									"value": "6461872bcbb42ddb37ce16a2"
-								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Delete Member",
-					"request": {
-						"method": "DELETE",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:4002/api/members/:id",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "4002",
-							"path": [
-								"api",
-								"members",
-								":id"
-							],
-							"variable": [
-								{
-									"key": "id",
-									"value": "6461872bcbb42ddb37ce16a2"
-								}
-							]
-						}
-					},
-					"response": []
-				}
-			]
-		},
-		{
-			"name": "subscription",
-			"item": []
-		},
-		{
-			"name": "activity",
-			"item": [
-				{
-					"name": "Get All",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "localhost:4002/api/activities",
-							"host": [
-								"localhost"
-							],
-							"port": "4002",
-							"path": [
-								"api",
-								"activities"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Get By ID",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "localhost:4002/api/activities/645fde0d75c870c4cedfeac5",
-							"host": [
-								"localhost"
-							],
-							"port": "4002",
-							"path": [
-								"api",
-								"activities",
-								"645fde0d75c870c4cedfeac5"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Create",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "localhost:4002/api/activities",
-							"host": [
-								"localhost"
-							],
-							"port": "4002",
-							"path": [
-								"api",
-								"activities"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Update",
-					"request": {
-						"method": "PUT",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "localhost:4002/api/activities/645fffbed0b66e037fd171f2",
-							"host": [
-								"localhost"
-							],
-							"port": "4002",
-							"path": [
-								"api",
-								"activities",
-								"645fffbed0b66e037fd171f2"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Delete",
-					"request": {
-						"method": "DELETE",
-						"header": [],
-						"url": {
-							"raw": "localhost:4002/api/activities/645fdf1f75c870c4cedfeac7",
-							"host": [
-								"localhost"
-							],
-							"port": "4002",
-							"path": [
-								"api",
-								"activities",
-								"645fdf1f75c870c4cedfeac7"
-							]
-						}
-					},
-					"response": []
-				}
-			]
-		},
-		{
-			"name": "super-admin",
-			"item": [
-				{
-					"name": "getAllSuperAdmins",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:4002/api/super-admin",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "4002",
-							"path": [
-								"api",
-								"super-admin"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "GetById",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:4002/api/super-admin/64613dc56b18b79d79323d97",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "4002",
-							"path": [
-								"api",
-								"super-admin",
-								"64613dc56b18b79d79323d97"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "create super admin",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"email\": \"CristianoRonaldo@gmail.com\",\r\n    \"password\": \"d\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://localhost:4002/api/super-admin",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "4002",
-							"path": [
-								"api",
-								"super-admin"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "updateSuperAdmin",
-					"request": {
-						"method": "PUT",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"email\": \"maradona@gmail.com\",\r\n    \"password\": \"MaradonaFulbo123\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://localhost:4002/api/super-admin/64613ec1668dbc97cfe8142b",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "4002",
-							"path": [
-								"api",
-								"super-admin",
-								"64613ec1668dbc97cfe8142b"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "DeleteById",
-					"request": {
-						"method": "DELETE",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:4002/api/super-admin/64613e91668dbc97cfe81429",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "4002",
-							"path": [
-								"api",
-								"super-admin",
-								"64613e91668dbc97cfe81429"
-							]
-						}
-					},
-					"response": []
-				}
-			]
-		},
-		{
-			"name": "Get all admins",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "localhost:4002/api/admins",
-					"host": [
-						"localhost"
-					],
-					"port": "4002",
-					"path": [
-						"api",
-						"admins"
-					]
-				}
-			},
-			"response": []
-		}
-	]
+  "info": {
+    "_postman_id": "c2a83d4d-06a4-4c0f-967b-157b8ddd53f3",
+    "name": "MR-test",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "27392612"
+  },
+  "item": [
+    {
+      "name": "admins",
+      "item": [
+        {
+          "name": "Get All Admins",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:4002/api/admins",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "4002",
+              "path": [
+                "api",
+                "admins"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Admin By Id",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:4002/api/admins/646223b3731da1b875752bda",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "4002",
+              "path": [
+                "api",
+                "admins",
+                "646223b3731da1b875752bda"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update admin",
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"firstName\": \"Valentina\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "localhost:4002/api/admins/646223b3731da1b875752bda",
+              "host": [
+                "localhost"
+              ],
+              "port": "4002",
+              "path": [
+                "api",
+                "admins",
+                "646223b3731da1b875752bda"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "New Request",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "localhost:4002/api/admins/646286c756d725773968075c",
+              "host": [
+                "localhost"
+              ],
+              "port": "4002",
+              "path": [
+                "api",
+                "admins",
+                "646286c756d725773968075c"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Create admin",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"firstName\": \"Victoria\",\r\n            \"lastName\": \"Yandel\",\r\n            \"dni\": 41345678,\r\n            \"phone\": 3534567890,\r\n            \"email\": \"rob@gmail.com\",\r\n            \"city\": \"Montevideo\",\r\n            \"password\": \"hola123123\"}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "localhost:4002/api/admins",
+              "host": [
+                "localhost"
+              ],
+              "port": "4002",
+              "path": [
+                "api",
+                "admins"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "trainer",
+      "item": [
+        {
+          "name": "Get",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "localhost:4002/api/trainers",
+              "host": [
+                "localhost"
+              ],
+              "port": "4002",
+              "path": [
+                "api",
+                "trainers"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get By Id",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "localhost:4002/api/trainers/64613fbb0a9261076cdd83e3",
+              "host": [
+                "localhost"
+              ],
+              "port": "4002",
+              "path": [
+                "api",
+                "trainers",
+                "64613fbb0a9261076cdd83e3"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Create new trainer",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "        {\r\n            \"firstName\": \"Iara\",\r\n            \"lastName\": \"Fulanito\",\r\n            \"dni\": 1234576,\r\n            \"phone\": 1234567890,\r\n            \"email\": \"c.fulanito8@gmail.com\",\r\n            \"city\": \"Santa Fe\",\r\n            \"password\": \"Contraseña123\",\r\n            \"salary\": 95000,\r\n            \"isActive\": \"true\"\r\n        }",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:4002/api/trainers",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "4002",
+              "path": [
+                "api",
+                "trainers"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update trainer",
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n            \"firstName\": \"Ema\",\r\n            \"lastName\": \"Siempreviva\",\r\n            \"dni\": 1234576,\r\n            \"phone\": 1234567890,\r\n            \"email\": \"c.fulanito8@gmail.com\",\r\n            \"city\": \"Santa Fe\",\r\n            \"password\": \"Contraseña123\",\r\n            \"salary\": 95000,\r\n            \"isActive\": \"false\"\r\n        }",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:4002/api/trainers/:id",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "4002",
+              "path": [
+                "api",
+                "trainers",
+                ":id"
+              ],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "645fc6089435a014c7e59a8d"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete trainer",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:4002/api/trainers/:id",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "4002",
+              "path": [
+                "api",
+                "trainers",
+                ":id"
+              ],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "64619c24f8712cbd498c1deb"
+                }
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "class",
+      "item": [
+        {
+          "name": "Create Class",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"day\": \"Tuesday\",\r\n    \"hour\": \"18:00\",\r\n    \"slots\": 6\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:4002/api/classes",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "4002",
+              "path": [
+                "api",
+                "classes"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete Class",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:4002/api/classes/646227bffef46a471ade3f35",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "4002",
+              "path": [
+                "api",
+                "classes",
+                "646227bffef46a471ade3f35"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update Class",
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": " {\r\n    \"slots\": 8\r\n }",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:4002/api/classes/64600b11c51d8d472e32c678",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "4002",
+              "path": [
+                "api",
+                "classes",
+                "64600b11c51d8d472e32c678"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "GET BY ID",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:4002/api/classes/64600b11c51d8d472e32c678",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "4002",
+              "path": [
+                "api",
+                "classes",
+                "64600b11c51d8d472e32c678"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "GET classes",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:4002/api/classes",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "4002",
+              "path": [
+                "api",
+                "classes"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "member",
+      "item": [
+        {
+          "name": "Get All",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "localhost:4002/api/members",
+              "host": [
+                "localhost"
+              ],
+              "port": "4002",
+              "path": [
+                "api",
+                "members"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get By ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "localhost:4002/api/members/646179b7d04433154a2ae9da",
+              "host": [
+                "localhost"
+              ],
+              "port": "4002",
+              "path": [
+                "api",
+                "members",
+                "646179b7d04433154a2ae9da"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Add Member",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"firstName\": \"Elon\",\r\n  \"lastName\": \"Musk\",\r\n  \"dni\": 42180329,\r\n  \"phone\": 12345678910,\r\n  \"email\": \"gnoboca@gmail.com\",\r\n  \"city\": \"Gotham\",\r\n  \"birthday\": \"20/20/2020\",\r\n  \"postalCode\": 2132,\r\n  \"isActive\": true,\r\n  \"membership\": \"Classic Membership\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:4002/api/members/",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "4002",
+              "path": [
+                "api",
+                "members",
+                ""
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Edit Member",
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"firstName\":\"Susana\",\r\n    \"lastName\": \"Horia\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:4002/api/members/:id",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "4002",
+              "path": [
+                "api",
+                "members",
+                ":id"
+              ],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "6461872bcbb42ddb37ce16a2"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete Member",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:4002/api/members/:id",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "4002",
+              "path": [
+                "api",
+                "members",
+                ":id"
+              ],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "6461872bcbb42ddb37ce16a2"
+                }
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "subscription",
+      "item": [
+        {
+          "name": "get all",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "localhost:4002/api/subscription",
+              "host": [
+                "localhost"
+              ],
+              "port": "4002",
+              "path": [
+                "api",
+                "subscription"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "get by id",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "localhost:4002/api/subscription/6463f24582038a9da868d113",
+              "host": [
+                "localhost"
+              ],
+              "port": "4002",
+              "path": [
+                "api",
+                "subscription",
+                "6463f24582038a9da868d113"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "post",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"classes\": \"646223b3731da1b875752bda\", \"member\": \"646223b3731da1b875752bda\", \"date\": \"2023-05-13T21:07:44.700+00:00\"}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "localhost:4002/api/subscription",
+              "host": [
+                "localhost"
+              ],
+              "port": "4002",
+              "path": [
+                "api",
+                "subscription"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "put",
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"classes\": \"646223b3731da1b875752bd5\"}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "localhost:4002/api/subscription/6463f073cb3db77b198c942d",
+              "host": [
+                "localhost"
+              ],
+              "port": "4002",
+              "path": [
+                "api",
+                "subscription",
+                "6463f073cb3db77b198c942d"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "delete",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "localhost:4002/api/subscription/6463f073cb3db77b198c942d",
+              "host": [
+                "localhost"
+              ],
+              "port": "4002",
+              "path": [
+                "api",
+                "subscription",
+                "6463f073cb3db77b198c942d"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "activity",
+      "item": [
+        {
+          "name": "Get All",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "localhost:4002/api/activities",
+              "host": [
+                "localhost"
+              ],
+              "port": "4002",
+              "path": [
+                "api",
+                "activities"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get By ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "localhost:4002/api/activities/645fde0d75c870c4cedfeac5",
+              "host": [
+                "localhost"
+              ],
+              "port": "4002",
+              "path": [
+                "api",
+                "activities",
+                "645fde0d75c870c4cedfeac5"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Create",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "localhost:4002/api/activities",
+              "host": [
+                "localhost"
+              ],
+              "port": "4002",
+              "path": [
+                "api",
+                "activities"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update",
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "localhost:4002/api/activities/645fffbed0b66e037fd171f2",
+              "host": [
+                "localhost"
+              ],
+              "port": "4002",
+              "path": [
+                "api",
+                "activities",
+                "645fffbed0b66e037fd171f2"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "localhost:4002/api/activities/645fdf1f75c870c4cedfeac7",
+              "host": [
+                "localhost"
+              ],
+              "port": "4002",
+              "path": [
+                "api",
+                "activities",
+                "645fdf1f75c870c4cedfeac7"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "super-admin",
+      "item": [
+        {
+          "name": "getAllSuperAdmins",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:4002/api/super-admin",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "4002",
+              "path": [
+                "api",
+                "super-admin"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "GetById",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:4002/api/super-admin/64613dc56b18b79d79323d97",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "4002",
+              "path": [
+                "api",
+                "super-admin",
+                "64613dc56b18b79d79323d97"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "create super admin",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"email\": \"CristianoRonaldo@gmail.com\",\r\n    \"password\": \"d\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:4002/api/super-admin",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "4002",
+              "path": [
+                "api",
+                "super-admin"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "updateSuperAdmin",
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"email\": \"maradona@gmail.com\",\r\n    \"password\": \"MaradonaFulbo123\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:4002/api/super-admin/64613ec1668dbc97cfe8142b",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "4002",
+              "path": [
+                "api",
+                "super-admin",
+                "64613ec1668dbc97cfe8142b"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "DeleteById",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:4002/api/super-admin/64613e91668dbc97cfe81429",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "4002",
+              "path": [
+                "api",
+                "super-admin",
+                "64613e91668dbc97cfe81429"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    }
+  ]
 }

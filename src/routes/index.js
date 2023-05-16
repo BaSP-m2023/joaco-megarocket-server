@@ -15,4 +15,8 @@ router.use('/admins', admins);
 router.use('/activities', activities);
 router.use('/super-admin', SuperAdmin);
 
+const Subscription = require('./subscription');
+
+router.use('/subscription', Subscription);
+
 module.exports = router;
