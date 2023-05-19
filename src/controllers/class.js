@@ -21,8 +21,23 @@ const getAllClasses = async (req, res) => {
 const getClassesByID = async (req, res) => {
   const { id } = req.params;
 
+  if (!mongoose.isValidObjectId(id)) {
+    return res.status(400).json({
+      message: `Format of ID ${id} is incorrect`,
+      data: undefined,
+      error: true,
+    });
+  }
+
   try {
     const classFound = await Class.findById(id);
+    if (!classFound) {
+      return res.status(404).json({
+        message: `Class with ID ${id} was not found`,
+        data: undefined,
+        error: true,
+      });
+    }
     return res.status(200).json({
       message: `Class with ID ${id} was found`,
       data: classFound,
