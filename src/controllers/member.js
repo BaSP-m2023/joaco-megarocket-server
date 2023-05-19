@@ -1,25 +1,27 @@
 const mongoose = require('mongoose');
 const Member = require('../models/Member');
 
-const getAllMembers = (req, res) => {
-  Member.find()
-    .then((member) => {
-      if (!member) {
-        return res.status(404).json({
-          message: 'Members are empty',
-          error: true,
-        });
-      }
-      return res.status(200).json({
-        message: 'Complete list of members',
-        data: member,
-        error: false,
+const getAllMembers = async (req, res) => {
+  try {
+    const response = await Member.find();
+    if (!response) {
+      return res.status(404).json({
+        message: 'Members are empty',
+        error: true,
       });
-    })
-    .catch((error) => res.status(400).json({
-      message: 'An error has ocurred',
-      data: error,
-    }));
+    }
+    return res.status(200).json({
+      message: 'Complete list of members',
+      data: response,
+      error: false,
+    });
+  } catch (error) {
+    return res.status(400).json({
+      message: error.message,
+      data: undefined,
+      error: true,
+    });
+  }
 };
 
 const getMembersById = (req, res) => {
