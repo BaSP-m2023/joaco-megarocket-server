@@ -1,32 +1,26 @@
-// use "import" to import libraries
-import express from 'express';
-import cors from 'cors';
+import dotenv from 'dotenv';
+import mongoose from 'mongoose';
+import app from './app';
 
-const mongoose = require('mongoose');
+dotenv.config();
 
-const url = 'mongodb+srv://joaco-team:1q248tHUzroQSLTL@megarocket-databases.inpprte.mongodb.net/joaco-database';
-
-mongoose.connect(url)
-  // eslint-disable-next-line no-console
+mongoose.connect(process.env.MONGO_DB_CONNECT_URL)
+// eslint-disable-next-line no-console
   .then(() => console.log('MongoDB connected'))
-  // eslint-disable-next-line no-console
+// eslint-disable-next-line no-console
   .catch((e) => console.log(e));
 
-const app = express();
-const port = process.env.PORT || 4002;
-// eslint-disable-next-line import/no-unresolved
-const router = require('./routes');
-
-app.use(cors());
-app.use(express.json());
-
 app.get('/', (req, res) => {
-  res.send('Base page');
+  res.send('Hello World!');
 });
 
-app.use('/api', router);
-
-app.listen(port, () => {
+try {
+  app.listen(process.env.PORT, (err) => {
+    if (err) throw err;
+    // eslint-disable-next-line no-console
+    console.log(`server listening on port: ${process.env.PORT}`);
+  });
+} catch (err) {
   // eslint-disable-next-line no-console
-  console.log(`Example app listening on port ${port}`);
-});
+  console.log('There was an error starting the server: ', err);
+}
