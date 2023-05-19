@@ -38,7 +38,7 @@ const getMembersById = async (req, res) => {
     const findMemberById = await Member.findById(id);
     if (!findMemberById) {
       return res.status(404).json({
-        message: 'Member not found',
+        message: 'Id not found',
         error: true,
       });
     }
