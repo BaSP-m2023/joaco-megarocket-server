@@ -1,55 +1,60 @@
 const mongoose = require('mongoose');
 const Member = require('../models/Member');
 
-const getAllMembers = (req, res) => {
-  Member.find()
-    .then((member) => {
-      if (!member) {
-        return res.status(404).json({
-          message: 'Members are empty',
-          error: true,
-        });
-      }
-      return res.status(200).json({
-        message: 'Complete list of members',
-        data: member,
-        error: false,
+const getAllMembers = async (req, res) => {
+  try {
+    const response = await Member.find();
+    if (!response) {
+      return res.status(404).json({
+        message: 'Members are empty',
+        data: undefined,
+        error: true,
       });
-    })
-    .catch((error) => res.status(400).json({
-      message: 'An error has ocurred',
-      data: error,
-    }));
+    }
+    return res.status(200).json({
+      message: 'Complete list of members',
+      data: response,
+      error: false,
+    });
+  } catch (error) {
+    return res.status(400).json({
+      message: error.message,
+      data: undefined,
+      error: true,
+    });
+  }
 };
 
-const getMembersById = (req, res) => {
+const getMembersById = async (req, res) => {
   const { id } = req.params;
 
   if (!mongoose.isValidObjectId(id)) {
-    res.status(400).json({
+    return res.status(400).json({
       message: 'Invalid id',
-      data: id,
+      data: undefined,
       error: true,
     });
-  } else {
-    Member.findById(id)
-      .then((member) => {
-        if (!member) {
-          return res.status(404).json({
-            message: 'Member not found',
-            error: true,
-          });
-        }
-        return res.status(200).json({
-          message: 'Member found',
-          data: member,
-          error: false,
-        });
-      })
-      .catch((error) => res.status(400).json({
-        message: `An error occurred with the ID: ${id}`,
-        data: error,
-      }));
+  }
+  try {
+    const findMemberById = await Member.findById(id);
+    if (!findMemberById) {
+      return res.status(404).json({
+        message: 'Id not found',
+        data: undefined,
+        error: true,
+      });
+    }
+    return res.status(200).json({
+      message: 'Member found',
+      data: findMemberById,
+      error: false,
+    });
+  } catch (error) {
+    return res.status(400).json({
+      message: error.message,
+      data: undefined,
+      error: true,
+    });
   }
 };
 
@@ -96,50 +101,77 @@ const createMember = async (req, res) => {
   }
 };
 
-const editMember = (req, res) => {
+const editMember = async (req, res) => {
   const { id } = req.params;
+
+  if (!mongoose.isValidObjectId(id)) {
+    return res.status(400).json({
+      message: 'Invalid id',
+      data: undefined,
+      error: true,
+    });
+  }
+
   const {
     firstName, lastName, dni, phone, email, city, birthday, postalCode, isActive, membership,
   } = req.body;
 
-  if (!mongoose.Types.ObjectId.isValid(id)) {
-    res.status(404).json({
-      message: `ID: ${id} format is not valid`,
-    });
-  }
-  Member.findByIdAndUpdate(
-    id,
-    {
-      firstName,
-      lastName,
-      dni,
-      phone,
-      email,
-      city,
-      birthday,
-      postalCode,
-      isActive,
-      membership,
-    },
-    { new: true },
-  )
-    .then((result) => {
-      if (!result) {
-        return res.status(404).json({
-          message: `Member with ID: ${id} was not found`,
-        });
+  try {
+    const actualMember = await Member.findById(id);
+
+    if (!actualMember) {
+      return res.status(404).json({
+        message: `Member with ID: ${id} was not found`,
+        data: undefined,
+        error: true,
+      });
+    }
+
+    const activityProperties = Object.keys(actualMember.toObject()).slice(1, -1);
+    let changes = false;
+    activityProperties.forEach((property) => {
+      if (req.body[property]
+    && req.body[property].toString() !== actualMember[property].toString()) {
+        changes = true;
       }
+    });
+
+    if (!changes) {
       return res.status(200).json({
-        message: 'Member was edited succesfully!',
-        data: result,
+        message: 'There were no changes',
+        data: actualMember,
         error: false,
       });
-    })
-    .catch((error) => res.status(400).json({
-      message: 'Error in the request',
-      data: error,
-      error,
-    }));
+    }
+    const response = await Member.findByIdAndUpdate(
+      id,
+      {
+        firstName,
+        lastName,
+        dni,
+        phone,
+        email,
+        city,
+        birthday,
+        postalCode,
+        isActive,
+        membership,
+      },
+      { new: true },
+    );
+
+    return res.status(201).json({
+      message: 'Member was edited succesfully!',
+      data: response,
+      error: false,
+    });
+  } catch (error) {
+    return res.status(400).json({
+      message: error.message,
+      data: undefined,
+      error: true,
+    });
+  }
 };
 
 const deleteMember = async (req, res) => {

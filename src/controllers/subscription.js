@@ -41,7 +41,7 @@ const getSubscriptionsByID = async (req, res) => {
       });
     }
 
-    const { classes, member, date } = foundSubscriptionById;
+    const { classes, member } = foundSubscriptionById;
 
     if (classes && !mongoose.isValidObjectId(classes)) {
       return res.status(400).json({
