@@ -138,54 +138,55 @@ const deleteTrainer = async (req, res) => {
   }
 };
 
-const getAllTrainer = (req, res) => {
-  Trainer.find()
-    .then((trainer) => {
-      if (!trainer) {
-        return res.status(404).json({
-          message: 'Trainers not found',
-          error: true,
-        });
-      }
-      return res.status(200).json({
-        message: 'Trainers list',
-        data: trainer,
-        error: false,
+const getAllTrainer = async (req, res) => {
+  try {
+    const trainers = await Trainer.find();
+    if (!trainers) {
+      return res.status(404).json({
+        message: 'Trainers not found',
+        error: true,
       });
-    })
-    .catch((error) => res.status(400).json({
+    }
+    return res.status(200).json({
+      message: 'Trainers list',
+      data: trainers,
+      error: false,
+    });
+  } catch (error) {
+    return res.status(400).json({
       message: 'An error ocurred to find the trainers',
       error,
-    }));
+    });
+  }
 };
 
-const getTrainerById = (req, res) => {
+const getTrainerById = async (req, res) => {
   const { id } = req.params;
 
   if (!mongoose.isValidObjectId(id)) {
-    res.status(400).json({
+    return res.status(400).json({
       message: 'Invalid id',
       error: true,
     });
-  } else {
-    Trainer.findById(id, 'firstName lastName email')
-      .then((trainer) => {
-        if (!trainer) {
-          return res.status(404).json({
-            message: `Trainer ID ${id} was not found`,
-            error: true,
-          });
-        }
-        return res.status(200).json({
-          message: `Trainer found ${trainer.firstName} ${trainer.lastName}`,
-          data: trainer,
-          error: false,
-        });
-      })
-      .catch((error) => res.status(400).json({
-        message: `An error occurred to find the trainer with ID ${id}`,
-        error,
-      }));
+  }
+  try {
+    const trainer = await Trainer.findById(id, 'firstName lastName email');
+    if (!trainer) {
+      return res.status(404).json({
+        message: `Trainer ID ${id} was not found`,
+        error: true,
+      });
+    }
+    return res.status(200).json({
+      message: `Trainer found ${trainer.firstName} ${trainer.lastName}`,
+      data: trainer,
+      error: false,
+    });
+  } catch (error) {
+    return res.status(400).json({
+      message: `An error occurred to find the trainer with ID ${id}`,
+      error,
+    });
   }
 };
 
