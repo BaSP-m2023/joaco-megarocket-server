@@ -41,9 +41,27 @@ const getSubscriptionsByID = async (req, res) => {
       });
     }
 
+    const { classes, member, date } = foundSubscriptionById;
+
+    if (classes && !mongoose.isValidObjectId(classes)) {
+      return res.status(400).json({
+        error: true,
+        message: 'Class ID is not valid',
+        data: undefined,
+      });
+    }
+
+    if (member && !mongoose.isValidObjectId(member)) {
+      return res.status(400).json({
+        error: true,
+        message: 'member ID is not valid',
+        data: undefined,
+      });
+    }
+
     return res.status(200).json({
       error: false,
-      message: `Subscription found: ${foundSubscriptionById}`,
+      message: 'Subscription found',
       data: foundSubscriptionById,
     });
   } catch (error) {
@@ -62,6 +80,7 @@ const createSubscription = async (req, res) => {
     return res.status(400).json({
       error: true,
       message: 'Class or member ID is not valid',
+      data: undefined,
     });
   }
 
@@ -73,6 +92,7 @@ const createSubscription = async (req, res) => {
       return res.status(404).json({
         error: true,
         message: 'Class or member not found',
+        data: undefined,
       });
     }
 
@@ -115,7 +135,7 @@ const updateSubscription = async (req, res) => {
   || (member && !mongoose.isValidObjectId(member))) {
     return res.status(400).json({
       error: true,
-      message: 'ID or class or member ID is not valid',
+      message: 'ID, class or member is not valid',
     });
   }
 
@@ -136,7 +156,7 @@ const updateSubscription = async (req, res) => {
       return res.status(400).json({
         error: true,
         message: 'Subscription already exists',
-        data: existingSubscription,
+        data: undefined,
       });
     }
 
