@@ -7,6 +7,7 @@ const getAllMembers = async (req, res) => {
     if (!response) {
       return res.status(404).json({
         message: 'Members are empty',
+        data: undefined,
         error: true,
       });
     }
@@ -30,7 +31,7 @@ const getMembersById = async (req, res) => {
   if (!mongoose.isValidObjectId(id)) {
     return res.status(400).json({
       message: 'Invalid id',
-      data: id,
+      data: undefined,
       error: true,
     });
   }
@@ -39,6 +40,7 @@ const getMembersById = async (req, res) => {
     if (!findMemberById) {
       return res.status(404).json({
         message: 'Id not found',
+        data: undefined,
         error: true,
       });
     }
@@ -50,7 +52,7 @@ const getMembersById = async (req, res) => {
   } catch (error) {
     return res.status(400).json({
       message: error.message,
-      data: error,
+      data: undefined,
       error: true,
     });
   }
@@ -92,7 +94,7 @@ const editMember = async (req, res) => {
   if (!mongoose.isValidObjectId(id)) {
     return res.status(400).json({
       message: 'Invalid id',
-      data: id,
+      data: undefined,
       error: true,
     });
   }
@@ -107,6 +109,7 @@ const editMember = async (req, res) => {
     if (!actualMember) {
       return res.status(404).json({
         message: `Member with ID: ${id} was not found`,
+        data: undefined,
         error: true,
       });
     }
@@ -143,12 +146,7 @@ const editMember = async (req, res) => {
       },
       { new: true },
     );
-    if (!response) {
-      return res.status(404).json({
-        message: `Member with ID: ${id} was not found`,
-        error: true,
-      });
-    }
+
     return res.status(201).json({
       message: 'Member was edited succesfully!',
       data: response,
@@ -157,8 +155,8 @@ const editMember = async (req, res) => {
   } catch (error) {
     return res.status(400).json({
       message: error.message,
-      data: error,
-      error,
+      data: undefined,
+      error: true,
     });
   }
 };
