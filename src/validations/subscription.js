@@ -15,7 +15,7 @@ const createValidation = (req, res, next) => {
       data: undefined,
     });
   }
-  next();
+  return next();
 };
 
 const updateValidation = (req, res, next) => {
@@ -33,7 +33,7 @@ const updateValidation = (req, res, next) => {
       data: undefined,
     });
   }
-  next();
+  return next();
 };
 
 module.exports = { createValidation, updateValidation };
