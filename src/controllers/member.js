@@ -84,11 +84,13 @@ const createMember = async (req, res) => {
     if (error.message === 'This member already exist') {
       return res.status(400).json({
         message: 'Failed to create an Member, member already exist',
+        data: undefined,
         error,
       });
     }
     return res.status(500).json({
       message: 'Error was ocurred',
+      data: undefined,
       error,
     });
   }
@@ -164,23 +166,27 @@ const deleteMember = async (req, res) => {
     if (error.message === 'Blank ID') {
       return res.status(400).json({
         message: 'Please enter an ID',
+        data: undefined,
         error,
       });
     }
     if (error.message === 'Invalid ID') {
       return res.status(400).json({
         message: `${id} is not a valid ID`,
+        data: undefined,
         error,
       });
     }
     if (error.message === 'Member not found') {
       return res.status(400).json({
         message: 'Member not found',
+        data: undefined,
         error,
       });
     }
     return res.status(500).json({
       message: 'Error was ocurred',
+      data: undefined,
       error,
     });
   }
