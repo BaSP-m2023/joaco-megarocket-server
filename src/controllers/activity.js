@@ -9,7 +9,7 @@ const getAllActivities = async (req, res) => {
       return res.status(404).json({
         message: 'There are no activities',
         data: activitiesFound,
-        error: false,
+        error: true,
       });
     }
 
@@ -33,7 +33,7 @@ const getActivityByID = async (req, res) => {
   if (!mongoose.isValidObjectId(id)) {
     return res.status(400).json({
       message: 'Invalid ID',
-      data: id,
+      data: undefined,
       error: true,
     });
   }
