@@ -85,13 +85,13 @@ const createMember = async (req, res) => {
       return res.status(400).json({
         message: 'Failed to create an Member, member already exist',
         data: undefined,
-        error,
+        error: true,
       });
     }
     return res.status(500).json({
       message: 'Error was ocurred',
       data: undefined,
-      error,
+      error: true,
     });
   }
 };
@@ -167,27 +167,27 @@ const deleteMember = async (req, res) => {
       return res.status(400).json({
         message: 'Please enter an ID',
         data: undefined,
-        error,
+        error: true,
       });
     }
     if (error.message === 'Invalid ID') {
       return res.status(400).json({
         message: `${id} is not a valid ID`,
         data: undefined,
-        error,
+        error: true,
       });
     }
     if (error.message === 'Member not found') {
       return res.status(400).json({
         message: 'Member not found',
         data: undefined,
-        error,
+        error: true,
       });
     }
     return res.status(500).json({
       message: 'Error was ocurred',
       data: undefined,
-      error,
+      error: true,
     });
   }
 };
