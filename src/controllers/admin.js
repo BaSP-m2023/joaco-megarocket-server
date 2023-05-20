@@ -47,6 +47,13 @@ const updateAdmin = async (req, res) => {
     }
 
     const actualAdmin = await Admin.findById(id);
+    if (!actualAdmin) {
+      return res.status(404).json({
+        message: `Admin with id ${id} was not found`,
+        data: undefined,
+        error: true,
+      });
+    }
     const adminProperties = Object.keys(actualAdmin.toObject()).slice(1, -1);
     let changes = false;
     adminProperties.forEach((property) => {
@@ -77,17 +84,17 @@ const updateAdmin = async (req, res) => {
       },
       { new: true },
     );
-    if (!result) {
+    /* if (!result) {
       return res.status(404).json({
         message: `Admin with id ${id} was not found`,
         data: undefined,
         error: true,
       });
-    }
+    } */
 
     return res.status(201).json({
       message: `Admin ${id} updated`,
-      result,
+      data: result,
       error: false,
     });
   } catch (error) {
@@ -121,7 +128,7 @@ const getAdminById = async (req, res) => {
   if (!mongoose.isValidObjectId(id)) {
     return res.status(400).json({
       message: 'Id is not a valid one',
-      data: id,
+      data: undefined,
       error: true,
     });
   }
@@ -151,15 +158,14 @@ const getAdminById = async (req, res) => {
 const deleteAdmin = async (req, res) => {
   const { id } = req.params;
 
-  if (!mongoose.Types.ObjectId.isValid(id)) {
-    return res.status(404).json({
-      message: 'Id is not a valid one',
-      data: undefined,
-      error: true,
-    });
-  }
-
   try {
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+      return res.status(404).json({
+        message: 'Id is not a valid one',
+        data: undefined,
+        error: true,
+      });
+    }
     const admin = await Admin.findByIdAndDelete(id);
     if (!admin) {
       return res.status(404).json({
