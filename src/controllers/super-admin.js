@@ -66,10 +66,10 @@ const getSuperAdminsById = async (req, res) => {
 const createSuperAdmin = async (req, res) => {
   const { email, password } = req.body;
 
-  const findEmail = await SuperAdmin.findOne({ email });
+  try {
+    const findEmail = await SuperAdmin.findOne({ email });
 
-  if (!findEmail) {
-    try {
+    if (!findEmail) {
       const superAdminCreate = await SuperAdmin.create({ email, password });
 
       if (superAdminCreate) {
@@ -79,16 +79,16 @@ const createSuperAdmin = async (req, res) => {
           error: false,
         });
       }
-    } catch (error) {
+    } else {
       return res.status(400).json({
-        message: error.message,
+        message: `The user with email ${email} already exist`,
         data: undefined,
         error: true,
       });
     }
-  } else {
+  } catch (error) {
     return res.status(400).json({
-      message: `The user with email ${email} already exist`,
+      message: error.message,
       data: undefined,
       error: true,
     });
@@ -101,7 +101,7 @@ const deleteAdminsById = async (req, res) => {
 
   if (!mongoose.isValidObjectId(id)) {
     res.status(404).json({
-      message: 'Id not found',
+      message: 'Id not valid',
       data: undefined,
       error: true,
     });
@@ -116,6 +116,11 @@ const deleteAdminsById = async (req, res) => {
           error: false,
         });
       }
+      return res.status(404).json({
+        message: 'Super admin was not found',
+        data: undefined,
+        error: true,
+      });
     } catch (error) {
       return res.status(400).json({
         message: error.message,
@@ -126,6 +131,7 @@ const deleteAdminsById = async (req, res) => {
   }
 };
 
+// eslint-disable-next-line consistent-return
 const updateAdminsById = async (req, res) => {
   const { id } = req.params;
   const { email, password } = req.body;
@@ -138,22 +144,31 @@ const updateAdminsById = async (req, res) => {
     });
   }
   try {
-    const updateSuperAdmin = await SuperAdmin.findByIdAndUpdate(
-      id,
-      { email, password },
-      { new: true },
-    );
+    const findEmail = await SuperAdmin.findOne({ email });
 
-    if (updateSuperAdmin) {
-      return res.status(201).json({
-        message: 'Super admin update succesfully',
-        data: updateSuperAdmin,
-        error: false,
+    if (!findEmail) {
+      const updateSuperAdmin = await SuperAdmin.findByIdAndUpdate(
+        id,
+        { email, password },
+        { new: true },
+      );
+
+      if (updateSuperAdmin) {
+        return res.status(201).json({
+          message: 'Super admin update succesfully',
+          data: updateSuperAdmin,
+          error: false,
+        });
+      }
+      return res.status(404).json({
+        message: 'Super admin no found',
+        data: undefined,
+        error: true,
       });
     }
-    return res.status(404).json({
-      message: 'Super admin no found',
-      data: undefined,
+    return res.status(409).json({
+      message: `Super admin with email ${email} already exist`,
+      data: { email, password },
       error: true,
     });
   } catch (error) {
