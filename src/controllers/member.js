@@ -86,51 +86,81 @@ const createMember = (req, res) => {
     }));
 };
 
-const editMember = (req, res) => {
+const editMember = async (req, res) => {
   const { id } = req.params;
+
+  if (!mongoose.isValidObjectId(id)) {
+    return res.status(400).json({
+      message: 'Invalid id',
+      data: id,
+      error: true,
+    });
+  }
+
   const {
     firstName, lastName, dni, phone, email, city, birthday, postalCode, isActive, membership,
   } = req.body;
 
-  if (!mongoose.Types.ObjectId.isValid(id)) {
-    res.status(404).json({
-      message: `ID: ${id} format is not valid`,
-    });
-  }
+  try {
+    const actualMember = await Member.findById(id);
 
-  Member.findByIdAndUpdate(
-    id,
-    {
-      firstName,
-      lastName,
-      dni,
-      phone,
-      email,
-      city,
-      birthday,
-      postalCode,
-      isActive,
-      membership,
-    },
-    { new: true },
-  )
-    .then((result) => {
-      if (!result) {
-        return res.status(404).json({
-          message: `Member with ID: ${id} was not found`,
-        });
+    if (!actualMember) {
+      return res.status(404).json({
+        message: `Member with ID: ${id} was not found`,
+        error: true,
+      });
+    }
+
+    const activityProperties = Object.keys(actualMember.toObject()).slice(1, -1);
+    let changes = false;
+    activityProperties.forEach((property) => {
+      if (req.body[property]
+    && req.body[property].toString() !== actualMember[property].toString()) {
+        changes = true;
       }
+    });
+
+    if (!changes) {
       return res.status(200).json({
-        message: 'Member was edited succesfully!',
-        data: result,
+        message: 'There were no changes',
+        data: actualMember,
         error: false,
       });
-    })
-    .catch((error) => res.status(400).json({
-      message: 'Error in the request',
+    }
+    const response = await Member.findByIdAndUpdate(
+      id,
+      {
+        firstName,
+        lastName,
+        dni,
+        phone,
+        email,
+        city,
+        birthday,
+        postalCode,
+        isActive,
+        membership,
+      },
+      { new: true },
+    );
+    if (!response) {
+      return res.status(404).json({
+        message: `Member with ID: ${id} was not found`,
+        error: true,
+      });
+    }
+    return res.status(201).json({
+      message: 'Member was edited succesfully!',
+      data: response,
+      error: false,
+    });
+  } catch (error) {
+    return res.status(400).json({
+      message: error.message,
       data: error,
       error,
-    }));
+    });
+  }
 };
 
 const deleteMember = (req, res) => {
