@@ -2,8 +2,10 @@ const Joi = require('joi');
 
 const createValidation = (req, res, next) => {
   const activityValidation = Joi.object({
-    name: Joi.string().min(3).max(15).required(),
-    description: Joi.string().min(40).max(250).required(),
+    name: Joi.string().min(3).max(15).regex(/^[a-zA-Z\s.,]+$/)
+      .required(),
+    description: Joi.string().min(40).max(250).regex(/^[a-zA-Z\s.,]+$/)
+      .required(),
     isActive: Joi.boolean().default(false),
   });
 
@@ -19,8 +21,8 @@ const createValidation = (req, res, next) => {
 
 const updateValidation = (req, res, next) => {
   const activityValidation = Joi.object({
-    name: Joi.string().min(3).max(15),
-    description: Joi.string().min(40).max(250),
+    name: Joi.string().min(3).max(15).regex(/^[a-zA-Z\s.,]+$/),
+    description: Joi.string().min(40).max(250).regex(/^[a-zA-Z\s.,]+$/),
     isActive: Joi.boolean(),
   });
 
