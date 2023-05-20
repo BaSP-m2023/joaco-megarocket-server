@@ -45,20 +45,7 @@ const updateAdmin = async (req, res) => {
         error: true,
       });
     }
-    const result = await Admin.findByIdAndUpdate(
-      id,
-      {
-        firstName, lastName, dni, phone, email, city, password,
-      },
-      { new: true },
-    );
-    if (!result) {
-      return res.status(404).json({
-        message: `Admin with id ${id} was not found`,
-        data: undefined,
-        error: true,
-      });
-    }
+
     const actualAdmin = await Admin.findById(id);
     const adminProperties = Object.keys(actualAdmin.toObject()).slice(1, -1);
     let changes = false;
@@ -73,6 +60,28 @@ const updateAdmin = async (req, res) => {
         message: 'There were no changes',
         data: undefined,
         error: false,
+      });
+    }
+    const found = await Admin.findOne({ dni });
+    if (found) {
+      return res.status(404).json({
+        message: `An admin with DNI ${dni} already exists`,
+        data: undefined,
+        error: true,
+      });
+    }
+    const result = await Admin.findByIdAndUpdate(
+      id,
+      {
+        firstName, lastName, dni, phone, email, city, password,
+      },
+      { new: true },
+    );
+    if (!result) {
+      return res.status(404).json({
+        message: `Admin with id ${id} was not found`,
+        data: undefined,
+        error: true,
       });
     }
 
