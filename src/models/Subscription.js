@@ -4,12 +4,14 @@ const { Schema } = mongoose;
 
 const subscriptionSchema = new Schema({
   classes: {
-    type: Schema.Types.ObjectId,
+    type: mongoose.Schema.Types.ObjectId,
     required: true,
+    ref: 'Class',
   },
   member: {
-    type: Schema.Types.ObjectId,
+    type: mongoose.Schema.Types.ObjectId,
     required: true,
+    ref: 'Member',
   },
   date: {
     type: Date,
