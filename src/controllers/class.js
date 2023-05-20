@@ -106,7 +106,11 @@ const deleteClass = async (req, res) => {
         error: true,
       });
     }
-    return res.status(204).json({});
+    return res.status(200).json({
+      message: 'Class deleted succesfully',
+      data: classFound,
+      error: false,
+    });
   } catch (error) {
     return res.status(400).json({
       message: `An error ocurred: ${error.message}`,
@@ -138,6 +142,16 @@ const updateClass = async (req, res) => {
         error: true,
       });
     }
+
+    const classExists = await Class.findOne({ day, hour });
+    if (classExists) {
+      return res.status(400).json({
+        message: `Class of day ${day} and hour ${hour} already exists`,
+        data: undefined,
+        error: true,
+      });
+    }
+
     const updatedClass = {
       ...result.toObject(),
       ...req.body,
