@@ -99,7 +99,7 @@ const createSuperAdmin = async (req, res) => {
 const deleteAdminsById = async (req, res) => {
   const { id } = req.params;
 
-  if (!id) {
+  if (!mongoose.isValidObjectId(id)) {
     res.status(404).json({
       message: 'Id not found',
       data: undefined,
