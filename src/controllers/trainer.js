@@ -144,7 +144,7 @@ const deleteTrainer = async (req, res) => {
     return res.status(500).json({
       message: 'An error occurred',
       data: undefined,
-      error,
+      error: true,
     });
   }
 };
@@ -201,7 +201,7 @@ const getTrainerById = async (req, res) => {
     return res.status(400).json({
       message: `An error occurred to find the trainer with ID ${id}`,
       data: undefined,
-      error,
+      error: true,
     });
   }
 };
