@@ -83,6 +83,15 @@ const updateTrainer = async (req, res) => {
         error: false,
       });
     }
+    const found = await Trainer.findOne({ $or: [{ dni }, { email }] });
+
+    if (found) {
+      return res.status(400).json({
+        message: `The trainer with DNI ${dni} or Email ${email} already exists`,
+        data: undefined,
+        error: true,
+      });
+    }
 
     const trainerUpdate = await Trainer.findByIdAndUpdate(
       id,
