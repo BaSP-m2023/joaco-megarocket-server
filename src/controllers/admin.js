@@ -84,13 +84,6 @@ const updateAdmin = async (req, res) => {
       },
       { new: true },
     );
-    /* if (!result) {
-      return res.status(404).json({
-        message: `Admin with id ${id} was not found`,
-        data: undefined,
-        error: true,
-      });
-    } */
 
     return res.status(201).json({
       message: `Admin ${id} updated`,
