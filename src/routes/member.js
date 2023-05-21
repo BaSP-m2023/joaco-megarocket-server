@@ -8,7 +8,7 @@ router
   .get('/', memberController.getAllMembers)
   .get('/:id', memberController.getMembersById)
   .post('/', validation.validateCreation, memberController.createMember)
-  .put('/:id', memberController.editMember)
+  .put('/:id', validation.validateUpdate, memberController.editMember)
   .delete('/:id', memberController.deleteMember);
 
 module.exports = router;
