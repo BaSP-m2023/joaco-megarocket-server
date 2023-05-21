@@ -11,8 +11,8 @@ const validateCreation = (req, res, next) => {
       .messages({
         'string.pattern.base': 'Hour must be of format hh:mm',
       }),
-    trainer: Joi.isSchema(),
-    activity: Joi.isSchema(),
+    trainer: Joi.required(),
+    activity: Joi.required(),
     slots: Joi.number().positive().min(2).max(15)
       .optional(),
   });
@@ -37,8 +37,8 @@ const validateUpdate = (req, res, next) => {
       .messages({
         'string.pattern.base': 'Hour must be of format hh:mm',
       }),
-    trainer: Joi.isSchema(),
-    activity: Joi.isSchema(),
+    trainer: Joi.optional(),
+    activity: Joi.optional(),
     slots: Joi.number().positive().min(2).max(15)
       .optional(),
   }).min(1);
