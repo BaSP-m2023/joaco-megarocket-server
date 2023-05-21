@@ -72,6 +72,17 @@ const updateTrainer = async (req, res) => {
         error: true,
       });
     }
+    const valuesChanged = Object.entries({
+      firstName, lastName, dni, phone, email, city, password, salary, isActive,
+    }).some(([key, value]) => actualTrainer[key] !== value);
+
+    if (!valuesChanged) {
+      return res.status(200).json({
+        message: 'No changes were made',
+        data: actualTrainer,
+        error: false,
+      });
+    }
 
     const trainerUpdate = await Trainer.findByIdAndUpdate(
       id,
@@ -144,6 +155,7 @@ const getAllTrainer = async (req, res) => {
     if (!trainers) {
       return res.status(404).json({
         message: 'Trainers not found',
+        data: undefined,
         error: true,
       });
     }
@@ -155,7 +167,8 @@ const getAllTrainer = async (req, res) => {
   } catch (error) {
     return res.status(400).json({
       message: 'An error ocurred to find the trainers',
-      error,
+      data: undefined,
+      error: true,
     });
   }
 };
@@ -166,6 +179,7 @@ const getTrainerById = async (req, res) => {
   if (!mongoose.isValidObjectId(id)) {
     return res.status(400).json({
       message: 'Invalid id',
+      data: undefined,
       error: true,
     });
   }
@@ -174,6 +188,7 @@ const getTrainerById = async (req, res) => {
     if (!trainer) {
       return res.status(404).json({
         message: `Trainer ID ${id} was not found`,
+        data: undefined,
         error: true,
       });
     }
@@ -185,6 +200,7 @@ const getTrainerById = async (req, res) => {
   } catch (error) {
     return res.status(400).json({
       message: `An error occurred to find the trainer with ID ${id}`,
+      data: undefined,
       error,
     });
   }
