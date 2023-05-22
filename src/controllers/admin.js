@@ -6,10 +6,11 @@ const createAdmin = async (req, res) => {
     firstName, lastName, dni, phone, email, city, password,
   } = req.body;
   try {
-    const found = await Admin.findOne({ dni });
-    if (found) {
-      return res.status(404).json({
-        message: `An admin with DNI ${dni} already exists`,
+    const dniExists = await Admin.findOne({ dni });
+    const emailExists = await Admin.findOne({ email });
+    if (dniExists || emailExists) {
+      return res.status(400).json({
+        message: 'An admin with DNI or Email already exists',
         data: undefined,
         error: true,
       });

@@ -129,3 +129,77 @@ describe('PUT /api/admins/:id', () => {
     expect(response.error).toBeTruthy();
   });
 });
+const newAdmin = {
+  firstName: 'Barbara',
+  lastName: 'Administer',
+  dni: 56231478,
+  phone: 3415576635,
+  email: 'admin@gmail.es',
+  city: 'Rosario',
+  password: 'holacomo1234',
+};
+const newBadAdmin = {
+  firstName: 'B',
+  lastName: 'Adminn',
+  dni: 42182913,
+  phone: 3415576635,
+  email: 'admins@gmail.es',
+  city: 'Rosario',
+  password: 'holacomo1234',
+};
+describe('POST /api/admins', () => {
+  test('should return admin created with status 201', async () => {
+    const response = await request(app).post('/api/admins').send(newAdmin);
+    expect(response.body.data).toBeDefined();
+    expect(response.status).toBe(201);
+    expect(response.error).toBeFalsy();
+  });
+  test('should return admin dni already exists with status 400', async () => {
+    const response = await request(app).post('/api/admins').send(newAdmin);
+    expect(response.body.data).toBeUndefined();
+    expect(response.body.message).toEqual('An admin with DNI or Email already exists');
+    expect(response.status).toBe(400);
+    expect(response.error).toBeTruthy();
+  });
+  test('should return admin email already exists with status 400', async () => {
+    newAdmin.dni = 96523748;
+    const response = await request(app).post('/api/admins').send(newAdmin);
+    expect(response.body.data).toBeUndefined();
+    expect(response.body.message).toEqual('An admin with DNI or Email already exists');
+    expect(response.status).toBe(400);
+    expect(response.error).toBeTruthy();
+  });
+  test('should return admin incorrect name with status 400', async () => {
+    const response = await request(app).post('/api/admins').send(newBadAdmin);
+    expect(response.body.data).toBeUndefined();
+    expect(response.status).toBe(400);
+    expect(response.error).toBeTruthy();
+  });
+  test('should return admin incorrect city with status 400', async () => {
+    newBadAdmin.firstName = 'Julian';
+    newBadAdmin.city = '123456';
+    const response = await request(app).post('/api/admins').send(newBadAdmin);
+    expect(response.body.data).toBeUndefined();
+    expect(response.status).toBe(400);
+    expect(response.error).toBeTruthy();
+  });
+  test('should return admin can not be empty  with status 400', async () => {
+    const response = await request(app).post('/api/admins').send();
+    expect(response.body.data).toBeUndefined();
+    expect(response.status).toBe(400);
+    expect(response.error).toBeTruthy();
+  });
+  test('should return admin incorrect phone with status 400', async () => {
+    newBadAdmin.phone = '125365478';
+    const response = await request(app).post('/api/admins').send(newBadAdmin);
+    expect(response.body.data).toBeUndefined();
+    expect(response.status).toBe(400);
+    expect(response.error).toBeTruthy();
+  });
+  test('should return status 404 and error true', async () => {
+    const response = await request(app).post('/api/admin').send();
+    expect(response.body.data).toBeUndefined();
+    expect(response.status).toBe(404);
+    expect(response.error).toBeTruthy();
+  });
+});
