@@ -103,7 +103,7 @@ const updateActivity = async (req, res) => {
   if (!mongoose.isValidObjectId(id)) {
     return res.status(400).json({
       message: 'Invalid ID',
-      data: id,
+      data: undefined,
       error: true,
     });
   }

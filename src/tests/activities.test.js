@@ -9,7 +9,7 @@ const activities = {
   isActive: true,
 };
 
-const ActivityBad = {
+const activityBad = {
   name: '',
   description: '',
   isActive: true,
@@ -18,6 +18,12 @@ const ActivityBad = {
 const updatedActivity = {
   name: 'basquetball',
   description: 'This is the most practiced sport nowadays by teams of men and women, both professionally and amateurishly.',
+  isActive: false,
+};
+
+const activityRepeated = {
+  name: 'functional',
+  description: 'this activity involves movements that enable greater overall body functioning and improve performance through better coordination and muscle stimulation',
   isActive: false,
 };
 
@@ -33,8 +39,15 @@ describe('POST /api/activities', () => {
     expect(res.error).toBeFalsy();
   });
 
-  test('should return a error', async () => {
-    const res = await request(app).post('/api/activities').send(ActivityBad);
+  test('should return a error, activity alredy exist', async () => {
+    const res = await request(app).post('/api/activities').send(activityRepeated);
+    expect(res.status).toBe(400);
+    expect(res.body.data).toBeUndefined();
+    expect(res.error).toBeTruthy();
+  });
+
+  test('should return a error, create empty activity', async () => {
+    const res = await request(app).post('/api/activities').send(activityBad);
     expect(res.status).toBe(400);
     expect(res.body.data).toBeUndefined();
     expect(res.error).toBeTruthy();
@@ -50,18 +63,14 @@ describe('PUT /api/activities/:id', () => {
   });
 
   test('should return a error, update a activity already exist', async () => {
-    const res = await request(app).put('/api/activities/6467cd965eada13a19071ab9').send({
-      name: 'functional',
-      description: 'this activity involves movements that enable greater overall body functioning and improve performance through better coordination and muscle stimulation',
-      isActive: false,
-    });
+    const res = await request(app).put('/api/activities/6467cd965eada13a19071ab9').send(activityRepeated);
     expect(res.status).toBe(200);
     expect(res.body.message).toBeDefined();
     expect(res.error).toBeFalsy();
   });
 
   test('should return a error', async () => {
-    const res = await request(app).put('/api/activities/6466b3e7a21fd4069bcaf7c0').send(ActivityBad);
+    const res = await request(app).put('/api/activities/6466b3e7a21fd4069bcaf7c0').send(activityBad);
     expect(res.status).toBe(400);
     expect(res.body.data).toBeUndefined();
     expect(res.error).toBeTruthy();
@@ -70,6 +79,7 @@ describe('PUT /api/activities/:id', () => {
   test('should return a error, id not valid', async () => {
     const res = await request(app).put('/api/activities/6462261').send(updatedActivity);
     expect(res.status).toBe(400);
+    expect(res.body.data).toBeUndefined();
     expect(res.error).toBeTruthy();
   });
 });
