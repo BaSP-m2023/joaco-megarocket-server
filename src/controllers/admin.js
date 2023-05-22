@@ -39,7 +39,7 @@ const updateAdmin = async (req, res) => {
 
   try {
     if (!mongoose.Types.ObjectId.isValid(id)) {
-      return res.status(404).json({
+      return res.status(400).json({
         message: 'Id is not a valid one',
         data: undefined,
         error: true,
@@ -69,10 +69,11 @@ const updateAdmin = async (req, res) => {
         error: false,
       });
     }
-    const found = await Admin.findOne({ dni });
-    if (found) {
-      return res.status(404).json({
-        message: `An admin with DNI ${dni} already exists`,
+    const dniExists = await Admin.findOne({ dni });
+    const emailExists = await Admin.findOne({ email });
+    if (dniExists || emailExists) {
+      return res.status(400).json({
+        message: 'An admin with DNI or Email already exists',
         data: undefined,
         error: true,
       });
@@ -85,7 +86,7 @@ const updateAdmin = async (req, res) => {
       { new: true },
     );
 
-    return res.status(201).json({
+    return res.status(200).json({
       message: `Admin ${id} updated`,
       data: result,
       error: false,
