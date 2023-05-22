@@ -180,14 +180,6 @@ const updateClass = async (req, res) => {
     });
   }
 
-  if (!mongoose.isValidObjectId(trainer) || !mongoose.isValidObjectId(activity)) {
-    return res.status(400).json({
-      message: 'Activity and Trainer should refer to a valid ID',
-      data: undefined,
-      error: true,
-    });
-  }
-
   try {
     const result = await Class.findById(id);
 
@@ -198,16 +190,24 @@ const updateClass = async (req, res) => {
         error: true,
       });
     }
+    if (trainer || activity) {
+      if (!mongoose.isValidObjectId(trainer) || !mongoose.isValidObjectId(activity)) {
+        return res.status(400).json({
+          message: 'Activity and Trainer should refer to a valid ID',
+          data: undefined,
+          error: true,
+        });
+      }
+      const activityExists = await Activity.findOne({ _id: activity });
+      const trainerExists = await Trainer.findOne({ _id: trainer });
 
-    const activityExists = await Activity.findOne({ _id: activity });
-    const trainerExists = await Trainer.findOne({ _id: trainer });
-
-    if (!activityExists || !trainerExists) {
-      return res.status(404).json({
-        message: 'Activity or Trainer was not found',
-        data: undefined,
-        error: true,
-      });
+      if (!activityExists || !trainerExists) {
+        return res.status(404).json({
+          message: 'Activity or Trainer was not found',
+          data: undefined,
+          error: true,
+        });
+      }
     }
 
     const classExists = await Class.findOne({ day, hour });

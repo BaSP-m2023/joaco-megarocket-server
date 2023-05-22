@@ -109,19 +109,90 @@ describe('POST /api/classes', () => {
   }); */
 });
 
-/* describe('PUT /api/classes', () => {
+describe('PUT /api/classes', () => {
   test('Invalid ID should return status 400', async () => {
-    const response = await request(app).put('api/classes/123456').send();
+    const response = await request(app).put('/api/classes/123456').send();
     expect(response.status).toBe(400);
     expect(response.body.data).toBeUndefined();
     expect(response.body.error).toBeTruthy();
   });
 
-  test('ID not found should return status 400', async () => {
-    const response = await request(app).put('api/classes/74663d50bb2d87b9f6510620').send();
+  test('ID not found should return status 404', async () => {
+    const updatedClass = {
+      day: 'Monday', hour: '20:00',
+    };
+    const response = await request(app).put('/api/classes/74663d50bb2d87b9f6510629').send(updatedClass);
+    expect(response.status).toBe(404);
+    expect(response.body.data).toBeUndefined();
+    expect(response.body.error).toBeTruthy();
+  });
+
+  test('Duplicated class should return status 400', async () => {
+    const duplicatedClass = {
+      day: 'Sunday', hour: '20:00',
+    };
+    const response = await request(app).put('/api/classes/74663d50bb2d87b9f6510620').send(duplicatedClass);
     expect(response.status).toBe(400);
     expect(response.body.data).toBeUndefined();
     expect(response.body.error).toBeTruthy();
   });
+
+  test('Day not valid should return status 400', async () => {
+    const dayInvalid = {
+      day: 'Miernes',
+    };
+    const response = await request(app).put('/api/classes/74663d50bb2d87b9f6510620').send(dayInvalid);
+    expect(response.status).toBe(400);
+    expect(response.body.data).toBeUndefined();
+    expect(response.body.error).toBeTruthy();
+  });
+
+  test('Hour not valid should return status 400', async () => {
+    const hourInvalid = {
+      hour: 'asd023',
+    };
+    const response = await request(app).put('/api/classes/74663d50bb2d87b9f6510620').send(hourInvalid);
+    expect(response.status).toBe(400);
+    expect(response.body.data).toBeUndefined();
+    expect(response.body.error).toBeTruthy();
+  });
+
+  test('Updated class should return status 200', async () => {
+    const validClass = {
+      day: 'Monday',
+      hour: '10:00',
+      slots: 15,
+    };
+    const response = await request(app).put('/api/classes/74663d50bb2d87b9f6510621').send(validClass);
+    expect(response.status).toBe(201);
+    expect(response.body.error).toBeFalsy();
+  });
 });
-*/
+
+describe('DELETE /api/classes', () => {
+  test('Invalid ID should return status 400', async () => {
+    const response = await request(app).delete('/api/classes/123456').send();
+    expect(response.status).toBe(400);
+    expect(response.body.data).toBeUndefined();
+    expect(response.body.error).toBeTruthy();
+  });
+
+  test('ID not found should return status 404', async () => {
+    const response = await request(app).delete('/api/classes/74663d50bb2d87b9f6510620').send();
+    expect(response.status).toBe(404);
+    expect(response.body.data).toBeUndefined();
+    expect(response.body.error).toBeTruthy();
+  });
+
+  test('Delete class should return status 200 and delete it', async () => {
+    const response = await request(app).delete('/api/classes/74663d50bb2d87b9f6510621').send();
+    expect(response.status).toBe(200);
+    expect(response.body.error).toBeFalsy();
+  });
+
+  test('Double deleted class should return not found', async () => {
+    const response = await request(app).delete('/api/classes/74663d50bb2d87b9f6510621').send();
+    expect(response.status).toBe(404);
+    expect(response.body.error).toBeTruthy();
+  });
+});
