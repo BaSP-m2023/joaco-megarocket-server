@@ -2,14 +2,17 @@ const Joi = require('joi');
 
 const validateCreation = (req, res, next) => {
   const classValidation = Joi.object({
-    day: Joi.string().min(6).max(9).required(),
+    day: Joi.string().min(6).max(9).required()
+      .messages({
+        'string.pattern.base': 'Day can only be Monday/Tuesday/Wednesday/Thursday/Friday/Saturday',
+      }),
     hour: Joi.string().min(5).max(5).regex(/^([01]\d|2[0-3]):([0-5]\d)$/)
       .required()
       .messages({
         'string.pattern.base': 'Hour must be of format hh:mm',
       }),
-    trainer: Joi.isSchema(),
-    activity: Joi.isSchema(),
+    trainer: Joi.required(),
+    activity: Joi.required(),
     slots: Joi.number().positive().min(2).max(15)
       .optional(),
   });
@@ -26,14 +29,16 @@ const validateCreation = (req, res, next) => {
 
 const validateUpdate = (req, res, next) => {
   const classValidation = Joi.object({
-    day: Joi.string().min(6).max(9).optional(),
+    day: Joi.string().valid('Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday').optional().messages({
+      'string.pattern.base': 'Day can only be Monday/Tuesday/Wednesday/Thursday/Friday/Saturday',
+    }),
     hour: Joi.string().min(5).max(5).regex(/^([01]\d|2[0-3]):([0-5]\d)$/)
       .optional()
       .messages({
-        'string.patter.base': 'Hour must be of format hh:mm',
+        'string.pattern.base': 'Hour must be of format hh:mm',
       }),
-    trainer: Joi.isSchema(),
-    activity: Joi.isSchema(),
+    trainer: Joi.optional(),
+    activity: Joi.optional(),
     slots: Joi.number().positive().min(2).max(15)
       .optional(),
   }).min(1);

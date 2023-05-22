@@ -14,11 +14,13 @@ const classSchema = new Schema({
   },
   trainer: {
     type: Schema.Types.ObjectId,
-    required: false,
+    required: true,
+    ref: 'Trainer',
   },
   activity: {
     type: Schema.Types.ObjectId,
-    required: false,
+    required: true,
+    ref: 'Activity',
   },
   slots: {
     type: Number,
