@@ -1,10 +1,16 @@
 import request from 'supertest';
 import app from '../app';
 import Classes from '../models/Class';
+import Trainers from '../models/Trainer';
+import Activity from '../models/Activity';
 import ClassesSeed from '../seeds/classes';
+import TrainersSeed from '../seeds/trainers';
+import ActivitySeed from '../seeds/activities';
 
 const insertData = async () => {
   await Classes.collection.insertMany(ClassesSeed);
+  await Trainers.collection.insertMany(TrainersSeed);
+  await Activity.collection.insertMany(ActivitySeed);
 };
 
 describe('GET /api/classes', () => {
@@ -93,12 +99,12 @@ describe('POST /api/classes', () => {
     expect(response.body.error).toBeTruthy();
   });
 
-  /* test('if POST request is valid, return 201 and the created class info', async () => {
+  test('if POST request is valid, return 201 and the created class info', async () => {
     const classData = {
       day: 'Wednesday',
       hour: '10:30',
-      trainer: '2462a2ee2aac39ef714f13d5',
-      activity: '1462a2ee2aac39ef714f13d5',
+      trainer: '646642acfac4c6a035b35000',
+      activity: '6462261d7ead90b46b7471cc',
       slots: 9,
     };
 
@@ -106,7 +112,7 @@ describe('POST /api/classes', () => {
     expect(response.status).toBe(201);
     expect(response.body.data).toBeDefined();
     expect(response.body.error).toBeFalsy();
-  }); */
+  });
 });
 
 /* describe('PUT /api/classes', () => {
