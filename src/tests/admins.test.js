@@ -203,3 +203,34 @@ describe('POST /api/admins', () => {
     expect(response.error).toBeTruthy();
   });
 });
+describe('DELETE /api/admins/:id', () => {
+  test('should return admin delete with status 200', async () => {
+    const mockID = '74663d50bb2d87b9f6510627';
+    const response = await request(app).delete(`/api/admins/${mockID}`).send();
+    expect(response.body.data).toBeDefined();
+    expect(response.body.message).toEqual('Admin successfully deleted!');
+    expect(response.status).toBe(200);
+    expect(response.error).toBeFalsy();
+  });
+  test('should return admin not found with status 404', async () => {
+    const mockID = '74663d50bb2d87b9f6510627';
+    const response = await request(app).delete(`/api/admins/${mockID}`).send();
+    expect(response.body.data).toBeUndefined();
+    expect(response.status).toBe(404);
+    expect(response.error).toBeTruthy();
+  });
+  test('should return invalid id format with status 400', async () => {
+    const mockID = '111';
+    const response = await request(app).delete(`/api/admins/${mockID}`).send();
+    expect(response.body.data).toBeUndefined();
+    expect(response.body.message).toEqual('Id is not a valid one');
+    expect(response.status).toBe(400);
+    expect(response.error).toBeTruthy();
+  });
+  test('should return status 404 and error true', async () => {
+    const response = await request(app).delete('/api/admin').send();
+    expect(response.body.data).toBeUndefined();
+    expect(response.status).toBe(404);
+    expect(response.error).toBeTruthy();
+  });
+});
