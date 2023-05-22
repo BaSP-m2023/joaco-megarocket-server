@@ -165,7 +165,6 @@ describe('PUT /api/classes', () => {
   test('If no changes were made, return status 400', async () => {
     const notChanged = { day: 'Thursday' };
     const response = await request(app).put('/api/classes/74663d50bb2d87b9f6510624').send(notChanged);
-    console.log(response);
     expect(response.status).toBe(200);
     expect(response.body.data).toBeDefined();
     expect(response.body.error).toBeFalsy();
