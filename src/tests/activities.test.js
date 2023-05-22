@@ -49,6 +49,17 @@ describe('PUT /api/activities/:id', () => {
     expect(res.error).toBeFalsy();
   });
 
+  test('should return a error, update a activity already exist', async () => {
+    const res = await request(app).put('/api/activities/6467cd965eada13a19071ab9').send({
+      name: 'functional',
+      description: 'this activity involves movements that enable greater overall body functioning and improve performance through better coordination and muscle stimulation',
+      isActive: false,
+    });
+    expect(res.status).toBe(200);
+    expect(res.body.message).toBeDefined();
+    expect(res.error).toBeFalsy();
+  });
+
   test('should return a error', async () => {
     const res = await request(app).put('/api/activities/6466b3e7a21fd4069bcaf7c0').send(ActivityBad);
     expect(res.status).toBe(400);
