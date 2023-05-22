@@ -7,11 +7,11 @@ import ClassesSeed from '../seeds/classes';
 import TrainersSeed from '../seeds/trainers';
 import ActivitySeed from '../seeds/activities';
 
-const insertData = async () => {
+beforeAll(async () => {
   await Classes.collection.insertMany(ClassesSeed);
   await Trainers.collection.insertMany(TrainersSeed);
   await Activity.collection.insertMany(ActivitySeed);
-};
+});
 
 describe('GET /api/classes', () => {
   test('if class data is empty, return 404', async () => {
@@ -23,7 +23,6 @@ describe('GET /api/classes', () => {
     }
   });
   test('if class data is not empty, return 200 and the array', async () => {
-    await insertData();
     const response = await request(app).get('/api/classes').send();
     expect(response.status).toBe(200);
     expect(response.body.data).not.toBe([]);
@@ -161,6 +160,15 @@ describe('PUT /api/classes', () => {
     expect(response.status).toBe(400);
     expect(response.body.data).toBeUndefined();
     expect(response.body.error).toBeTruthy();
+  });
+
+  test('If no changes were made, return status 400', async () => {
+    const notChanged = { day: 'Thursday' };
+    const response = await request(app).put('/api/classes/74663d50bb2d87b9f6510624').send(notChanged);
+    console.log(response);
+    expect(response.status).toBe(200);
+    expect(response.body.data).toBeDefined();
+    expect(response.body.error).toBeFalsy();
   });
 
   test('Updated class should return status 200', async () => {
