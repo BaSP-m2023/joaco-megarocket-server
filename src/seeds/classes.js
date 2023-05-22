@@ -5,34 +5,16 @@ export default [
     _id: new mongoose.Types.ObjectId('74663d50bb2d87b9f6510621'),
     day: 'Sunday',
     hour: '20:00',
-    trainer: {
-      _id: new mongoose.Types.ObjectId('74663d50bb2d87b9f6510622'),
-      firstName: 'Ema',
-      lastName: 'Siempreviva',
-      dni: 1234576,
-    },
-    activity: {
-      _id: new mongoose.Types.ObjectId('74663d50bb2d87b9f6510623'),
-      name: 'voley',
-      description: 'basic training that consists of throwing soft punches into the air wit hgrtfhgrehgtdfghdfgh dfghdfghdfgh dfgh dfgh dfgh',
-    },
+    trainer: new mongoose.Types.ObjectId('74663d50bb2d87b9f6510622'),
+    activity: new mongoose.Types.ObjectId('74663d50bb2d87b9f6510623'),
     slots: 8,
   },
   {
     _id: new mongoose.Types.ObjectId('74663d50bb2d87b9f6510624'),
     day: 'Thursday',
     hour: '17:00',
-    trainer: {
-      _id: new mongoose.Types.ObjectId('74663d50bb2d87b9f6510625'),
-      firstName: 'Ema',
-      lastName: 'Siempreviva',
-      dni: 1234576,
-    },
-    activity: {
-      _id: new mongoose.Types.ObjectId('74663d50bb2d87b9f6510626'),
-      name: 'voley',
-      description: 'basic training that consists of throwing soft punches into the air wit hgrtfhgrehgtdfghdfgh dfghdfghdfgh dfgh dfgh dfgh',
-    },
+    trainer: new mongoose.Types.ObjectId('74663d50bb2d87b9f6510625'),
+    activity: new mongoose.Types.ObjectId('74663d50bb2d87b9f6510626'),
     slots: 6,
   },
   {
