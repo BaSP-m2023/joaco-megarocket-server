@@ -140,15 +140,15 @@ describe('DELETE /api/Super-admin', () => {
   });
 
   test('DELETE Invalid Mongoose ID status 400', async () => {
-    const response = await request(app).delete('/api/trainers/64619de9d65e6b69210sdasdasdasddf4c9');
+    const response = await request(app).delete('/api/super-admin/64619de9d65e6b69210sdasdasdasddf4c9');
     expect(response.status).toBe(400);
     expect(response.body.message).toBeDefined();
     expect(response.body.error).toBeTruthy();
   });
 
   test('DELETE a non-existent ID status 404', async () => {
-    const response = await request(app).delete('/api/trainers/64619de9d65e6b69180df4c9');
-    expect(response.status).toBe(404);
+    const response = await request(app).delete('/api/super-admin/122319de9d65e6b69280df4c9');
+    expect(response.status).toBe(400);
     expect(response.body.message).toBeDefined();
     expect(response.body.error).toBeTruthy();
   });

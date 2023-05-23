@@ -107,7 +107,7 @@ const deleteAdminsById = async (req, res) => {
     });
   } else {
     try {
-      const superAdminDeleted = await SuperAdmin.deleteOne({ _id: id });
+      const superAdminDeleted = await SuperAdmin.findByIdAndDelete(id);
 
       if (superAdminDeleted) {
         return res.status(200).json({
