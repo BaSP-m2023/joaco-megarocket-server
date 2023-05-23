@@ -52,6 +52,13 @@ describe('POST /api/activities', () => {
     expect(res.body.data).toBeUndefined();
     expect(res.error).toBeTruthy();
   });
+
+  test('Should return status 404 if the endpoint no exist', async () => {
+    const res = await request(app).post('/api/activitie').send(activities);
+    expect(res.status).toBe(404);
+    expect(res.body.data).toBeUndefined();
+    expect(res.error).toBeTruthy();
+  });
 });
 
 describe('PUT /api/activities/:id', () => {
@@ -82,6 +89,13 @@ describe('PUT /api/activities/:id', () => {
     expect(res.body.data).toBeUndefined();
     expect(res.error).toBeTruthy();
   });
+
+  test('Should return status 404 if the endpoint no exist', async () => {
+    const res = await request(app).put('/api/activitie').send(updatedActivity);
+    expect(res.status).toBe(404);
+    expect(res.body.data).toBeUndefined();
+    expect(res.error).toBeTruthy();
+  });
 });
 
 describe('DELETE /api/activities/:id', () => {
@@ -100,6 +114,13 @@ describe('DELETE /api/activities/:id', () => {
 
   test('should return error, id not found', async () => {
     const res = await request(app).delete('/api/activities/6467cd965eada13a19071ab5');
+    expect(res.status).toBe(404);
+    expect(res.body.data).toBeUndefined();
+    expect(res.error).toBeTruthy();
+  });
+
+  test('Should return status 404 if the endpoint no exist', async () => {
+    const res = await request(app).delete('/api/activitie').send();
     expect(res.status).toBe(404);
     expect(res.body.data).toBeUndefined();
     expect(res.error).toBeTruthy();
