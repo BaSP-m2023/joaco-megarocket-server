@@ -10,4 +10,12 @@ export default [
     activity: new mongoose.Types.ObjectId('74663d50bb2d87b9f6510623'),
     slots: 8,
   },
+  {
+    _id: new mongoose.Types.ObjectId('74663d50bb2d87b9f6510624'),
+    day: 'Thursday',
+    hour: '17:00',
+    trainer: new mongoose.Types.ObjectId('74663d50bb2d87b9f6510625'),
+    activity: new mongoose.Types.ObjectId('74663d50bb2d87b9f6510626'),
+    slots: 6,
+  },
 ];
