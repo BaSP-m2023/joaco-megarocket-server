@@ -248,12 +248,20 @@ describe('POST /api/trainers', () => {
 });
 
 describe('DELETE /api/trainers', () => {
-  test('Should create a trainer with a status 200', async () => {
+  test('Should delete a trainer with a status 200', async () => {
     const id = '646642acfac4c6a035b35000';
     const response = await request(app).delete(`/api/trainers/${id}`);
     expect(response.status).toBe(200);
     expect(response.body.message).toBeDefined();
     expect(response.body.error).toBeFalsy();
+  });
+
+  test('Should return ID not found with a status 404 (previously deleted)', async () => {
+    const id = '646642acfac4c6a035b35000';
+    const response = await request(app).delete(`/api/trainers/${id}`);
+    expect(response.status).toBe(404);
+    expect(response.body.message).toBeDefined();
+    expect(response.body.error).toBeTruthy();
   });
 
   test('Should return ID not found with a status 404', async () => {
