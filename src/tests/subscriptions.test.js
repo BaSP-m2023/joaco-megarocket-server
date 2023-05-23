@@ -24,6 +24,11 @@ const dataBase = {
   member: '24625faf956fb774c56da140',
 };
 
+const noValidData = {
+  classes: '---64663d50bb2d87b9f6510625',
+  member: '--24625faf956fb774c56da140',
+};
+
 const dataSubscription = {
   classes: '74663d50bb2d87b9f6510624',
   member: '6462d0074441252c694332dd',
@@ -105,6 +110,42 @@ describe('POST /api/subscriptions', () => {
 
   test('if class or member are not found, return 404', async () => {
     const response = await request(app).post('/api/subscriptions').send(dataBase);
+    expect(response.status).toBe(404);
+    expect(response.body.data).toBeUndefined();
+    expect(response.body.error).toBeTruthy();
+  });
+});
+
+describe('PUT /api/subscriptions', () => {
+  test('if member or class ids are not valid, return 400', async () => {
+    const response = await request(app).put('/api/subscriptions/64663d50bb2d87b9f6510628').send(noValidData);
+    expect(response.status).toBe(400);
+    expect(response.body.data).toBeUndefined();
+    expect(response.body.error).toBeTruthy();
+  });
+
+  test('if member or class ids are not found, return 404', async () => {
+    const response = await request(app).put('/api/subscriptions/6466f6c43b2af1a6510deea5').send(dataBase);
+    expect(response.status).toBe(404);
+    expect(response.body.data).toBeUndefined();
+    expect(response.body.error).toBeTruthy();
+  });
+
+  test('if the id is invalid should return status 400', async () => {
+    const response = await request(app).put('/api/subscriptions/9897981987951987498').send();
+    expect(response.status).toBe(400);
+    expect(response.body.data).toBeUndefined();
+    expect(response.body.error).toBeTruthy();
+  });
+
+  test('updated subscription should return status 200', async () => {
+    const response = await request(app).put('/api/subscriptions/6466aeb229ef0fba19e2cd82').send({ date: new Date() });
+    expect(response.status).toBe(200);
+    expect(response.body.error).toBeFalsy();
+  });
+
+  test('id not found should return status 404', async () => {
+    const response = await request(app).put('/api/subscriptions/52663d50bb2d87b9f6510629').send();
     expect(response.status).toBe(404);
     expect(response.body.data).toBeUndefined();
     expect(response.body.error).toBeTruthy();
