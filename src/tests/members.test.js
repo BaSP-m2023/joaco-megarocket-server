@@ -6,19 +6,6 @@ import memberSeed from '../seeds/members';
 const insertData = (async () => {
   await Member.collection.insertMany(memberSeed);
 });
-
-// const aMember = {
-//   firstName: 'Nombre',
-//   lastName: 'Apellido',
-//   dni: 4218,
-//   phone: 12345678,
-//   email: 'gnoboca@gmail.com',
-//   city: 'Gotham',
-//   birthday: '10/12/2020',
-//   postalCode: 2132,
-//   membership: 'Classic Membership',
-// };
-
 describe('GET /api/members', () => {
   test('if members data is empty, return 404', async () => {
     const response = await request(app).get('/api/members').send();
@@ -36,6 +23,15 @@ describe('GET /api/members', () => {
     expect(response.body.message).toBeDefined();
     expect(response.body.data).not.toStrictEqual([]);
     expect(response.body.error).toBeFalsy();
+  });
+
+  test('If route api is incorrect return 400', async () => {
+    const response = await request(app).get('/api/membersssssss').send();
+    if (response.body.data === 0) {
+      expect(response.status).toBe(400);
+      expect(response.body.data).toBeUndefined();
+      expect(response.body.error).toBeTruthy();
+    }
   });
 });
 
@@ -124,6 +120,15 @@ describe('PUT /api/members/:id', () => {
     expect(response.body.data).toBeUndefined();
     expect(response.body.error).toBeTruthy();
   });
+
+  test('If there were no changes return 200', async () => {
+    const id = '6462d0074441252c694332dd';
+    const changes = { firstName: 'Elon' };
+    const response = await request(app).put(`/api/members/${id}`).send(changes);
+    expect(response.status).toBe(200);
+    expect(response.body.data).toBeDefined();
+    expect(response.body.error).toBeFalsy();
+  });
 });
 
 describe('POST /api/members', () => {
@@ -165,6 +170,14 @@ describe('DELETE /api/members', () => {
     expect(response.status).toBe(200);
     expect(response.body.message).toBeDefined();
     expect(response.body.error).toBeFalsy();
+  });
+
+  test('Should return 404 if the member was deleted', async () => {
+    const id = '6462d0074441252c694332dd';
+    const response = await request(app).delete(`/api/members/${id}`);
+    expect(response.status).toBe(404);
+    expect(response.body.message).toBeDefined();
+    expect(response.body.error).toBeTruthy();
   });
 
   test('If ID is not valid return 400', async () => {
