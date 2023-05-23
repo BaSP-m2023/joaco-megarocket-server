@@ -1,13 +1,11 @@
 import mongoose from 'mongoose';
 
 export default [
-
   {
     _id: new mongoose.Types.ObjectId('6462261d7ead90b46b7471cc'),
-    name: 'voley',
-    description: 'basic training that consists of throwing soft punches into the air wit hgrtfhgrehgtdfghdfgh dfghdfghdfgh dfgh dfgh dfgh',
+    name: 'box',
+    description: 'basic training that consists of throwing soft punches into the air wit',
     isActive: true,
-    __v: 0,
   },
   {
     _id: new mongoose.Types.ObjectId('6466b3e7a21fd4069bcaf7c0'),
