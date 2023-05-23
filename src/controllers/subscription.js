@@ -214,7 +214,11 @@ const deleteSubscription = async (req, res) => {
       });
     }
 
-    return res.status(204).json();
+    return res.status(200).json({
+      error: false,
+      message: 'subscription deleted succesfully',
+      data: subscription,
+    });
   } catch (error) {
     return res.status(500).json({
       error: true,
