@@ -7,6 +7,18 @@ const insertData = (async () => {
   await Member.collection.insertMany(memberSeed);
 });
 
+// const aMember = {
+//   firstName: 'Nombre',
+//   lastName: 'Apellido',
+//   dni: 4218,
+//   phone: 12345678,
+//   email: 'gnoboca@gmail.com',
+//   city: 'Gotham',
+//   birthday: '10/12/2020',
+//   postalCode: 2132,
+//   membership: 'Classic Membership',
+// };
+
 describe('GET /api/members', () => {
   test('if members data is empty, return 404', async () => {
     const response = await request(app).get('/api/members').send();
@@ -110,6 +122,63 @@ describe('PUT /api/members/:id', () => {
     expect(response.status).toBe(400);
     expect(response.body.message).toBeDefined();
     expect(response.body.data).toBeUndefined();
+    expect(response.body.error).toBeTruthy();
+  });
+});
+
+describe('POST /api/members', () => {
+  test('If email is not valid return 400', async () => {
+    const newMember = {
+      firstName: 'Elon',
+      lastName: 'Musk',
+      dni: 42180329,
+      phone: 1234567891,
+      email: 'aaaa',
+      city: 'Gotham',
+      birthday: '20/10/2020',
+      postalCode: 2132,
+      isActive: true,
+      membership: 'Classic Membership',
+    };
+
+    const response = await request(app).post('/api/members').send(newMember);
+    expect(response.status).toBe(400);
+    expect(response.body.data).toBeUndefined();
+    expect(response.body.error).toBeTruthy();
+  });
+
+  test('Returns the member with the same phone', async () => {
+    const memberPhone = {
+      phone: 1234567891,
+    };
+    const response = await request(app).post('/api/members').send(memberPhone);
+    expect(response.status).toBe(400);
+    expect(response.body.message).toBeDefined();
+    expect(response.body.error).toBeTruthy();
+  });
+});
+
+describe('DELETE /api/members', () => {
+  test('Should delete a member', async () => {
+    const id = '6462d0074441252c694332dd';
+    const response = await request(app).delete(`/api/members/${id}`);
+    expect(response.status).toBe(200);
+    expect(response.body.message).toBeDefined();
+    expect(response.body.error).toBeFalsy();
+  });
+
+  test('If ID is not valid return 400', async () => {
+    const id = '24124';
+    const response = await request(app).delete(`/api/members/${id}`);
+    expect(response.status).toBe(400);
+    expect(response.body.data).toBeUndefined();
+    expect(response.body.error).toBeTruthy();
+  });
+  test('If ID is not found return 404', async () => {
+    const id = '6462d0074441252c694332fd';
+    const response = await request(app).delete(`/api/members/${id}`);
+    expect(response.status).toBe(404);
+    expect(response.body.message).toBeDefined();
     expect(response.body.error).toBeTruthy();
   });
 });
