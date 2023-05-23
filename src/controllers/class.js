@@ -243,7 +243,7 @@ const updateClass = async (req, res) => {
       name: 1,
       description: 1,
     });
-    return res.status(201).json({
+    return res.status(200).json({
       message: 'Class updated',
       data: modifiedClass,
       error: false,
