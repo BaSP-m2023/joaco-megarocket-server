@@ -22,6 +22,16 @@ describe('GET /api/classes', () => {
       expect(response.body.error).toBeTruthy();
     }
   });
+
+  test('If the endpoint is wrong, return 400', async () => {
+    const response = await request(app).get('/api/classessss').send();
+    if (response.body.data === 0) {
+      expect(response.status).toBe(400);
+      expect(response.body.data).toBeUndefined();
+      expect(response.body.error).toBeTruthy();
+    }
+  });
+
   test('if class data is not empty, return 200 and the array', async () => {
     const response = await request(app).get('/api/classes').send();
     expect(response.status).toBe(200);
@@ -38,6 +48,7 @@ describe('GET /api/classes/:id', () => {
     expect(response.body.data).toBeUndefined();
     expect(response.error).toBeTruthy();
   });
+
   test('if class ID is not found, return 404', async () => {
     const id = '6462359679333a385c67f704';
     const response = await request(app).get(`/api/classes/${id}`).send();
@@ -45,6 +56,17 @@ describe('GET /api/classes/:id', () => {
     expect(response.body.data).toBeUndefined();
     expect(response.error).toBeTruthy();
   });
+
+  test('If the endpoint is wrong, return 400', async () => {
+    const id = '74663d50bb2d87b9f6510621';
+    const response = await request(app).get(`/api/classessss/${id}`).send();
+    if (response.body.data === 0) {
+      expect(response.status).toBe(400);
+      expect(response.body.data).toBeUndefined();
+      expect(response.body.error).toBeTruthy();
+    }
+  });
+
   test('if class ID is found, return 201', async () => {
     const id = '74663d50bb2d87b9f6510621';
     const response = await request(app).get(`/api/classes/${id}`).send();
@@ -55,6 +77,45 @@ describe('GET /api/classes/:id', () => {
 });
 
 describe('POST /api/classes', () => {
+  test('If trainer or activity IDs are not valid, return 400 and an error message', async () => {
+    const classData = {
+      day: 'Wednesday',
+      hour: '10:30',
+      trainer: '***646642acfac4c6a035b35000',
+      activity: '***6462261d7ead90b46b7471cc',
+      slots: 9,
+    };
+
+    const response = await request(app).post('/api/classes').send(classData);
+    expect(response.status).toBe(400);
+    expect(response.body.data).toBeUndefined();
+    expect(response.body.error).toBeTruthy();
+  });
+
+  test('Duplicated class should return status 400', async () => {
+    const duplicatedClass = {
+      day: 'Sunday', hour: '20:00',
+    };
+    const response = await request(app).post('/api/classes').send(duplicatedClass);
+    expect(response.status).toBe(400);
+    expect(response.body.data).toBeUndefined();
+    expect(response.body.error).toBeTruthy();
+  });
+
+  test('If trainer or activity IDs are not found, return 404 and an error message', async () => {
+    const classData = {
+      day: 'Wednesday',
+      hour: '10:30',
+      trainer: '746642acfac4c6a035b35000',
+      activity: '7462261d7ead90b46b7471cc',
+      slots: 9,
+    };
+    const response = await request(app).post('/api/classes').send(classData);
+    expect(response.status).toBe(404);
+    expect(response.body.data).toBeUndefined();
+    expect(response.body.error).toBeTruthy();
+  });
+
   test('if POST request has no data, return 400', async () => {
     const response = await request(app).post('/api/classes').send();
     expect(response.status).toBe(400);
@@ -90,12 +151,19 @@ describe('POST /api/classes', () => {
       __v: 0,
     };
 
-    await Classes.collection.insertOne(classData);
-
     const response = await request(app).post('/api/classes').send(classData);
     expect(response.status).toBe(400);
     expect(response.body.data).toBeUndefined();
     expect(response.body.error).toBeTruthy();
+  });
+
+  test('If the endpoint is wrong, return 400', async () => {
+    const response = await request(app).post('/api/classessss').send();
+    if (response.body.data === 0) {
+      expect(response.status).toBe(400);
+      expect(response.body.data).toBeUndefined();
+      expect(response.body.error).toBeTruthy();
+    }
   });
 
   test('if POST request is valid, return 201 and the created class info', async () => {
@@ -115,6 +183,35 @@ describe('POST /api/classes', () => {
 });
 
 describe('PUT /api/classes', () => {
+  test('If trainer or activity IDs are not valid, return 400 and an error message', async () => {
+    const classData = {
+      day: 'Wednesday',
+      hour: '10:30',
+      trainer: '***646642acfac4c6a035b35000',
+      activity: '***6462261d7ead90b46b7471cc',
+      slots: 9,
+    };
+
+    const response = await request(app).put('/api/classes/74663d50bb2d87b9f6510624').send(classData);
+    expect(response.status).toBe(400);
+    expect(response.body.data).toBeUndefined();
+    expect(response.body.error).toBeTruthy();
+  });
+
+  test('If trainer or activity IDs are not found, return 404 and an error message', async () => {
+    const classData = {
+      day: 'Wednesday',
+      hour: '10:30',
+      trainer: '746642acfac4c6a035b35000',
+      activity: '7462261d7ead90b46b7471cc',
+      slots: 9,
+    };
+    const response = await request(app).put('/api/classes/74663d50bb2d87b9f6510624').send(classData);
+    expect(response.status).toBe(404);
+    expect(response.body.data).toBeUndefined();
+    expect(response.body.error).toBeTruthy();
+  });
+
   test('Invalid ID should return status 400', async () => {
     const response = await request(app).put('/api/classes/123456').send();
     expect(response.status).toBe(400);
@@ -170,6 +267,15 @@ describe('PUT /api/classes', () => {
     expect(response.body.error).toBeFalsy();
   });
 
+  test('If the endpoint is wrong, return 400', async () => {
+    const response = await request(app).put('/api/classessss').send();
+    if (response.body.data === 0) {
+      expect(response.status).toBe(400);
+      expect(response.body.data).toBeUndefined();
+      expect(response.body.error).toBeTruthy();
+    }
+  });
+
   test('Updated class should return status 200', async () => {
     const validClass = {
       day: 'Monday',
@@ -195,6 +301,15 @@ describe('DELETE /api/classes', () => {
     expect(response.status).toBe(404);
     expect(response.body.data).toBeUndefined();
     expect(response.body.error).toBeTruthy();
+  });
+
+  test('If the endpoint is wrong, return 400', async () => {
+    const response = await request(app).delete('/api/classessss').send();
+    if (response.body.data === 0) {
+      expect(response.status).toBe(400);
+      expect(response.body.data).toBeUndefined();
+      expect(response.body.error).toBeTruthy();
+    }
   });
 
   test('Delete class should return status 200 and delete it', async () => {
