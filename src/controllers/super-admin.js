@@ -12,7 +12,7 @@ const getAllSuperAdmins = async (req, res) => {
         error: false,
       });
     }
-    return res.status(400).json({
+    return res.status(404).json({
       message: 'There are no super admins yet',
       data: undefined,
       error: true,
@@ -31,7 +31,7 @@ const getSuperAdminsById = async (req, res) => {
   const { id } = req.params;
 
   if (!mongoose.isValidObjectId(id)) {
-    res.status(404).json({
+    res.status(400).json({
       message: 'Id no valid',
       data: undefined,
       error: true,
@@ -41,7 +41,7 @@ const getSuperAdminsById = async (req, res) => {
       const findByIdSuperAdmin = await SuperAdmin.findById(id, 'email');
 
       if (!findByIdSuperAdmin) {
-        return res.status(400).json({
+        return res.status(404).json({
           message: `This super admins with id: ${id} not exist`,
           data: undefined,
           error: true,
@@ -100,7 +100,7 @@ const deleteAdminsById = async (req, res) => {
   const { id } = req.params;
 
   if (!mongoose.isValidObjectId(id)) {
-    res.status(404).json({
+    res.status(400).json({
       message: 'Id not valid',
       data: undefined,
       error: true,
@@ -137,7 +137,7 @@ const updateAdminsById = async (req, res) => {
   const { email, password } = req.body;
 
   if (!mongoose.isValidObjectId(id)) {
-    return res.status(404).json({
+    return res.status(400).json({
       message: 'Id no valid',
       data: undefined,
       error: true,
@@ -166,7 +166,7 @@ const updateAdminsById = async (req, res) => {
         error: true,
       });
     }
-    return res.status(409).json({
+    return res.status(400).json({
       message: `Super admin with email ${email} already exist`,
       data: { email, password },
       error: true,
