@@ -283,7 +283,7 @@ describe('PUT /api/classes', () => {
       slots: 15,
     };
     const response = await request(app).put('/api/classes/74663d50bb2d87b9f6510621').send(validClass);
-    expect(response.status).toBe(201);
+    expect(response.status).toBe(200);
     expect(response.body.error).toBeFalsy();
   });
 });
