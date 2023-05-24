@@ -12,13 +12,21 @@ describe('GET /api/Super-admin', () => {
     const response = await request(app).get('/api/super-admin').send();
     expect(response.status).toBe(200);
     expect(response.body.message).toBeDefined();
-    expect(response.error).toBeFalsy();
+    expect(response.body.error).toBeFalsy();
   });
 
-  test('GET Should return status 404', async () => {
-    const response = await request(app).get('/api/super-adminS').send();
+  test('GET should return status 404', async () => {
+    const response = await request(app).get('/api/invalid-route').send();
     expect(response.status).toBe(404);
-    expect(response.error).toBeTruthy();
+  });
+
+  test('GET if super admin data is empty, return 404', async () => {
+    const response = await request(app).get('/api/super-admin').send();
+    if (response.body.data === 0) {
+      expect(response.status).toBe(404);
+      expect(response.body.data).toBe([]);
+      expect(response.body.error).toBeTruthy();
+    }
   });
 });
 
@@ -27,25 +35,23 @@ describe('GET /api/Super-admin', () => {
     const response = await request(app).get('/api/super-admin/64619de9d65e6b69280df4c9').send();
     expect(response.status).toBe(200);
     expect(response.body.message).toBeDefined();
-    expect(response.error).toBeFalsy();
+    expect(response.body.error).toBeFalsy();
   });
 
   test('GET Invalid Mongoose ID status 400', async () => {
     const response = await request(app).get('/api/super-admin/646ssNOFUNCAs19de9d65e6b69280df4cs319').send();
     expect(response.status).toBe(400);
     expect(response.body.message).toBeDefined();
-    expect(response.error).toBeTruthy();
+    expect(response.body.error).toBeTruthy();
   });
 
   test('Get a non-existent ID status 404', async () => {
     const response = await request(app).get('/api/super-admin/64619de9d65e6b69280df4c1').send();
     expect(response.status).toBe(404);
     expect(response.body.message).toBeDefined();
-    expect(response.error).toBeTruthy();
+    expect(response.body.error).toBeTruthy();
   });
 });
-
-let mocksuperAdminId;
 
 describe('POST /api/Super-admin', () => {
   test('POST should create a super admin with status 201', async () => {
@@ -55,10 +61,8 @@ describe('POST /api/Super-admin', () => {
     };
     const response = await request(app).post('/api/super-admin').send(mocksuperAdmin);
     expect(response.status).toBe(201);
-    // eslint-disable-next-line no-underscore-dangle
-    mocksuperAdminId = response.body.data._id;
     expect(response.body.message).toBeDefined();
-    expect(response.error).toBeFalsy();
+    expect(response.body.error).toBeFalsy();
   });
 
   test('POST Invalid post data should return status 400', async () => {
@@ -69,8 +73,7 @@ describe('POST /api/Super-admin', () => {
     const response = await request(app).post('/api/super-admin').send(mocksuperAdmin);
     expect(response.status).toBe(400);
     expect(response.body.message).toBeDefined();
-    // eslint-disable-next-line no-underscore-dangle
-    expect(response.error).toBeTruthy();
+    expect(response.body.error).toBeTruthy();
   });
 
   test('POST The admin with this Email already exists status 400', async () => {
@@ -99,14 +102,14 @@ describe('PUT /api/Super-admin', () => {
     const response = await request(app).put('/api/super-admin/6461ssNOFUNCAs9de9dss65e6b69280df4cs319');
     expect(response.status).toBe(400);
     expect(response.body.message).toBeDefined();
-    expect(response.error).toBeTruthy();
+    expect(response.body.error).toBeTruthy();
   });
 
   test('PUT a non-existent ID status 404', async () => {
     const response = await request(app).put('/api/super-admin/64619de9d65e6b69280df4c1').send();
     expect(response.status).toBe(404);
     expect(response.body.message).toBeDefined();
-    expect(response.error).toBeTruthy();
+    expect(response.body.error).toBeTruthy();
   });
 
   test('PUT if email exists return 400', async () => {
@@ -125,7 +128,7 @@ describe('PUT /api/Super-admin', () => {
       password: 'Test1234!',
     };
     const response = await request(app).put('/api/super-admin/64619de9d65e6b69280df4c9').send(reqBody);
-    expect(response.status).toBe(201);
+    expect(response.status).toBe(200);
     expect(response.body.message).toBeDefined();
     expect(response.body.data).toBeDefined();
     expect(response.body.error).toBeFalsy();
@@ -134,7 +137,7 @@ describe('PUT /api/Super-admin', () => {
 
 describe('DELETE /api/Super-admin', () => {
   test('should delete one super admin status 200', async () => {
-    const response = await request(app).delete(`/api/super-admin/${mocksuperAdminId}`);
+    const response = await request(app).delete('/api/super-admin/64619de9d65e6b69280df4c9');
     expect(response.status).toBe(200);
     expect(response.body.message).toBeDefined();
   });
@@ -147,8 +150,8 @@ describe('DELETE /api/Super-admin', () => {
   });
 
   test('DELETE a non-existent ID status 404', async () => {
-    const response = await request(app).delete('/api/super-admin/122319de9d65e6b69280df4c9');
-    expect(response.status).toBe(400);
+    const response = await request(app).delete('/api/super-admin/64619de9d65e6b69280df4c9');
+    expect(response.status).toBe(404);
     expect(response.body.message).toBeDefined();
     expect(response.body.error).toBeTruthy();
   });

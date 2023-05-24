@@ -154,7 +154,7 @@ const updateAdminsById = async (req, res) => {
       );
 
       if (updateSuperAdmin) {
-        return res.status(201).json({
+        return res.status(200).json({
           message: 'Super admin update succesfully',
           data: updateSuperAdmin,
           error: false,
