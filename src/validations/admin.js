@@ -13,7 +13,8 @@ const validateCreation = (req, res, next) => {
     phone: Joi.number().min(1000000000).max(9999999999).required()
       .messages({ 'number.min': 'Phone number must have 10 digits', 'number.max': 'Phone number must have 10 digits' }),
     email: Joi.string().email().required(),
-    city: Joi.string().min(4).required(),
+    city: Joi.string().min(4).pattern(/^[A-Za-z\s]+$/).required()
+      .messages({ 'string.pattern.base': 'City must contain letters and spaces only' }),
     password: Joi.string().min(8).required(),
   });
 
@@ -30,9 +31,9 @@ const validateCreation = (req, res, next) => {
 
 const validateUpdate = (req, res, next) => {
   const adminValidation = Joi.object({
-    firstName: Joi.string().min(4).max(25).pattern(/^[a-zA-Z-]+$/)
+    firstName: Joi.string().min(2).max(25).pattern(/^[a-zA-Z-]+$/)
       .messages({ 'string.pattern.base': 'First name must contain letters or hyphens only' }),
-    lastName: Joi.string().min(4).max(25).pattern(/^[a-zA-Z-]+$/)
+    lastName: Joi.string().min(2).max(25).pattern(/^[a-zA-Z-]+$/)
       .messages({ 'string.pattern.base': 'Last name must contain letters or hyphens only' }),
     dni: Joi.number().min(1000000).max(99999999)
       .messages({ 'number.min': 'DNI must have 7-8 digits', 'number.max': 'DNI must have 7-8 digits' }),

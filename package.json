@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "jest",
+    "test:coverage": "jest --coverage",
     "start": "nodemon --exec npm run babel-node -- src/index.js",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
