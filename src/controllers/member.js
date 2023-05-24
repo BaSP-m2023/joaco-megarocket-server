@@ -178,12 +178,12 @@ const deleteMember = async (req, res) => {
   const { id } = req.params;
 
   try {
-    if (!id) {
-      throw Error('Blank ID');
-    }
-
     if (!mongoose.Types.ObjectId.isValid(id)) {
-      throw Error('Invalid');
+      return res.status(400).json({
+        message: 'Invalid id',
+        data: undefined,
+        error: true,
+      });
     }
     const memberDeleted = await Member.findByIdAndDelete(id);
     if (!memberDeleted) {
@@ -210,7 +210,7 @@ const deleteMember = async (req, res) => {
       });
     }
     if (error.message === 'Member not found') {
-      return res.status(400).json({
+      return res.status(404).json({
         message: 'Member not found',
         data: undefined,
         error: true,
