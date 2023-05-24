@@ -53,7 +53,7 @@ const updateTrainer = async (req, res) => {
   if (!mongoose.isValidObjectId(id)) {
     return res.status(400).json({
       message: 'Invalid ID',
-      data: id,
+      data: undefined,
       error: true,
     });
   }
@@ -72,17 +72,24 @@ const updateTrainer = async (req, res) => {
         error: true,
       });
     }
-    const valuesChanged = Object.entries({
-      firstName, lastName, dni, phone, email, city, password, salary, isActive,
-    }).some(([key, value]) => actualTrainer[key] !== value);
 
-    if (!valuesChanged) {
+    const trainerProperties = Object.keys(actualTrainer.toObject()).slice(1, -1);
+    let changes = false;
+    trainerProperties.forEach((property) => {
+      if (req.body[property]
+      && req.body[property].toString().toLowerCase() !== actualTrainer[property].toString()) {
+        changes = true;
+      }
+    });
+
+    if (!changes) {
       return res.status(200).json({
-        message: 'No changes were made',
+        message: 'There were no changes',
         data: actualTrainer,
         error: false,
       });
     }
+
     const found = await Trainer.findOne({ $or: [{ dni }, { email }] });
 
     if (found) {
@@ -108,7 +115,7 @@ const updateTrainer = async (req, res) => {
       },
       { new: true },
     );
-    return res.status(201).json({
+    return res.status(200).json({
       message: 'Trainer updated succesfully',
       data: trainerUpdate,
       error: false,
@@ -161,6 +168,15 @@ const deleteTrainer = async (req, res) => {
 const getAllTrainer = async (req, res) => {
   try {
     const trainers = await Trainer.find();
+
+    if (trainers.length === 0) {
+      return res.status(404).json({
+        message: 'There are no activities',
+        data: trainers,
+        error: true,
+      });
+    }
+
     if (!trainers) {
       return res.status(404).json({
         message: 'Trainers not found',

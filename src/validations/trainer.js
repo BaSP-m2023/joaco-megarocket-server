@@ -4,12 +4,14 @@ const RGXPass = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$/;
 
 const validateCreation = (req, res, next) => {
   const trainerValidation = Joi.object({
-    firstName: Joi.string().min(3).max(11).required(),
-    lastName: Joi.string().min(3).max(30).required(),
+    firstName: Joi.string().min(3).max(11).regex(/^[a-zA-Z\s.,]+$/)
+      .required(),
+    lastName: Joi.string().min(3).max(30).regex(/^[a-zA-Z\s.,]+$/)
+      .required(),
     dni: Joi.number().min(1000000).max(99999999).required(),
     phone: Joi.number().min(1000000000).max(9999999999).required(),
     email: Joi.string().email().required(),
-    city: Joi.string().min(3).required(),
+    city: Joi.string().min(3).regex(/^[a-zA-Z\s.,]+$/).required(),
     password: Joi.string().regex(RGXPass)
       .min(8)
       .regex(RGXPass)
@@ -32,12 +34,12 @@ const validateCreation = (req, res, next) => {
 
 const validateUpdate = (req, res, next) => {
   const trainerValidation = Joi.object({
-    firstName: Joi.string().min(3).max(11),
-    lastName: Joi.string().min(3).max(30),
+    firstName: Joi.string().min(3).max(11).regex(/^[a-zA-Z\s.,]+$/),
+    lastName: Joi.string().min(3).max(30).regex(/^[a-zA-Z\s.,]+$/),
     dni: Joi.number().min(1000000).max(99999999),
     phone: Joi.number().min(1000000000).max(9999999999),
     email: Joi.string().email(),
-    city: Joi.string().min(3),
+    city: Joi.string().min(3).regex(/^[a-zA-Z\s.,]+$/),
     password: Joi.string().regex(RGXPass)
       .min(8)
       .regex(RGXPass)
