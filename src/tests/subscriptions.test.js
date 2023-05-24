@@ -51,7 +51,7 @@ describe('GET /api/subscriptions', () => {
 
 describe('GET /api/subscriptions', () => {
   test('if id is different from mongoose type should return 400', async () => {
-    const response = await request(app).get('/api/subscriptions/65465461').send();
+    const response = await request(app).get('/api/subscriptions/:id').send();
     expect(response.status).toBe(400);
     expect(response.error).toBeTruthy();
   });
