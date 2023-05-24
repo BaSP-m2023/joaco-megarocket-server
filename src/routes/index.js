@@ -17,6 +17,6 @@ router.use('/super-admin', SuperAdmin);
 
 const Subscription = require('./subscription');
 
-router.use('/subscription', Subscription);
+router.use('/subscriptions', Subscription);
 
 module.exports = router;

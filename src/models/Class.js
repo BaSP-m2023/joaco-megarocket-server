@@ -24,7 +24,7 @@ const classSchema = new Schema({
   },
   slots: {
     type: Number,
-    default: 10,
+    default: 50,
   },
 }, {
   versionKey: false,

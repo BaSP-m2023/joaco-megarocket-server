@@ -1,3 +1,4 @@
+// test comment
 import mongoose from 'mongoose';
 
 export default [
