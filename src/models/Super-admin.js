@@ -4,8 +4,15 @@ const { Schema } = mongoose;
 
 const SuperAdminSchema = new Schema({
 
-  email: String,
-  password: String,
+  email: {
+    type: String,
+    required: true,
+  },
+  password: {
+    type: String,
+    required: true,
+    minLenght: 8,
+  },
 
 });
 
