@@ -138,16 +138,6 @@ const updateActivity = async (req, res) => {
       });
     }
 
-    const activityExists = await Activity.findOne({ name });
-
-    if (activityExists) {
-      return res.status(400).json({
-        message: `${name} activity already exists`,
-        data: undefined,
-        error: true,
-      });
-    }
-
     const activityUpdated = await Activity.findByIdAndUpdate(
       id,
       {
