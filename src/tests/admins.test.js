@@ -81,26 +81,6 @@ describe('PUT /api/admins/:id', () => {
     expect(response.status).toBe(200);
     expect(response.error).toBeFalsy();
   });
-  test('should return email already exists with status 400', async () => {
-    const mockID = '74663d50bb2d87b9f6510627';
-    const updatedAdmin = {
-      email: 'fed58@gmail.com',
-    };
-    const response = await request(app).put(`/api/admins/${mockID}`).send(updatedAdmin);
-    expect(response.body.data).toBeUndefined();
-    expect(response.status).toBe(400);
-    expect(response.error).toBeTruthy();
-  });
-  test('should return dni already exists with status 400', async () => {
-    const mockID = '74663d50bb2d87b9f6510627';
-    const updatedAdmin = {
-      dni: 98765412,
-    };
-    const response = await request(app).put(`/api/admins/${mockID}`).send(updatedAdmin);
-    expect(response.body.data).toBeUndefined();
-    expect(response.status).toBe(400);
-    expect(response.error).toBeTruthy();
-  });
   test('should return no changes with data undefined and status 200', async () => {
     const mockID = '74663d50bb2d87b9f6510627';
     const response = await request(app).put(`/api/admins/${mockID}`).send();

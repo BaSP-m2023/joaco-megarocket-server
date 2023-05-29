@@ -67,15 +67,6 @@ const updateAdmin = async (req, res) => {
       return res.status(200).json({
         message: 'There were no changes',
         data: undefined,
-        error: false,
-      });
-    }
-    const dniExists = await Admin.findOne({ dni });
-    const emailExists = await Admin.findOne({ email });
-    if (dniExists || emailExists) {
-      return res.status(400).json({
-        message: 'An admin with DNI or Email already exists',
-        data: undefined,
         error: true,
       });
     }
@@ -88,7 +79,7 @@ const updateAdmin = async (req, res) => {
     );
 
     return res.status(200).json({
-      message: `Admin ${id} updated`,
+      message: 'Admin updated',
       data: result,
       error: false,
     });
