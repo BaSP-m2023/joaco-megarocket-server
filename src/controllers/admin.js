@@ -70,15 +70,6 @@ const updateAdmin = async (req, res) => {
         error: true,
       });
     }
-    const dniExists = await Admin.findOne({ dni });
-    const emailExists = await Admin.findOne({ email });
-    if (dniExists || emailExists) {
-      return res.status(400).json({
-        message: 'An admin with DNI or Email already exists',
-        data: undefined,
-        error: true,
-      });
-    }
     const result = await Admin.findByIdAndUpdate(
       id,
       {
