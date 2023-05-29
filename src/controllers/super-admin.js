@@ -111,7 +111,7 @@ const deleteSuperAdminsById = async (req, res) => {
 
       if (superAdminDeleted) {
         return res.status(200).json({
-          message: `This super admins with id: ${id} was deleted successfully`,
+          message: 'This super admins was deleted successfully',
           data: undefined,
           error: false,
         });
@@ -158,7 +158,7 @@ const updateSuperAdmin = (req, res) => {
         });
       }
       return res.status(200).json({
-        message: `Super admin with id: ${id} was succesfully updated`,
+        message: `Super admin with id: ${email} was succesfully updated`,
         data: result,
         error: false,
       });
