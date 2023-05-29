@@ -96,7 +96,7 @@ const createSuperAdmin = async (req, res) => {
 };
 
 // eslint-disable-next-line consistent-return
-const deleteAdminsById = async (req, res) => {
+const deleteSuperAdminsById = async (req, res) => {
   const { id } = req.params;
 
   if (!mongoose.isValidObjectId(id)) {
@@ -132,58 +132,45 @@ const deleteAdminsById = async (req, res) => {
 };
 
 // eslint-disable-next-line consistent-return
-const updateAdminsById = async (req, res) => {
+const updateSuperAdmin = (req, res) => {
   const { id } = req.params;
   const { email, password } = req.body;
-
-  if (!mongoose.isValidObjectId(id)) {
+  if (id.length !== 24) {
     return res.status(400).json({
-      message: 'Id no valid',
+      message: 'Invalid id, try again',
       data: undefined,
       error: true,
     });
   }
-  try {
-    const findEmail = await SuperAdmin.findOne({ email });
-
-    if (!findEmail) {
-      const updateSuperAdmin = await SuperAdmin.findByIdAndUpdate(
-        id,
-        { email, password },
-        { new: true },
-      );
-
-      if (updateSuperAdmin) {
-        return res.status(200).json({
-          message: 'Super admin update succesfully',
-          data: updateSuperAdmin,
-          error: false,
+  SuperAdmin.findByIdAndUpdate(
+    id,
+    {
+      email,
+      password,
+    },
+    { new: true },
+  )
+    .then((result) => {
+      if (!result) {
+        return res.status(404).json({
+          message: `Super admin with id: ${id} was not found`,
+          error: true,
         });
       }
-      return res.status(404).json({
-        message: 'Super admin no found',
-        data: undefined,
-        error: true,
+      return res.status(200).json({
+        message: `Super admin with id: ${id} was succesfully updated`,
+        data: result,
+        error: false,
       });
-    }
-    return res.status(400).json({
-      message: `Super admin with email ${email} already exist`,
-      data: { email, password },
-      error: true,
-    });
-  } catch (error) {
-    return res.status(400).json({
-      message: error.message,
-      data: undefined,
-      error: true,
-    });
-  }
+    })
+    .catch((error) => res.status(500).json(error));
+  return false;
 };
 
 module.exports = {
   getAllSuperAdmins,
   getSuperAdminsById,
   createSuperAdmin,
-  deleteAdminsById,
-  updateAdminsById,
+  deleteSuperAdminsById,
+  updateSuperAdmin,
 };
