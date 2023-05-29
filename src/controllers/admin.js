@@ -67,7 +67,7 @@ const updateAdmin = async (req, res) => {
       return res.status(200).json({
         message: 'There were no changes',
         data: undefined,
-        error: false,
+        error: true,
       });
     }
     const dniExists = await Admin.findOne({ dni });
@@ -88,7 +88,7 @@ const updateAdmin = async (req, res) => {
     );
 
     return res.status(200).json({
-      message: `Admin ${id} updated`,
+      message: 'Admin updated',
       data: result,
       error: false,
     });
