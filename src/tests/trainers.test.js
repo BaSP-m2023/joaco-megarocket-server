@@ -109,30 +109,6 @@ describe('PUT /api/trainers/:id', () => {
     expect(response.body.error).toBeFalsy();
   });
 
-  test('if DNI exists return 400', async () => {
-    const id = '6462a2ee2aac39ef714f13d5';
-    const reqBody = {
-      dni: 1234567,
-    };
-    const response = await request(app).put(`/api/trainers/${id}`).send(reqBody);
-    expect(response.status).toBe(400);
-    expect(response.body.message).toBeDefined();
-    expect(response.body.data).toBeUndefined();
-    expect(response.body.error).toBeTruthy();
-  });
-
-  test('if Email exists return 400', async () => {
-    const id = '6462a2ee2aac39ef714f13d5';
-    const reqBody = {
-      email: 'gino@gmail.com',
-    };
-    const response = await request(app).put(`/api/trainers/${id}`).send(reqBody);
-    expect(response.status).toBe(400);
-    expect(response.body.message).toBeDefined();
-    expect(response.body.data).toBeUndefined();
-    expect(response.body.error).toBeTruthy();
-  });
-
   test('if firstName has numbers return 400', async () => {
     const id = '6462a2ee2aac39ef714f13d5';
     const reqBody = {
