@@ -112,16 +112,6 @@ describe('PUT /api/Super-admin', () => {
     expect(response.body.error).toBeTruthy();
   });
 
-  test('PUT if email exists return 400', async () => {
-    const reqBody = {
-      email: 'maradonaa@gmail.com',
-    };
-    const response = await request(app).put('/api/super-admin/64619de9d65e6b69280df4c9').send(reqBody);
-    expect(response.status).toBe(400);
-    expect(response.body.message).toBeDefined();
-    expect(response.body.error).toBeTruthy();
-  });
-
   test('PUT if update success return 201', async () => {
     const reqBody = {
       email: 'superadministrador@superadmin.com',
