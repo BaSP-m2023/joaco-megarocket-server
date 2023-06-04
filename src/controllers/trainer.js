@@ -10,7 +10,7 @@ const createTrainer = async (req, res) => {
     const found = await Trainer.findOne({ $or: [{ dni }, { email }] });
 
     if (found) {
-      throw Error(`The admin with DNI ${dni} or Email ${email} already exists`);
+      throw Error(`The trainer with DNI ${dni} or Email ${email} already exists`);
     }
 
     const newTrainer = await Trainer.create({
@@ -31,7 +31,7 @@ const createTrainer = async (req, res) => {
       error: false,
     });
   } catch (error) {
-    if (error.message === `The admin with DNI ${dni} or Email ${email} already exists`) {
+    if (error.message === `The Trainer with DNI ${dni} or Email ${email} already exists`) {
       return res.status(400).json({
         message: error.message,
         data: undefined,
