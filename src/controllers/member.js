@@ -127,14 +127,50 @@ const editMember = async (req, res) => {
       });
     }
 
-    const activityProperties = Object.keys(actualMember.toObject()).slice(1, -1);
+    const memberProperties = Object.keys(actualMember.toObject()).slice(1, -1);
     let changes = false;
-    activityProperties.forEach((property) => {
+    memberProperties.forEach((property) => {
       if (req.body[property]
     && req.body[property].toString() !== actualMember[property].toString()) {
         changes = true;
       }
     });
+
+    const aMemberAlreadyHasDni = await Member.findOne({
+      $and: [
+        {
+          $or: [{ dni }],
+        },
+        {
+          _id: { $ne: id },
+        },
+      ],
+    });
+    if (aMemberAlreadyHasDni) {
+      return res.status(400).json({
+        message: 'There is another member with that dni.',
+        data: req.body,
+        error: true,
+      });
+    }
+
+    const aMemberAlreadyHasEmail = await Member.findOne({
+      $and: [
+        {
+          $or: [{ email }],
+        },
+        {
+          _id: { $ne: id },
+        },
+      ],
+    });
+    if (aMemberAlreadyHasEmail) {
+      return res.status(400).json({
+        message: 'There is another member with that email.',
+        data: req.body,
+        error: true,
+      });
+    }
 
     if (!changes) {
       return res.status(200).json({

@@ -212,7 +212,23 @@ const updateClass = async (req, res) => {
         });
       }
     }
-
+    const classExists = await Class.findOne({
+      $and: [
+        {
+          $and: [{ day }, { hour }],
+        },
+        {
+          _id: { $ne: id },
+        },
+      ],
+    });
+    if (classExists) {
+      return res.status(400).json({
+        message: `Class of day ${day} and hour ${hour} already exists`,
+        data: req.body,
+        error: true,
+      });
+    }
     const updatedClass = {
       ...result.toObject(),
       ...req.body,
