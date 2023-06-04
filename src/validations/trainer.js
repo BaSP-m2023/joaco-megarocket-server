@@ -4,10 +4,16 @@ const RGXPass = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$/;
 
 const validateCreation = (req, res, next) => {
   const trainerValidation = Joi.object({
-    firstName: Joi.string().min(3).max(11).regex(/^[a-zA-Z\s.,]+$/)
-      .required(),
-    lastName: Joi.string().min(3).max(30).regex(/^[a-zA-Z\s.,]+$/)
-      .required(),
+    firstName: Joi.string().min(3).max(11).regex(/^[a-zA-Z]+(?: [a-zA-Z]+)*$/)
+      .required()
+      .messages({
+        'string.pattern.base': 'Name must contain only letters',
+      }),
+    lastName: Joi.string().min(3).max(30).regex(/^[a-zA-Z]+(?: [a-zA-Z]+)*$/)
+      .required()
+      .messages({
+        'string.pattern.base': 'Last name must contain only letters',
+      }),
     dni: Joi.number().min(1000000).max(99999999).required(),
     phone: Joi.number().min(1000000000).max(9999999999).required(),
     email: Joi.string().email().required(),
@@ -19,7 +25,7 @@ const validateCreation = (req, res, next) => {
       .messages({
         'string.pattern.base': 'Password must contain at least one uppercase letter, one lowercase letter, and one digit',
       }),
-    salary: Joi.number().required(),
+    salary: Joi.number().min(1).required(),
     isActive: Joi.boolean(),
   });
 
@@ -34,8 +40,14 @@ const validateCreation = (req, res, next) => {
 
 const validateUpdate = (req, res, next) => {
   const trainerValidation = Joi.object({
-    firstName: Joi.string().min(3).max(11).regex(/^[a-zA-Z\s.,]+$/),
-    lastName: Joi.string().min(3).max(30).regex(/^[a-zA-Z\s.,]+$/),
+    firstName: Joi.string().min(3).max(11).regex(/^[a-zA-Z]+(?: [a-zA-Z]+)*$/)
+      .messages({
+        'string.pattern.base': 'Name must contain only letters',
+      }),
+    lastName: Joi.string().min(3).max(30).regex(/^[a-zA-Z]+(?: [a-zA-Z]+)*$/)
+      .messages({
+        'string.pattern.base': 'Last name must contain only letters',
+      }),
     dni: Joi.number().min(1000000).max(99999999),
     phone: Joi.number().min(1000000000).max(9999999999),
     email: Joi.string().email(),
@@ -46,7 +58,7 @@ const validateUpdate = (req, res, next) => {
       .messages({
         'string.pattern.base': 'Password must contain at least one uppercase letter, one lowercase letter, and one digit',
       }),
-    salary: Joi.number(),
+    salary: Joi.number().min(1),
     isActive: Joi.boolean(),
   });
 
