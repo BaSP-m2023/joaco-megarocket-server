@@ -26,7 +26,7 @@ const createTrainer = async (req, res) => {
     });
 
     return res.status(201).json({
-      message: 'Trainer created successfuly',
+      message: 'Trainer created successfuly.',
       data: newTrainer,
       error: false,
     });
