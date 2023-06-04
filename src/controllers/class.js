@@ -213,27 +213,11 @@ const updateClass = async (req, res) => {
       }
     }
 
-    const updateResult = await Class.updateOne({
-      day,
-      hour,
-      trainer,
-      activity,
-      slots,
-    });
-
-    await Class.populate(updateResult, { path: 'activity trainer' });
-
     const updatedClass = {
       ...result.toObject(),
       ...req.body,
     };
-    if (JSON.stringify(result) === JSON.stringify(updatedClass)) {
-      return res.status(200).json({
-        message: 'No changes were made to the class',
-        data: updatedClass,
-        error: false,
-      });
-    }
+
     const modifiedClass = await Class.findByIdAndUpdate(id, {
       day,
       hour,
@@ -247,6 +231,15 @@ const updateClass = async (req, res) => {
       name: 1,
       description: 1,
     });
+
+    if (JSON.stringify(result) === JSON.stringify(updatedClass)) {
+      return res.status(200).json({
+        message: 'No changes were made to the class',
+        data: modifiedClass,
+        error: false,
+      });
+    }
+
     return res.status(200).json({
       message: 'Class updated',
       data: modifiedClass,
