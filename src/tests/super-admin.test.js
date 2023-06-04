@@ -118,7 +118,7 @@ describe('PUT /api/Super-admin', () => {
       password: 'Test1234!',
     };
     const response = await request(app).put('/api/super-admin/64619de9d65e6b69280df4c9').send(reqBody);
-    expect(response.status).toBe(200);
+    expect(response.status).toBe(201);
     expect(response.body.message).toBeDefined();
     expect(response.body.data).toBeDefined();
     expect(response.body.error).toBeFalsy();

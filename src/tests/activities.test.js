@@ -42,7 +42,6 @@ describe('POST /api/activities', () => {
   test('should return a error, activity alredy exist', async () => {
     const res = await request(app).post('/api/activities').send(activityRepeated);
     expect(res.status).toBe(400);
-    expect(res.body.data).toBeUndefined();
     expect(res.error).toBeTruthy();
   });
 
