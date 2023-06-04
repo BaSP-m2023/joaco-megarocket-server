@@ -112,6 +112,9 @@ const createClass = async (req, res) => {
       activity,
       slots,
     });
+
+    await Class.populate(result, { path: 'activity trainer' });
+
     return res.status(201).json({
       message: 'Class created',
       data: result,
@@ -210,14 +213,15 @@ const updateClass = async (req, res) => {
       }
     }
 
-    const classExists = await Class.findOne({ day, hour });
-    if (classExists) {
-      return res.status(400).json({
-        message: `Class of day ${day} and hour ${hour} already exists`,
-        data: undefined,
-        error: true,
-      });
-    }
+    const updateResult = await Class.updateOne({
+      day,
+      hour,
+      trainer,
+      activity,
+      slots,
+    });
+
+    await Class.populate(updateResult, { path: 'activity trainer' });
 
     const updatedClass = {
       ...result.toObject(),
