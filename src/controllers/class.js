@@ -247,6 +247,7 @@ const updateClass = async (req, res) => {
       name: 1,
       description: 1,
     });
+
     if (JSON.stringify(result) === JSON.stringify(updatedClass)) {
       return res.status(200).json({
         message: 'No changes were made to the class',
@@ -254,6 +255,7 @@ const updateClass = async (req, res) => {
         error: false,
       });
     }
+
     return res.status(200).json({
       message: 'Class updated',
       data: modifiedClass,
