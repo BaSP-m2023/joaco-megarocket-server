@@ -10,7 +10,7 @@ const createTrainer = async (req, res) => {
     const found = await Trainer.findOne({ $or: [{ dni }, { email }] });
 
     if (found) {
-      throw Error(`The admin with DNI ${dni} or Email ${email} already exists`);
+      throw Error(`The trainer with DNI ${dni} or Email ${email} already exists`);
     }
 
     const newTrainer = await Trainer.create({
@@ -31,7 +31,7 @@ const createTrainer = async (req, res) => {
       error: false,
     });
   } catch (error) {
-    if (error.message === `The admin with DNI ${dni} or Email ${email} already exists`) {
+    if (error.message === `The Trainer with DNI ${dni} or Email ${email} already exists`) {
       return res.status(400).json({
         message: error.message,
         data: undefined,
@@ -77,11 +77,10 @@ const updateTrainer = async (req, res) => {
     let changes = false;
     trainerProperties.forEach((property) => {
       if (req.body[property]
-      && req.body[property].toString().toLowerCase() !== actualTrainer[property].toString()) {
+      && req.body[property].toString() !== actualTrainer[property].toString()) {
         changes = true;
       }
     });
-
     if (!changes) {
       return res.status(200).json({
         message: 'There were no changes',
@@ -90,6 +89,41 @@ const updateTrainer = async (req, res) => {
       });
     }
 
+    const aTrainerAlreadyHasDni = await Trainer.findOne({
+      $and: [
+        {
+          $or: [{ dni }],
+        },
+        {
+          _id: { $ne: id },
+        },
+      ],
+    });
+    if (aTrainerAlreadyHasDni) {
+      return res.status(400).json({
+        message: 'There is another trainer with that dni.',
+        data: req.body,
+        error: true,
+      });
+    }
+
+    const aTrainerAlreadyHasEmail = await Trainer.findOne({
+      $and: [
+        {
+          $or: [{ email }],
+        },
+        {
+          _id: { $ne: id },
+        },
+      ],
+    });
+    if (aTrainerAlreadyHasEmail) {
+      return res.status(400).json({
+        message: 'There is another trainer with that email.',
+        data: req.body,
+        error: true,
+      });
+    }
     const trainerUpdate = await Trainer.findByIdAndUpdate(
       id,
       {
