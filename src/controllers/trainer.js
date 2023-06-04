@@ -31,7 +31,7 @@ const createTrainer = async (req, res) => {
       error: false,
     });
   } catch (error) {
-    if (error.message === `The trainer with DNI ${dni} or Email ${email} already exists`) {
+    if (error.message === `The Trainer with DNI ${dni} or Email ${email} already exists`) {
       return res.status(400).json({
         message: error.message,
         data: undefined,
