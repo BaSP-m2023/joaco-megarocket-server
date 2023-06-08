@@ -72,7 +72,7 @@ const createActivity = async (req, res) => {
     if (activityExists) {
       return res.status(400).json({
         message: `${name} activity already exists`,
-        data: undefined,
+        data: req.body,
         error: true,
       });
     }
@@ -129,22 +129,28 @@ const updateActivity = async (req, res) => {
         changes = true;
       }
     });
-
+    const activityExists = await Activity.findOne({
+      $and: [
+        {
+          $and: [{ name }],
+        },
+        {
+          _id: { $ne: id },
+        },
+      ],
+    });
+    if (activityExists) {
+      return res.status(400).json({
+        message: `Activity ${name} already exists`,
+        data: req.body,
+        error: true,
+      });
+    }
     if (!changes) {
       return res.status(200).json({
         message: 'There were no changes',
         data: actualActivity,
         error: false,
-      });
-    }
-
-    const activityExists = await Activity.findOne({ name });
-
-    if (activityExists) {
-      return res.status(400).json({
-        message: `${name} activity already exists`,
-        data: undefined,
-        error: true,
       });
     }
 

@@ -111,7 +111,7 @@ const deleteSuperAdminsById = async (req, res) => {
 
       if (superAdminDeleted) {
         return res.status(200).json({
-          message: `This super admins with id: ${id} was deleted successfully`,
+          message: 'This super admins was deleted successfully',
           data: undefined,
           error: false,
         });
@@ -132,7 +132,7 @@ const deleteSuperAdminsById = async (req, res) => {
 };
 
 // eslint-disable-next-line consistent-return
-const updateSuperAdmin = (req, res) => {
+const updateSuperAdmin = async (req, res) => {
   const { id } = req.params;
   const { email, password } = req.body;
   if (id.length !== 24) {
@@ -142,29 +142,73 @@ const updateSuperAdmin = (req, res) => {
       error: true,
     });
   }
-  SuperAdmin.findByIdAndUpdate(
-    id,
-    {
-      email,
-      password,
-    },
-    { new: true },
-  )
-    .then((result) => {
-      if (!result) {
-        return res.status(404).json({
-          message: `Super admin with id: ${id} was not found`,
-          error: true,
-        });
+
+  try {
+    const actualSuperAdmin = await SuperAdmin.findById(id);
+
+    if (!actualSuperAdmin) {
+      return res.status(404).json({
+        message: `SuperAdmin with ID: ${id} was not found`,
+        data: undefined,
+        error: true,
+      });
+    }
+
+    const actualSuperAdminProperties = Object.keys(actualSuperAdmin.toObject()).slice(1, -1);
+    let changes = false;
+    actualSuperAdminProperties.forEach((property) => {
+      if (req.body[property]
+    && req.body[property].toString() !== actualSuperAdmin[property].toString()) {
+        changes = true;
       }
+    });
+
+    const aSuperAdminAlreadyHasEmail = await SuperAdmin.findOne({
+      $and: [
+        {
+          $or: [{ email }],
+        },
+        {
+          _id: { $ne: id },
+        },
+      ],
+    });
+    if (aSuperAdminAlreadyHasEmail) {
+      return res.status(400).json({
+        message: 'There is another SuperAdmin with that email.',
+        data: req.body,
+        error: true,
+      });
+    }
+
+    if (!changes) {
       return res.status(200).json({
-        message: `Super admin with id: ${id} was succesfully updated`,
-        data: result,
+        message: 'There were no changes',
+        data: actualSuperAdmin,
         error: false,
       });
-    })
-    .catch((error) => res.status(500).json(error));
-  return false;
+    }
+    const response = await SuperAdmin.findByIdAndUpdate(
+      id,
+      {
+        email,
+        password,
+      },
+      { new: true },
+    );
+
+    return res.status(201).json({
+      message: 'SuperAdmin was edited succesfully!',
+      data: response,
+      error: false,
+    });
+  } catch (error) {
+    return res.status(400).json({
+      message: error.message,
+      data: undefined,
+      error: true,
+    });
+  }
 };
 
 module.exports = {

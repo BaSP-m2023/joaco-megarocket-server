@@ -55,21 +55,60 @@ const updateAdmin = async (req, res) => {
         error: true,
       });
     }
-    const adminProperties = Object.keys(actualAdmin.toObject()).slice(1, -1);
+    const adminProps = Object.keys(actualAdmin.toObject()).slice(1, -3);
     let changes = false;
-    adminProperties.forEach((property) => {
-      if (req.body[property]
-      && req.body[property].toString() !== actualAdmin[property].toString()) {
+    adminProps.forEach((prop) => {
+      if (req.body[prop] && req.body[prop] !== actualAdmin[prop]) {
         changes = true;
       }
     });
+
     if (!changes) {
       return res.status(200).json({
         message: 'There were no changes',
-        data: undefined,
+        data: actualAdmin,
+        error: false,
+      });
+    }
+
+    const anAdminAlreadyHasDni = await Admin.findOne({
+      $and: [
+        {
+          $or: [{ dni }],
+        },
+        {
+          _id: { $ne: id },
+        },
+      ],
+    });
+
+    if (anAdminAlreadyHasDni) {
+      return res.status(400).json({
+        message: 'There is another admin with that DNI.',
+        data: req.body,
         error: true,
       });
     }
+
+    const anAdminAlreadyHasEmail = await Admin.findOne({
+      $and: [
+        {
+          $or: [{ email }],
+        },
+        {
+          _id: { $ne: id },
+        },
+      ],
+    });
+
+    if (anAdminAlreadyHasEmail) {
+      return res.status(400).json({
+        message: 'There is another admin with that email.',
+        data: req.body,
+        error: true,
+      });
+    }
+
     const result = await Admin.findByIdAndUpdate(
       id,
       {

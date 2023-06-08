@@ -112,6 +112,9 @@ const createClass = async (req, res) => {
       activity,
       slots,
     });
+
+    await Class.populate(result, { path: 'activity trainer' });
+
     return res.status(201).json({
       message: 'Class created',
       data: result,
@@ -209,27 +212,28 @@ const updateClass = async (req, res) => {
         });
       }
     }
-
-    const classExists = await Class.findOne({ day, hour });
+    const classExists = await Class.findOne({
+      $and: [
+        {
+          $and: [{ day }, { hour }],
+        },
+        {
+          _id: { $ne: id },
+        },
+      ],
+    });
     if (classExists) {
       return res.status(400).json({
         message: `Class of day ${day} and hour ${hour} already exists`,
-        data: undefined,
+        data: req.body,
         error: true,
       });
     }
-
     const updatedClass = {
       ...result.toObject(),
       ...req.body,
     };
-    if (JSON.stringify(result) === JSON.stringify(updatedClass)) {
-      return res.status(200).json({
-        message: 'No changes were made to the class',
-        data: updatedClass,
-        error: false,
-      });
-    }
+
     const modifiedClass = await Class.findByIdAndUpdate(id, {
       day,
       hour,
@@ -243,6 +247,15 @@ const updateClass = async (req, res) => {
       name: 1,
       description: 1,
     });
+
+    if (JSON.stringify(result) === JSON.stringify(updatedClass)) {
+      return res.status(200).json({
+        message: 'No changes were made to the class',
+        data: modifiedClass,
+        error: false,
+      });
+    }
+
     return res.status(200).json({
       message: 'Class updated',
       data: modifiedClass,

@@ -77,14 +77,12 @@ describe('PUT /api/admins/:id', () => {
       dni: 98765413,
     };
     const response = await request(app).put(`/api/admins/${mockID}`).send(updatedAdmin);
-    expect(response.body.data).toBeUndefined();
     expect(response.status).toBe(200);
     expect(response.error).toBeFalsy();
   });
   test('should return no changes with data undefined and status 200', async () => {
     const mockID = '74663d50bb2d87b9f6510627';
     const response = await request(app).put(`/api/admins/${mockID}`).send();
-    expect(response.body.data).toBeUndefined();
     expect(response.status).toBe(200);
     expect(response.error).toBeFalsy();
   });
