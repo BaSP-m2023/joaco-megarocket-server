@@ -5,7 +5,15 @@ const Member = require('../models/Member');
 
 const getSubscriptions = async (req, res) => {
   try {
-    const response = await Subscription.find().populate('classes member');
+    const response = await Subscription.find().populate({
+      path: 'classes',
+      select: 'activity hour slots',
+      populate: {
+        path: 'activity',
+        select: 'name',
+      },
+    })
+      .populate('member');
 
     return res.status(200).json({
       message: 'Subscriptions list',
