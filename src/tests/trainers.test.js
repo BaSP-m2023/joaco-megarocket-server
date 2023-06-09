@@ -86,24 +86,24 @@ describe('PUT /api/trainers/:id', () => {
     expect(response.body.error).toBeTruthy();
   });
 
-  test('if body is empty return 200 no changes', async () => {
+  test('if body is empty return 400 no changes', async () => {
     const id = '646642acfac4c6a035b35000';
     const reqBody = {};
     const response = await request(app).put(`/api/trainers/${id}`).send(reqBody);
-    expect(response.status).toBe(200);
+    expect(response.status).toBe(400);
     expect(response.body.message).toBeDefined();
     expect(response.body.data).toBeDefined();
     expect(response.body.error).toBeFalsy();
   });
 
-  test('if body matches with actual trainer return 200 no changes', async () => {
+  test('if body matches with actual trainer return 400 no changes', async () => {
     const id = '6462a2ee2aac39ef714f13d5';
     const reqBody = {
       firstName: 'Delfi',
       isActive: true,
     };
     const response = await request(app).put(`/api/trainers/${id}`).send(reqBody);
-    expect(response.status).toBe(200);
+    expect(response.status).toBe(400);
     expect(response.body.message).toBeDefined();
     expect(response.body.data).toBeDefined();
     expect(response.body.error).toBeFalsy();

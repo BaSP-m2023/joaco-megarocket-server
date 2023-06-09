@@ -70,9 +70,9 @@ describe('PUT /api/activities/:id', () => {
 
   test('should return a error, update a activity already exist', async () => {
     const res = await request(app).put('/api/activities/6467cd965eada13a19071ab9').send(activityRepeated);
-    expect(res.status).toBe(200);
+    expect(res.status).toBe(400);
     expect(res.body.message).toBeDefined();
-    expect(res.error).toBeFalsy();
+    expect(res.error).toBeTruthy();
   });
 
   test('should return a error', async () => {
