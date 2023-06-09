@@ -121,13 +121,13 @@ describe('PUT /api/members/:id', () => {
     expect(response.body.error).toBeTruthy();
   });
 
-  test('If there were no changes return 200', async () => {
+  test('If there were no changes return 400', async () => {
     const id = '6462d0074441252c694332dd';
     const changes = { firstName: 'Elon' };
     const response = await request(app).put(`/api/members/${id}`).send(changes);
-    expect(response.status).toBe(200);
+    expect(response.status).toBe(400);
     expect(response.body.data).toBeDefined();
-    expect(response.body.error).toBeFalsy();
+    expect(response.body.error).toBeTruthy();
   });
 });
 
