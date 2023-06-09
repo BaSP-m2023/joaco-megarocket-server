@@ -264,7 +264,7 @@ describe('PUT /api/classes', () => {
     const response = await request(app).put('/api/classes/74663d50bb2d87b9f6510624').send(notChanged);
     expect(response.status).toBe(400);
     expect(response.body.data).toBeDefined();
-    expect(response.body.error).toBeFalsy();
+    expect(response.body.error).toBeTruthy();
   });
 
   test('If the endpoint is wrong, return 400', async () => {

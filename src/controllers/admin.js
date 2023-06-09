@@ -67,7 +67,7 @@ const updateAdmin = async (req, res) => {
       return res.status(400).json({
         message: 'There were no changes',
         data: actualAdmin,
-        error: false,
+        error: true,
       });
     }
 

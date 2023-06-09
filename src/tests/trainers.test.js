@@ -93,7 +93,7 @@ describe('PUT /api/trainers/:id', () => {
     expect(response.status).toBe(400);
     expect(response.body.message).toBeDefined();
     expect(response.body.data).toBeDefined();
-    expect(response.body.error).toBeFalsy();
+    expect(response.body.error).toBeTruthy();
   });
 
   test('if body matches with actual trainer return 400 no changes', async () => {
@@ -106,7 +106,7 @@ describe('PUT /api/trainers/:id', () => {
     expect(response.status).toBe(400);
     expect(response.body.message).toBeDefined();
     expect(response.body.data).toBeDefined();
-    expect(response.body.error).toBeFalsy();
+    expect(response.body.error).toBeTruthy();
   });
 
   test('if firstName has numbers return 400', async () => {

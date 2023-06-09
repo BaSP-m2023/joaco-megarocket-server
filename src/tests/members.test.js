@@ -127,7 +127,7 @@ describe('PUT /api/members/:id', () => {
     const response = await request(app).put(`/api/members/${id}`).send(changes);
     expect(response.status).toBe(400);
     expect(response.body.data).toBeDefined();
-    expect(response.body.error).toBeFalsy();
+    expect(response.body.error).toBeTruthy();
   });
 });
 

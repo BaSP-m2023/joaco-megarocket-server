@@ -150,7 +150,7 @@ const updateActivity = async (req, res) => {
       return res.status(400).json({
         message: 'There were no changes',
         data: actualActivity,
-        error: false,
+        error: true,
       });
     }
 

@@ -85,7 +85,7 @@ const updateTrainer = async (req, res) => {
       return res.status(400).json({
         message: 'There were no changes',
         data: actualTrainer,
-        error: false,
+        error: true,
       });
     }
 

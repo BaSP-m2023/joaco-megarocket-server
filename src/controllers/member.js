@@ -176,7 +176,7 @@ const editMember = async (req, res) => {
       return res.status(400).json({
         message: 'There were no changes',
         data: actualMember,
-        error: false,
+        error: true,
       });
     }
     const response = await Member.findByIdAndUpdate(
