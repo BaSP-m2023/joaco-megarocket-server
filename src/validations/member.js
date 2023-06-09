@@ -1,7 +1,5 @@
 const joi = require('joi');
 
-const dateRegex = /^(0?[1-9]|[12][0-9]|3[01])[/-](0?[1-9]|1[012])[/-]\d{4,}$/;
-
 const validateCreation = (req, res, next) => {
   const memberValidation = joi.object({
     firstName: joi.string().min(3).max(11).pattern(/^[a-zA-Z-]+$/)
@@ -18,7 +16,7 @@ const validateCreation = (req, res, next) => {
       .messages({ 'number.min': 'Phone number must have 10 digits', 'number.max': 'Phone number must have 10 digits' }),
     email: joi.string().email().required(),
     city: joi.string().min(3).required(),
-    birthday: joi.string().regex(dateRegex).required(),
+    birthday: joi.date().required(),
     postalCode: joi.number().min(1000).max(99999).required(),
     isActive: joi.boolean(),
     membership: joi.string().required(),
@@ -49,7 +47,7 @@ const validateUpdate = (req, res, next) => {
       .messages({ 'number.min': 'Phone number must have 10 digits', 'number.max': 'Phone number must have 10 digits' }),
     email: joi.string().email(),
     city: joi.string().min(3),
-    birthday: joi.string().regex(dateRegex),
+    birthday: joi.date().optional(),
     postalCode: joi.number().min(1000).max(99999),
     isActive: joi.boolean(),
     membership: joi.string(),
