@@ -122,7 +122,7 @@ const createSubscription = async (req, res) => {
 
     return res.status(201).json({
       error: false,
-      message: 'Subscription created successfully',
+      message: 'Subscription was created successfully!',
       data: newSubscription,
     });
   } catch (error) {
@@ -188,7 +188,7 @@ const updateSubscription = async (req, res) => {
 
     return res.status(200).json({
       error: false,
-      message: 'Subscription updated successfully',
+      message: 'Subscription updated successfully!',
       data: updatedSubscription,
     });
   } catch (error) {
@@ -224,7 +224,7 @@ const deleteSubscription = async (req, res) => {
 
     return res.status(200).json({
       error: false,
-      message: 'subscription deleted succesfully',
+      message: 'Subscription deleted successfully',
       data: subscription,
     });
   } catch (error) {

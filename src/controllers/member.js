@@ -81,14 +81,14 @@ const createMember = async (req, res) => {
       membership,
     });
     return res.status(201).json({
-      message: `Member ${createdMember.id} was created successfully!`,
+      message: 'Member was created successfully!',
       data: createdMember,
       error: false,
     });
   } catch (error) {
     if (error.message === 'This member already exist') {
       return res.status(400).json({
-        message: 'Failed to create an Member, member already exist',
+        message: 'This Member already exist',
         data: undefined,
         error: true,
       });
@@ -196,8 +196,8 @@ const editMember = async (req, res) => {
       { new: true },
     );
 
-    return res.status(201).json({
-      message: 'Member was edited succesfully!',
+    return res.status(200).json({
+      message: 'Member edited successfully!',
       data: response,
       error: false,
     });
@@ -226,7 +226,7 @@ const deleteMember = async (req, res) => {
       throw Error('Member not found');
     }
     return res.status(200).json({
-      message: 'Member was deleted succesfully!',
+      message: 'Member deleted successfully',
       data: memberDeleted,
       error: false,
     });
