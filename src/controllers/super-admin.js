@@ -74,7 +74,7 @@ const createSuperAdmin = async (req, res) => {
 
       if (superAdminCreate) {
         return res.status(201).json({
-          message: 'Succesfully created',
+          message: 'SuperAdmin was created successfully!',
           data: superAdminCreate,
           error: false,
         });
@@ -111,7 +111,7 @@ const deleteSuperAdminsById = async (req, res) => {
 
       if (superAdminDeleted) {
         return res.status(200).json({
-          message: 'This super admins was deleted successfully',
+          message: 'SuperAdmin deleted successfully',
           data: undefined,
           error: false,
         });
@@ -197,8 +197,8 @@ const updateSuperAdmin = async (req, res) => {
       { new: true },
     );
 
-    return res.status(201).json({
-      message: 'SuperAdmin was edited succesfully!',
+    return res.status(200).json({
+      message: 'SuperAdmin edited successfully!',
       data: response,
       error: false,
     });

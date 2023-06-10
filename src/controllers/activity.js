@@ -84,7 +84,7 @@ const createActivity = async (req, res) => {
     });
 
     return res.status(201).json({
-      message: 'Activity created successfuly',
+      message: 'Activity created successfully!',
       data: newActivity,
       error: false,
     });
@@ -141,7 +141,7 @@ const updateActivity = async (req, res) => {
     });
     if (activityExists) {
       return res.status(400).json({
-        message: `Activity ${name} already exists`,
+        message: `${name} activity already exists`,
         data: req.body,
         error: true,
       });
@@ -165,7 +165,7 @@ const updateActivity = async (req, res) => {
     );
 
     return res.status(200).json({
-      message: 'Activity updated successfuly!',
+      message: 'Activity updated successfully!',
       data: activityUpdated,
       error: false,
     });
@@ -201,7 +201,7 @@ const deleteActivity = async (req, res) => {
     }
 
     return res.status(200).json({
-      message: 'Activity deleted successfuly!',
+      message: 'Activity deleted successfully',
       data: activityDeleted,
       error: false,
     });

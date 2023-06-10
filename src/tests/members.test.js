@@ -95,7 +95,7 @@ describe('PUT /api/members/:id', () => {
     expect(response.body.error).toBeTruthy();
   });
 
-  test('If update success return 201', async () => {
+  test('If update success return 200', async () => {
     const id = '64625f36956fb774c56da13e';
     const reqBody = {
       firstName: 'Jorge',
@@ -103,7 +103,7 @@ describe('PUT /api/members/:id', () => {
       city: 'Rosario',
     };
     const response = await request(app).put(`/api/members/${id}`).send(reqBody);
-    expect(response.status).toBe(201);
+    expect(response.status).toBe(200);
     expect(response.body.message).toBeDefined();
     expect(response.body.data).toBeDefined();
     expect(response.body.error).toBeFalsy();
