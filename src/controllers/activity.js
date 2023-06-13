@@ -5,14 +5,6 @@ const getAllActivities = async (req, res) => {
   try {
     const activitiesFound = await Activity.find();
 
-    if (activitiesFound.length === 0) {
-      return res.status(404).json({
-        message: 'There are no activities',
-        data: activitiesFound,
-        error: true,
-      });
-    }
-
     return res.status(200).json({
       message: 'Activities List',
       data: activitiesFound,

@@ -161,11 +161,4 @@ describe('GET api/activities', () => {
     expect(res.body.data).toBeUndefined();
     expect(res.error).toBeTruthy();
   });
-
-  test('Should return status 404, there are no activities yet', async () => {
-    await activity.deleteMany({});
-    const res = await request(app).get('/api/activities').send();
-    expect(res.status).toBe(404);
-    expect(res.error).toBeTruthy();
-  });
 });
