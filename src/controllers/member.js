@@ -4,13 +4,7 @@ const Member = require('../models/Member');
 const getAllMembers = async (req, res) => {
   try {
     const response = await Member.find();
-    if (!response) {
-      return res.status(404).json({
-        message: 'Members are empty',
-        data: undefined,
-        error: true,
-      });
-    }
+
     return res.status(200).json({
       message: 'Complete list of members',
       data: response,

@@ -20,12 +20,12 @@ const insertData = (async () => {
 });
 
 describe('GET /api/trainers', () => {
-  test('if trainers data is empty should return 404', async () => {
+  test('if trainers data is empty should return 200', async () => {
     const response = await request(app).get('/api/trainers').send();
-    expect(response.status).toBe(404);
+    expect(response.status).toBe(200);
     expect(response.body.message).toBeDefined();
     expect(response.body.data).toStrictEqual([]);
-    expect(response.body.error).toBeTruthy();
+    expect(response.body.error).toBeFalsy();
   });
 
   test('if trainers data isnt empty should return 200 and its array', async () => {

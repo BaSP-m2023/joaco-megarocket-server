@@ -196,14 +196,6 @@ const getAllTrainer = async (req, res) => {
   try {
     const trainers = await Trainer.find();
 
-    if (trainers.length === 0) {
-      return res.status(404).json({
-        message: 'There are no activities',
-        data: trainers,
-        error: true,
-      });
-    }
-
     if (!trainers) {
       return res.status(404).json({
         message: 'Trainers not found',

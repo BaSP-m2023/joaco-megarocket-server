@@ -114,7 +114,7 @@ const newAdmin = {
   phone: 3415576635,
   email: 'admin@gmail.es',
   city: 'Rosario',
-  password: 'holacomo1234',
+  password: 'Holacomo1234.',
 };
 const newBadAdmin = {
   firstName: 'B',

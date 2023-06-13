@@ -12,13 +12,6 @@ const getAllClasses = async (req, res) => {
       name: 1,
       description: 1,
     });
-    if (classes.length === 0) {
-      return res.status(404).json({
-        message: 'There is no data',
-        data: classes,
-        error: true,
-      });
-    }
     return res.status(200).json({
       message: 'Classes list completed',
       data: classes,
