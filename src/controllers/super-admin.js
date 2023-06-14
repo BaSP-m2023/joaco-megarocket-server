@@ -5,8 +5,15 @@ const getAllSuperAdmins = async (req, res) => {
   try {
     const superAdmins = await SuperAdmin.find();
 
+    if (superAdmins.length > 0) {
+      return res.status(200).json({
+        message: 'Successfully',
+        data: superAdmins,
+        error: false,
+      });
+    }
     return res.status(200).json({
-      message: 'Successfully',
+      message: 'There are no super admins yet',
       data: superAdmins,
       error: false,
     });
