@@ -12,10 +12,10 @@ const getAllSuperAdmins = async (req, res) => {
         error: false,
       });
     }
-    return res.status(404).json({
+    return res.status(200).json({
       message: 'There are no super admins yet',
-      data: undefined,
-      error: true,
+      data: superAdmins,
+      error: false,
     });
   } catch (error) {
     return res.status(500).json({
