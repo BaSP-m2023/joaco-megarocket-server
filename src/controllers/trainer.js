@@ -11,14 +11,14 @@ const createTrainer = async (req, res) => {
     const emailExists = await Trainer.findOne({ email });
     if (dniExists) {
       return res.status(400).json({
-        message: 'A Trainer with that DNI already exists',
+        message: 'A Trainer with that DNI already exists!',
         data: undefined,
         error: true,
       });
     }
     if (emailExists) {
       return res.status(400).json({
-        message: 'A Trainer with that Email already exists',
+        message: 'A Trainer with that Email already exists!',
         data: undefined,
         error: true,
       });
@@ -143,13 +143,13 @@ const updateTrainer = async (req, res) => {
       { new: true },
     );
     return res.status(200).json({
-      message: 'Trainer updated succesfully',
+      message: 'Trainer was updated succesfully!',
       data: trainerUpdate,
       error: false,
     });
   } catch (error) {
     return res.status(500).json({
-      message: `An error ocurred: ${error}`,
+      message: `An error ocurred: ${error}!`,
       data: undefined,
       error: true,
     });
@@ -185,7 +185,7 @@ const deleteTrainer = async (req, res) => {
     });
   } catch (error) {
     return res.status(500).json({
-      message: 'An error occurred',
+      message: 'An error occurred!',
       data: undefined,
       error: true,
     });

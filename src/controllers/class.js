@@ -149,7 +149,7 @@ const deleteClass = async (req, res) => {
       });
     }
     return res.status(200).json({
-      message: 'Class deleted successfully',
+      message: 'Class successfully deleted!',
       data: classFound,
       error: false,
     });
@@ -250,7 +250,7 @@ const updateClass = async (req, res) => {
     }
 
     return res.status(200).json({
-      message: 'Class edited successfully!',
+      message: 'Class was updated successfully!',
       data: modifiedClass,
       error: false,
     });

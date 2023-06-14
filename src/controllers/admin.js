@@ -174,7 +174,7 @@ const updateAdmin = async (req, res) => {
     );
 
     return res.status(200).json({
-      message: 'Admin edited successfully!',
+      message: 'Admin was updated successfully!',
       data: result,
       error: false,
     });
@@ -207,7 +207,7 @@ const deleteAdmin = async (req, res) => {
       });
     }
     return res.status(200).json({
-      message: 'Admin deleted successfully',
+      message: 'Admin successfully deleted!',
       data: admin,
       error: false,
     });

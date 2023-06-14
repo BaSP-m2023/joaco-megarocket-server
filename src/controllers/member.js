@@ -191,7 +191,7 @@ const editMember = async (req, res) => {
     );
 
     return res.status(200).json({
-      message: 'Member edited successfully!',
+      message: 'Member was updated successfully!',
       data: response,
       error: false,
     });
@@ -220,7 +220,7 @@ const deleteMember = async (req, res) => {
       throw Error('Member not found');
     }
     return res.status(200).json({
-      message: 'Member deleted successfully',
+      message: 'Member successfully deleted!',
       data: memberDeleted,
       error: false,
     });
