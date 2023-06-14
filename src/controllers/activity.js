@@ -76,7 +76,7 @@ const createActivity = async (req, res) => {
     });
 
     return res.status(201).json({
-      message: 'Activity created successfully!',
+      message: 'Activity was created successfully!',
       data: newActivity,
       error: false,
     });
@@ -157,7 +157,7 @@ const updateActivity = async (req, res) => {
     );
 
     return res.status(200).json({
-      message: 'Activity updated successfully!',
+      message: 'Activity was updated successfully!',
       data: activityUpdated,
       error: false,
     });
@@ -193,7 +193,7 @@ const deleteActivity = async (req, res) => {
     }
 
     return res.status(200).json({
-      message: 'Activity deleted successfully',
+      message: 'Activity successfully deleted!',
       data: activityDeleted,
       error: false,
     });
