@@ -12,13 +12,6 @@ const getAllClasses = async (req, res) => {
       name: 1,
       description: 1,
     });
-    if (classes.length === 0) {
-      return res.status(404).json({
-        message: 'There is no data',
-        data: classes,
-        error: true,
-      });
-    }
     return res.status(200).json({
       message: 'Classes list completed',
       data: classes,
@@ -116,7 +109,7 @@ const createClass = async (req, res) => {
     await Class.populate(result, { path: 'activity trainer' });
 
     return res.status(201).json({
-      message: 'Class created',
+      message: 'Class was created successfully!',
       data: result,
       error: false,
     });
@@ -150,13 +143,13 @@ const deleteClass = async (req, res) => {
     });
     if (!classFound) {
       return res.status(404).json({
-        message: `Class with ID ${id} was not found`,
+        message: 'Class was not found',
         data: undefined,
         error: true,
       });
     }
     return res.status(200).json({
-      message: 'Class deleted succesfully',
+      message: 'Class successfully deleted!',
       data: classFound,
       error: false,
     });
@@ -188,7 +181,7 @@ const updateClass = async (req, res) => {
 
     if (!result) {
       return res.status(404).json({
-        message: `Class with ID ${id} was not found`,
+        message: 'Class was not found',
         data: undefined,
         error: true,
       });
@@ -257,7 +250,7 @@ const updateClass = async (req, res) => {
     }
 
     return res.status(200).json({
-      message: 'Class updated',
+      message: 'Class was updated successfully!',
       data: modifiedClass,
       error: false,
     });

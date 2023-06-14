@@ -1,6 +1,55 @@
 const mongoose = require('mongoose');
 const Admin = require('../models/Admin');
 
+const getAllAdmins = async (req, res) => {
+  try {
+    const admins = await Admin.find();
+    return res.status(200).json({
+      message: 'Complete admin list',
+      data: admins,
+      error: false,
+    });
+  } catch (error) {
+    return res.status(400).json({
+      message: error.message,
+      data: undefined,
+      error: true,
+    });
+  }
+};
+
+const getAdminById = async (req, res) => {
+  const { id } = req.params;
+  if (!mongoose.isValidObjectId(id)) {
+    return res.status(400).json({
+      message: 'Id is not a valid one',
+      data: undefined,
+      error: true,
+    });
+  }
+  try {
+    const admin = await Admin.findById(id);
+    if (admin) {
+      return res.status(200).json({
+        message: `Admin user found: ${admin.firstName} ${admin.lastName}`,
+        data: admin,
+        error: false,
+      });
+    }
+    return res.status(404).json({
+      message: `Admin with id ${id} was not found`,
+      data: undefined,
+      error: true,
+    });
+  } catch (error) {
+    return res.status(400).json({
+      message: error.message,
+      data: undefined,
+      error: true,
+    });
+  }
+};
+
 const createAdmin = async (req, res) => {
   const {
     firstName, lastName, dni, phone, email, city, password,
@@ -8,9 +57,16 @@ const createAdmin = async (req, res) => {
   try {
     const dniExists = await Admin.findOne({ dni });
     const emailExists = await Admin.findOne({ email });
-    if (dniExists || emailExists) {
+    if (dniExists) {
       return res.status(400).json({
-        message: 'An admin with DNI or Email already exists',
+        message: 'An admin with that DNI already exists',
+        data: undefined,
+        error: true,
+      });
+    }
+    if (emailExists) {
+      return res.status(400).json({
+        message: 'An admin with that Email already exists',
         data: undefined,
         error: true,
       });
@@ -19,7 +75,7 @@ const createAdmin = async (req, res) => {
       firstName, lastName, dni, phone, email, city, password,
     });
     return res.status(201).json({
-      message: 'New admin created',
+      message: 'Admin was created successfully!',
       data: result,
       error: false,
     });
@@ -55,7 +111,7 @@ const updateAdmin = async (req, res) => {
         error: true,
       });
     }
-    const adminProps = Object.keys(actualAdmin.toObject()).slice(1, -3);
+    const adminProps = Object.keys(actualAdmin.toObject()).slice(1, -1);
     let changes = false;
     adminProps.forEach((prop) => {
       if (req.body[prop] && req.body[prop] !== actualAdmin[prop]) {
@@ -118,58 +174,9 @@ const updateAdmin = async (req, res) => {
     );
 
     return res.status(200).json({
-      message: 'Admin updated',
+      message: 'Admin was updated successfully!',
       data: result,
       error: false,
-    });
-  } catch (error) {
-    return res.status(400).json({
-      message: error.message,
-      data: undefined,
-      error: true,
-    });
-  }
-};
-
-const getAllAdmins = async (req, res) => {
-  try {
-    const admins = await Admin.find();
-    return res.status(200).json({
-      message: 'Complete admin list',
-      data: admins,
-      error: false,
-    });
-  } catch (error) {
-    return res.status(400).json({
-      message: error.message,
-      data: undefined,
-      error: true,
-    });
-  }
-};
-
-const getAdminById = async (req, res) => {
-  const { id } = req.params;
-  if (!mongoose.isValidObjectId(id)) {
-    return res.status(400).json({
-      message: 'Id is not a valid one',
-      data: undefined,
-      error: true,
-    });
-  }
-  try {
-    const admin = await Admin.findById(id);
-    if (admin) {
-      return res.status(200).json({
-        message: `Admin user found: ${admin.firstName} ${admin.lastName}`,
-        data: admin,
-        error: false,
-      });
-    }
-    return res.status(404).json({
-      message: `Admin with id ${id} was not found`,
-      data: undefined,
-      error: true,
     });
   } catch (error) {
     return res.status(400).json({

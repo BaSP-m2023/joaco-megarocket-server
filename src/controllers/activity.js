@@ -5,14 +5,6 @@ const getAllActivities = async (req, res) => {
   try {
     const activitiesFound = await Activity.find();
 
-    if (activitiesFound.length === 0) {
-      return res.status(404).json({
-        message: 'There are no activities',
-        data: activitiesFound,
-        error: true,
-      });
-    }
-
     return res.status(200).json({
       message: 'Activities List',
       data: activitiesFound,
@@ -84,7 +76,7 @@ const createActivity = async (req, res) => {
     });
 
     return res.status(201).json({
-      message: 'Activity created successfuly',
+      message: 'Activity was created successfully!',
       data: newActivity,
       error: false,
     });
@@ -141,7 +133,7 @@ const updateActivity = async (req, res) => {
     });
     if (activityExists) {
       return res.status(400).json({
-        message: `Activity ${name} already exists`,
+        message: `${name} activity already exists`,
         data: req.body,
         error: true,
       });
@@ -165,7 +157,7 @@ const updateActivity = async (req, res) => {
     );
 
     return res.status(200).json({
-      message: 'Activity updated successfuly!',
+      message: 'Activity was updated successfully!',
       data: activityUpdated,
       error: false,
     });
@@ -201,7 +193,7 @@ const deleteActivity = async (req, res) => {
     }
 
     return res.status(200).json({
-      message: 'Activity deleted successfuly!',
+      message: 'Activity successfully deleted!',
       data: activityDeleted,
       error: false,
     });

@@ -42,13 +42,13 @@ const getSuperAdminsById = async (req, res) => {
 
       if (!findByIdSuperAdmin) {
         return res.status(404).json({
-          message: `This super admins with id: ${id} not exist`,
+          message: `This super-admins with id: ${id} not exist`,
           data: undefined,
           error: true,
         });
       }
       return res.status(200).json({
-        message: 'Super admin found',
+        message: 'Super-Admin found!',
         data: findByIdSuperAdmin,
         error: false,
       });
@@ -74,7 +74,7 @@ const createSuperAdmin = async (req, res) => {
 
       if (superAdminCreate) {
         return res.status(201).json({
-          message: 'Succesfully created',
+          message: 'Super-Admin was created successfully!',
           data: superAdminCreate,
           error: false,
         });
@@ -111,13 +111,13 @@ const deleteSuperAdminsById = async (req, res) => {
 
       if (superAdminDeleted) {
         return res.status(200).json({
-          message: 'This super admins was deleted successfully',
+          message: 'Super-Admin successfully deleted!',
           data: undefined,
           error: false,
         });
       }
       return res.status(404).json({
-        message: 'Super admin was not found',
+        message: 'Super-Admin was not found!',
         data: undefined,
         error: true,
       });
@@ -137,7 +137,7 @@ const updateSuperAdmin = async (req, res) => {
   const { email, password } = req.body;
   if (id.length !== 24) {
     return res.status(400).json({
-      message: 'Invalid id, try again',
+      message: 'Invalid id, try again!',
       data: undefined,
       error: true,
     });
@@ -148,7 +148,7 @@ const updateSuperAdmin = async (req, res) => {
 
     if (!actualSuperAdmin) {
       return res.status(404).json({
-        message: `SuperAdmin with ID: ${id} was not found`,
+        message: `Super-Admin with ID: ${id} was not found`,
         data: undefined,
         error: true,
       });
@@ -175,7 +175,7 @@ const updateSuperAdmin = async (req, res) => {
     });
     if (aSuperAdminAlreadyHasEmail) {
       return res.status(400).json({
-        message: 'There is another SuperAdmin with that email.',
+        message: 'There is another Super-Admin with that email.',
         data: req.body,
         error: true,
       });
@@ -197,8 +197,8 @@ const updateSuperAdmin = async (req, res) => {
       { new: true },
     );
 
-    return res.status(201).json({
-      message: 'SuperAdmin was edited succesfully!',
+    return res.status(200).json({
+      message: 'Super-Admin was updated successfully!',
       data: response,
       error: false,
     });

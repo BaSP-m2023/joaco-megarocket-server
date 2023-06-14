@@ -122,7 +122,7 @@ const createSubscription = async (req, res) => {
 
     return res.status(201).json({
       error: false,
-      message: 'Subscription created successfully',
+      message: 'Subscription was created successfully!',
       data: newSubscription,
     });
   } catch (error) {
@@ -188,7 +188,7 @@ const updateSubscription = async (req, res) => {
 
     return res.status(200).json({
       error: false,
-      message: 'Subscription updated successfully',
+      message: 'Subscription was updated successfully!',
       data: updatedSubscription,
     });
   } catch (error) {
@@ -206,7 +206,7 @@ const deleteSubscription = async (req, res) => {
   if (!mongoose.isValidObjectId(id)) {
     return res.status(400).json({
       error: true,
-      message: 'ID is not valid',
+      message: 'ID is not valid!',
       data: id,
     });
   }
@@ -217,14 +217,14 @@ const deleteSubscription = async (req, res) => {
     if (!subscription) {
       return res.status(404).json({
         error: true,
-        message: 'Subscription not found',
+        message: 'Subscription not found!',
         data: undefined,
       });
     }
 
     return res.status(200).json({
       error: false,
-      message: 'subscription deleted succesfully',
+      message: 'Subscription successfully deleted!',
       data: subscription,
     });
   } catch (error) {

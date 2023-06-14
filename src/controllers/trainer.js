@@ -7,10 +7,21 @@ const createTrainer = async (req, res) => {
   } = req.body;
 
   try {
-    const found = await Trainer.findOne({ $or: [{ dni }, { email }] });
-
-    if (found) {
-      throw Error(`The trainer with DNI ${dni} or Email ${email} already exists`);
+    const dniExists = await Trainer.findOne({ dni });
+    const emailExists = await Trainer.findOne({ email });
+    if (dniExists) {
+      return res.status(400).json({
+        message: 'A Trainer with that DNI already exists!',
+        data: undefined,
+        error: true,
+      });
+    }
+    if (emailExists) {
+      return res.status(400).json({
+        message: 'A Trainer with that Email already exists!',
+        data: undefined,
+        error: true,
+      });
     }
 
     const newTrainer = await Trainer.create({
@@ -26,20 +37,12 @@ const createTrainer = async (req, res) => {
     });
 
     return res.status(201).json({
-      message: 'Trainer created successfuly.',
+      message: 'Trainer was created successfully!',
       data: newTrainer,
       error: false,
     });
   } catch (error) {
-    if (error.message === `The Trainer with DNI ${dni} or Email ${email} already exists`) {
-      return res.status(400).json({
-        message: error.message,
-        data: undefined,
-        error: true,
-      });
-    }
-
-    return res.status(500).json({
+    return res.status(400).json({
       message: error.message,
       data: undefined,
       error: true,
@@ -140,13 +143,13 @@ const updateTrainer = async (req, res) => {
       { new: true },
     );
     return res.status(200).json({
-      message: 'Trainer updated succesfully',
+      message: 'Trainer was updated succesfully!',
       data: trainerUpdate,
       error: false,
     });
   } catch (error) {
     return res.status(500).json({
-      message: `An error ocurred: ${error}`,
+      message: `An error ocurred: ${error}!`,
       data: undefined,
       error: true,
     });
@@ -182,7 +185,7 @@ const deleteTrainer = async (req, res) => {
     });
   } catch (error) {
     return res.status(500).json({
-      message: 'An error occurred',
+      message: 'An error occurred!',
       data: undefined,
       error: true,
     });
@@ -192,14 +195,6 @@ const deleteTrainer = async (req, res) => {
 const getAllTrainer = async (req, res) => {
   try {
     const trainers = await Trainer.find();
-
-    if (trainers.length === 0) {
-      return res.status(404).json({
-        message: 'There are no activities',
-        data: trainers,
-        error: true,
-      });
-    }
 
     if (!trainers) {
       return res.status(404).json({
