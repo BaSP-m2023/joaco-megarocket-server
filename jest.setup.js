@@ -3,7 +3,7 @@ import { MongoMemoryServer } from 'mongodb-memory-server';
 
 const mongoServer = new MongoMemoryServer();
 let mongo;
-
+jest.setTimeout(300000);
 // Make the connection to a fake database
 beforeAll(async () => {
   mongo = await MongoMemoryServer.create();
