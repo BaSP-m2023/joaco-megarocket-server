@@ -21,7 +21,7 @@ export default [
   {
     _id: new mongoose.Types.ObjectId('74663d50bb2d87b9f6510623'),
     day: 'Monday',
-    hour: '13:30',
+    hour: '13:00',
     trainer: {
       _id: new mongoose.Types.ObjectId('74663d50bb2d87b9f6510627'),
       firstName: 'Ema',

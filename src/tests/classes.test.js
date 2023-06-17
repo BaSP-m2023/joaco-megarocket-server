@@ -50,7 +50,7 @@ describe('GET /api/classes/:id', () => {
   });
 
   test('if class ID is not found, return 404', async () => {
-    const id = '6462359679333a385c67f704';
+    const id = '64625faf956fb774c56da140';
     const response = await request(app).get(`/api/classes/${id}`).send();
     expect(response.status).toBe(404);
     expect(response.body.data).toBeUndefined();
@@ -105,7 +105,7 @@ describe('POST /api/classes', () => {
   test('If trainer or activity IDs are not found, return 404 and an error message', async () => {
     const classData = {
       day: 'Wednesday',
-      hour: '10:30',
+      hour: '10:00',
       trainer: '746642acfac4c6a035b35000',
       activity: '7462261d7ead90b46b7471cc',
       slots: 9,
@@ -126,7 +126,7 @@ describe('POST /api/classes', () => {
   describe('POST /api/classes', () => {
     test('if required fields are missing or data is incorrect, return 400 and an error message', async () => {
       const invalidClassData = {
-        hour: '10:30',
+        hour: '10:00',
         slots: '9',
         createdAt: new Date(),
         updatedAt: new Date(),
@@ -144,7 +144,7 @@ describe('POST /api/classes', () => {
     const classData = {
       _id: '6462359679333a385c67f703',
       day: 'Monday',
-      hour: '13:30',
+      hour: '13:00',
       slots: 7,
       createdAt: '2023-05-15T13:37:26.139Z',
       updatedAt: '2023-05-15T13:37:26.139Z',
@@ -169,7 +169,7 @@ describe('POST /api/classes', () => {
   test('if POST request is valid, return 201 and the created class info', async () => {
     const classData = {
       day: 'Wednesday',
-      hour: '10:30',
+      hour: '10:00',
       trainer: '646642acfac4c6a035b35000',
       activity: '6462261d7ead90b46b7471cc',
       slots: 9,
@@ -201,7 +201,7 @@ describe('PUT /api/classes', () => {
   test('If trainer or activity IDs are not found, return 404 and an error message', async () => {
     const classData = {
       day: 'Wednesday',
-      hour: '10:30',
+      hour: '10:00',
       trainer: '746642acfac4c6a035b35000',
       activity: '7462261d7ead90b46b7471cc',
       slots: 9,
