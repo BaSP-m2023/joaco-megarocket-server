@@ -92,6 +92,17 @@ const createSubscription = async (req, res) => {
     });
   }
 
+  const slotsClasses = await Class.findById(classes);
+  const sameClassSubscription = await Subscription.find({ classes, date });
+
+  if (sameClassSubscription.length >= slotsClasses?.slots) {
+    return res.status(400).json({
+      error: true,
+      message: 'The slots are full!',
+      data: undefined,
+    });
+  }
+
   try {
     const existingClass = await Class.findById(classes);
     const existingMember = await Member.findById(member);
