@@ -114,7 +114,7 @@ const updateAdmin = async (req, res) => {
     const adminProps = Object.keys(actualAdmin.toObject()).slice(1, -1);
     let changes = false;
     adminProps.forEach((prop) => {
-      if (req.body[prop] && req.body[prop] !== actualAdmin[prop]) {
+      if (req.body[prop] && req.body[prop] !== actualAdmin[prop].toString()) {
         changes = true;
       }
     });

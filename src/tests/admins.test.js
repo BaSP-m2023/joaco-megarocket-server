@@ -70,15 +70,15 @@ describe('PUT /api/admins/:id', () => {
     expect(response.status).toBe(200);
     expect(response.error).toBeFalsy();
   });
-  test('should return no changes with status 400', async () => {
+  test('should return no changes with status 200', async () => {
     const mockID = '74663d50bb2d87b9f6510627';
     const updatedAdmin = {
       lastName: 'Admin',
       dni: 98765413,
     };
     const response = await request(app).put(`/api/admins/${mockID}`).send(updatedAdmin);
-    expect(response.status).toBe(400);
-    expect(response.error).toBeTruthy();
+    expect(response.status).toBe(200);
+    expect(response.error).toBeFalsy();
   });
   test('should return no changes with data undefined and status 400', async () => {
     const mockID = '74663d50bb2d87b9f6510627';

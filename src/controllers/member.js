@@ -258,9 +258,9 @@ const loginMember = async (req, res) => {
   try {
     const member = await Member.findOne({ dni, email });
     if (!member) {
-      return res.status(401).json({ message: 'Invalid credentials' });
+      return res.status(401).json({ message: 'Invalid credentials', error: true });
     }
-    return res.status(200).json({ message: 'Login successful' });
+    return res.status(200).json({ message: 'Login successful', error: false });
   } catch (error) {
     return res.status(500).json({ message: 'Error occurred', error: true });
   }
