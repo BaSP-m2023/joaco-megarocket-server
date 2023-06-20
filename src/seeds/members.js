@@ -38,4 +38,17 @@ export default [
     isActive: true,
     membership: 'Classic Membership',
   },
+  {
+    _id: new mongoose.Types.ObjectId('64693ee0ed79af5a83aac57c'),
+    firstName: 'Elon',
+    lastName: 'Musk',
+    dni: 42180329,
+    phone: 1234567891,
+    email: 'gnoborca@gmail.com',
+    city: 'Gotham',
+    birthday: '20/10/2020',
+    postalCode: 2132,
+    isActive: true,
+    membership: 'Classic Membership',
+  },
 ];

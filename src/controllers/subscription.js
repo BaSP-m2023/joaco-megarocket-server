@@ -123,10 +123,18 @@ const validateDay = (day, dateString) => {
 const createSubscription = async (req, res) => {
   const { classes, member, date } = req.body;
 
-  if (!mongoose.isValidObjectId(classes) || !mongoose.isValidObjectId(member)) {
+  if (!mongoose.isValidObjectId(classes)) {
     return res.status(400).json({
       error: true,
-      message: 'Class or member ID is not valid',
+      message: 'Class ID is not valid',
+      data: undefined,
+    });
+  }
+
+  if (!mongoose.isValidObjectId(member)) {
+    return res.status(400).json({
+      error: true,
+      message: 'member ID is not valid',
       data: undefined,
     });
   }
@@ -135,13 +143,14 @@ const createSubscription = async (req, res) => {
     const existingClass = await Class.findById(classes);
     const existingMember = await Member.findById(member);
     const sameClassSubscription = await Subscription.find({ classes, date });
-
-    if (validateDay(existingClass?.day, date)) {
-      return res.status(400).json({
-        error: true,
-        message: 'this class is not available this day',
-        data: undefined,
-      });
+    if (existingClass && existingMember) {
+      if (validateDay(existingClass?.day, date)) {
+        return res.status(400).json({
+          error: true,
+          message: 'this class is not availeable this day',
+          data: undefined,
+        });
+      }
     }
 
     if (sameClassSubscription.length >= existingClass?.slots) {
