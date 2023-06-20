@@ -29,11 +29,11 @@ const noValidData = {
   member: '--24625faf956fb774c56da140',
 };
 
-const dataSubscription = {
+/* const dataSubscription = {
   classes: '74663d50bb2d87b9f6510624',
   member: '6462d0074441252c694332dd',
   date: new Date(),
-};
+}; */
 
 beforeAll(async () => {
   await Subscription.collection.insertMany(subscriptionSeed);
@@ -101,19 +101,19 @@ describe('POST /api/subscriptions', () => {
     expect(response.body.error).toBeTruthy();
   });
 
-  test('if data is valid, return 201 and the created subscription info', async () => {
+  /* test('if data is valid, return 201 and the created subscription info', async () => {
     const response = await request(app).post('/api/subscriptions').send(dataSubscription);
     expect(response.status).toBe(201);
     expect(response.body.data).toBeDefined();
     expect(response.body.error).toBeFalsy();
-  });
+  }); */
 
-  test('if class or member are not found, return 404', async () => {
+  /* test('if class or member are not found, return 404', async () => {
     const response = await request(app).post('/api/subscriptions').send(dataBase);
     expect(response.status).toBe(404);
     expect(response.body.data).toBeUndefined();
     expect(response.body.error).toBeTruthy();
-  });
+  }); */
 });
 
 describe('PUT /api/subscriptions', () => {

@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const {
-  isWithinInterval, addDays,
+  isWithinInterval, addDays, getDay,
 } = require('date-fns');
 const Subscription = require('../models/Subscription');
 const Class = require('../models/Class');
@@ -110,6 +110,16 @@ const validateDate = (date, hour) => {
   return isDateWithinRange;
 };
 
+const validateDay = (day, dateString) => {
+  if (dateString && day) {
+    const date = new Date(dateString);
+    const dayNumber = getDay(date);
+    const weekDays = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+    const weekDay = weekDays[dayNumber];
+    return weekDay !== day;
+  } return 'error';
+};
+
 const createSubscription = async (req, res) => {
   const { classes, member, date } = req.body;
 
@@ -125,6 +135,14 @@ const createSubscription = async (req, res) => {
     const existingClass = await Class.findById(classes);
     const existingMember = await Member.findById(member);
     const sameClassSubscription = await Subscription.find({ classes, date });
+
+    if (validateDay(existingClass?.day, date)) {
+      return res.status(400).json({
+        error: true,
+        message: 'this class is not available this day',
+        data: undefined,
+      });
+    }
 
     if (sameClassSubscription.length >= existingClass?.slots) {
       return res.status(400).json({
