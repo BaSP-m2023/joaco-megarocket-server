@@ -24,5 +24,16 @@ export default [
     password: 'Abcdefg123',
     salary: 60000,
     isActive: false,
+  }, {
+    _id: new mongoose.Types.ObjectId('74663d50bb2d87b9f6510625'),
+    firstName: 'Gino',
+    lastName: 'juju',
+    dni: 12345687,
+    phone: 1234567891,
+    email: 'gindo@gmail.com',
+    city: 'Rosario',
+    password: 'Abcdefg123',
+    salary: 60000,
+    isActive: false,
   },
 ];

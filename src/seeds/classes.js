@@ -1,10 +1,9 @@
-// test comment
 import mongoose from 'mongoose';
 
 export default [
   {
     _id: new mongoose.Types.ObjectId('74663d50bb2d87b9f6510621'),
-    day: 'Sunday',
+    day: 'Saturday',
     hour: '20:00',
     trainer: new mongoose.Types.ObjectId('74663d50bb2d87b9f6510622'),
     activity: new mongoose.Types.ObjectId('74663d50bb2d87b9f6510623'),
@@ -34,5 +33,21 @@ export default [
       description: 'basic training that consists of throwing soft punches into the air wit hgrtfhgrehgtdfghdfgh dfghdfghdfgh dfgh dfgh dfgh',
     },
     slots: 7,
+  },
+  {
+    _id: new mongoose.Types.ObjectId('64663d50bb2d87b9f6510625'),
+    day: 'Saturday',
+    hour: '20:00',
+    trainer: new mongoose.Types.ObjectId('74663d50bb2d87b9f6510622'),
+    activity: new mongoose.Types.ObjectId('74663d50bb2d87b9f6510623'),
+    slots: 8,
+  },
+  {
+    _id: new mongoose.Types.ObjectId('6462d8c5afd4e4d023690d66'),
+    day: 'Thursday',
+    hour: '17:00',
+    trainer: new mongoose.Types.ObjectId('74663d50bb2d87b9f6510625'),
+    activity: new mongoose.Types.ObjectId('74663d50bb2d87b9f6510626'),
+    slots: 6,
   },
 ];

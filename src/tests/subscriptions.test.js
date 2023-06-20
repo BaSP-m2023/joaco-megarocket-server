@@ -1,4 +1,5 @@
 import request from 'supertest';
+import mongoose from 'mongoose';
 import app from '../app';
 import Subscription from '../models/Subscription';
 import Member from '../models/Member';
@@ -7,33 +8,35 @@ import subscriptionSeed from '../seeds/subscriptions';
 import classSeed from '../seeds/classes';
 import memberSeed from '../seeds/members';
 
-const newSubscription = {
-  _id: '6466aeb229ef0fba19e2cd85',
-  classes: '6465816c08ae1e4d4b105a49',
-  member: '646223b3731da1b875752bda',
-};
-
-const duplicatedId = {
-  _id: '6466aeb229ef0fba19e2cd85',
-  classes: '6465816c08ae1e4d4b105a49',
-  member: '646223b3731da1b875752bda',
-};
-
-const dataBase = {
+const dataClassInvalid = {
   classes: '64663d50bb2d87b9f6510625',
   member: '24625faf956fb774c56da140',
+  date: '2023-06-24T17:00:00.700+00:00',
 };
 
 const noValidData = {
   classes: '---64663d50bb2d87b9f6510625',
   member: '--24625faf956fb774c56da140',
 };
+const idDuplicated = {
+  _id: new mongoose.Types.ObjectId('6466aeb229ef0fba19e2cd82'),
+  classes: '6465816c08ae1e4d4b105a49',
+  member: '646223b3731da1b875752bda',
+  date: '2023-05-13T21:07:44.700+00:00',
+};
 
-/* const dataSubscription = {
-  classes: '74663d50bb2d87b9f6510624',
+const invalidSupscrition = {
+  _id: '6462439ab744865babed70',
+  classes: '6465816c08ae1e4d4b105a49',
+  member: '646223b3731da1b875752bda',
+  date: '2023-05-13T21:07:44.700+00:00',
+};
+const validSupscrition = {
+
+  classes: '74663d50bb2d87b9f6510621',
   member: '6462d0074441252c694332dd',
-  date: new Date(),
-}; */
+  date: '2023-06-23T20:00:00.000+00:00',
+};
 
 beforeAll(async () => {
   await Subscription.collection.insertMany(subscriptionSeed);
@@ -87,7 +90,7 @@ describe('DELETE /api/subscriptions', () => {
 
 describe('POST /api/subscriptions', () => {
   test('if subscription id is not valid should return 400', async () => {
-    const response = await request(app).post('/api/subscriptions').send(newSubscription);
+    const response = await request(app).post('/api/subscriptions').send(invalidSupscrition);
     expect(response.status).toBe(400);
     expect(response.body).toBeDefined();
     expect(response.error).toBeTruthy();
@@ -95,25 +98,26 @@ describe('POST /api/subscriptions', () => {
   });
 
   test('if ID is duplicated should return status 400', async () => {
-    const response = await request(app).post('/api/subscriptions').send(duplicatedId);
+    const response = await request(app).post('/api/subscriptions').send(idDuplicated);
     expect(response.status).toBe(400);
     expect(response.body.data).toBeUndefined();
     expect(response.body.error).toBeTruthy();
   });
 
-  /* test('if data is valid, return 201 and the created subscription info', async () => {
-    const response = await request(app).post('/api/subscriptions').send(dataSubscription);
+  test('if data is valid, return 201 and the created subscription info', async () => {
+    const response = await request(app).post('/api/subscriptions').send(validSupscrition);
     expect(response.status).toBe(201);
     expect(response.body.data).toBeDefined();
     expect(response.body.error).toBeFalsy();
-  }); */
+  });
 
-  /* test('if class or member are not found, return 404', async () => {
-    const response = await request(app).post('/api/subscriptions').send(dataBase);
+  test('if class or member are not found, return 404', async () => {
+    const response = await request(app).post('/api/subscriptions').send(dataClassInvalid);
+
     expect(response.status).toBe(404);
     expect(response.body.data).toBeUndefined();
     expect(response.body.error).toBeTruthy();
-  }); */
+  });
 });
 
 describe('PUT /api/subscriptions', () => {
@@ -125,7 +129,7 @@ describe('PUT /api/subscriptions', () => {
   });
 
   test('if member or class ids are not found, return 404', async () => {
-    const response = await request(app).put('/api/subscriptions/6466f6c43b2af1a6510deea5').send(dataBase);
+    const response = await request(app).put('/api/subscriptions/6466f6c43b2af1a6510deea5').send(dataClassInvalid);
     expect(response.status).toBe(404);
     expect(response.body.data).toBeUndefined();
     expect(response.body.error).toBeTruthy();

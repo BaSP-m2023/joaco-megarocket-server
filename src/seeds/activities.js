@@ -19,4 +19,10 @@ export default [
     description: 'this activity involves movements that enable greater overall body functioning and improve performance through better coordination and muscle stimulation',
     isActive: false,
   },
+  {
+    _id: new mongoose.Types.ObjectId('74663d50bb2d87b9f6510626'),
+    name: 'functio',
+    description: 'this activity involves movements that enable greater overall body functioning and improve performance through better coordination and muscle stimulation',
+    isActive: false,
+  },
 ];
