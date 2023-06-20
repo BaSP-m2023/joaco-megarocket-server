@@ -86,13 +86,16 @@ const getSubscriptionsByID = async (req, res) => {
 
 const validateDate = (date, hour) => {
   const enteredDate = new Date(date);
-  const [hours, minutes] = hour.split(':');
+  if (hour) {
+    const [hours, minutes] = hour.split(':');
+
+    enteredDate.setUTCHours(hours);
+    enteredDate.setMinutes(minutes);
+  } else {
+    return ('error');
+  }
   const currentDate = new Date();
   const maxAllowedDate = addDays(currentDate, 6);
-
-  enteredDate.setUTCHours(hours);
-  enteredDate.setMinutes(minutes);
-
   const currentHours = currentDate.getHours();
 
   currentDate.setUTCHours(currentHours);
@@ -123,18 +126,18 @@ const createSubscription = async (req, res) => {
     const existingMember = await Member.findById(member);
     const sameClassSubscription = await Subscription.find({ classes, date });
 
-    if (!validateDate(date, existingClass.hour)) {
+    if (sameClassSubscription.length >= existingClass?.slots) {
       return res.status(400).json({
         error: true,
-        message: 'You cannot subscribe to a finished class',
+        message: 'The slots are full',
         data: undefined,
       });
     }
 
-    if (sameClassSubscription.length >= existingClass?.slots) {
+    if (!validateDate(date, existingClass?.hour)) {
       return res.status(400).json({
         error: true,
-        message: 'The slots are full!',
+        message: 'You cannot subscribe to a finished class',
         data: undefined,
       });
     }
