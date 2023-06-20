@@ -1,4 +1,7 @@
 const mongoose = require('mongoose');
+const {
+  isWithinInterval, addDays, getDay,
+} = require('date-fns');
 const Subscription = require('../models/Subscription');
 const Class = require('../models/Class');
 const Member = require('../models/Member');
@@ -7,7 +10,7 @@ const getSubscriptions = async (req, res) => {
   try {
     const response = await Subscription.find().populate({
       path: 'classes',
-      select: 'activity hour slots',
+      select: 'activity hour slots day',
       populate: {
         path: 'activity',
         select: 'name',
@@ -81,6 +84,42 @@ const getSubscriptionsByID = async (req, res) => {
   }
 };
 
+const validateDate = (date, hour) => {
+  const enteredDate = new Date(date);
+  if (hour) {
+    const [hours, minutes] = hour.split(':');
+
+    enteredDate.setUTCHours(hours);
+    enteredDate.setMinutes(minutes);
+  } else {
+    return ('error');
+  }
+  const currentDate = new Date();
+  const maxAllowedDate = addDays(currentDate, 6);
+  const currentHours = currentDate.getHours();
+
+  currentDate.setUTCHours(currentHours);
+
+  const dateRange = {
+    start: currentDate,
+    end: maxAllowedDate,
+  };
+
+  const isDateWithinRange = isWithinInterval(enteredDate, dateRange);
+
+  return isDateWithinRange;
+};
+
+const validateDay = (day, dateString) => {
+  if (dateString && day) {
+    const date = new Date(dateString);
+    const dayNumber = getDay(date);
+    const weekDays = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+    const weekDay = weekDays[dayNumber];
+    return weekDay !== day;
+  } return 'error';
+};
+
 const createSubscription = async (req, res) => {
   const { classes, member, date } = req.body;
 
@@ -92,25 +131,47 @@ const createSubscription = async (req, res) => {
     });
   }
 
-  const slotsClasses = await Class.findById(classes);
-  const sameClassSubscription = await Subscription.find({ classes, date });
-
-  if (sameClassSubscription.length >= slotsClasses?.slots) {
-    return res.status(400).json({
-      error: true,
-      message: 'The slots are full!',
-      data: undefined,
-    });
-  }
-
   try {
     const existingClass = await Class.findById(classes);
     const existingMember = await Member.findById(member);
+    const sameClassSubscription = await Subscription.find({ classes, date });
 
-    if (!existingClass || !existingMember) {
+    if (validateDay(existingClass?.day, date)) {
+      return res.status(400).json({
+        error: true,
+        message: 'this class is not available this day',
+        data: undefined,
+      });
+    }
+
+    if (sameClassSubscription.length >= existingClass?.slots) {
+      return res.status(400).json({
+        error: true,
+        message: 'The slots are full',
+        data: undefined,
+      });
+    }
+
+    if (!validateDate(date, existingClass?.hour)) {
+      return res.status(400).json({
+        error: true,
+        message: 'You cannot subscribe to a finished class',
+        data: undefined,
+      });
+    }
+
+    if (!existingClass) {
       return res.status(404).json({
         error: true,
-        message: 'Class or member not found',
+        message: 'Class not found',
+        data: undefined,
+      });
+    }
+
+    if (!existingMember) {
+      return res.status(404).json({
+        error: true,
+        message: 'Member not found',
         data: undefined,
       });
     }
