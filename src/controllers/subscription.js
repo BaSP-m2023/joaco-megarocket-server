@@ -110,13 +110,15 @@ const validateDate = (date, hour) => {
   return isDateWithinRange;
 };
 
-const validateDay = (day, dateString) => {
-  if (dateString && day) {
-    const date = new Date(dateString);
+const validateDay = (classDay, enteredDate) => {
+  if (enteredDate && classDay) {
+    const date = new Date(enteredDate);
+    date.getUTCDate('00');
     const dayNumber = getDay(date);
     const weekDays = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
     const weekDay = weekDays[dayNumber];
-    return weekDay !== day;
+
+    return weekDay !== classDay;
   } return 'error';
 };
 
@@ -143,11 +145,12 @@ const createSubscription = async (req, res) => {
     const existingClass = await Class.findById(classes);
     const existingMember = await Member.findById(member);
     const sameClassSubscription = await Subscription.find({ classes, date });
+
     if (existingClass && existingMember) {
       if (validateDay(existingClass?.day, date)) {
         return res.status(400).json({
           error: true,
-          message: 'this class is not availeable this day',
+          message: 'this class is not available this day',
           data: undefined,
         });
       }
@@ -317,10 +320,33 @@ const deleteSubscription = async (req, res) => {
   }
 };
 
+const deleteOldSubscriptions = async (req, res) => {
+  try {
+    const currentDate = new Date();
+
+    currentDate.setUTCHours('00');
+
+    const oldSubscriptions = await Subscription.deleteMany({ date: { $lt: currentDate } });
+
+    return res.status(200).json({
+      error: false,
+      message: 'Old subscriptions deleted successfully!',
+      data: oldSubscriptions,
+    });
+  } catch (error) {
+    return res.status(500).json({
+      error: true,
+      message: error.message,
+      data: undefined,
+    });
+  }
+};
+
 module.exports = {
   getSubscriptions,
   getSubscriptionsByID,
   createSubscription,
   updateSubscription,
   deleteSubscription,
+  deleteOldSubscriptions,
 };
