@@ -9,6 +9,7 @@ router
   .get('/:id', subscriptionController.getSubscriptionsByID)
   .post('/', validations.createValidation, subscriptionController.createSubscription)
   .put('/:id', validations.updateValidation, subscriptionController.updateSubscription)
-  .delete('/:id', subscriptionController.deleteSubscription);
+  .delete('/:id', subscriptionController.deleteSubscription)
+  .delete('/', subscriptionController.deleteOldSubscriptions);
 
 module.exports = router;
