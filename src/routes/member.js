@@ -1,15 +1,15 @@
-const express = require('express');
+import express from 'express';
+import memberController from '../controllers/member';
+import validations from '../validations/member';
 
 const router = express.Router();
-const validation = require('../validations/member');
-const memberController = require('../controllers/member');
 
 router
   .get('/', memberController.getAllMembers)
   .get('/:id', memberController.getMembersById)
-  .post('/userLogin', validation.validateLogin, memberController.loginMember)
-  .post('/', validation.validateCreation, memberController.createMember)
-  .put('/:id', validation.validateUpdate, memberController.editMember)
+  .post('/userLogin', validations.validateLogin, memberController.loginMember)
+  .post('/', validations.validateCreation, memberController.createMember)
+  .put('/:id', validations.validateUpdate, memberController.editMember)
   .delete('/:id', memberController.deleteMember);
 
-module.exports = router;
+export default router;

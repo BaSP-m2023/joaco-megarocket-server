@@ -1,5 +1,5 @@
-const { default: mongoose } = require('mongoose');
-const Activity = require('../models/Activity');
+import mongoose from 'mongoose';
+import Activity from '../models/Activity';
 
 const getAllActivities = async (req, res) => {
   try {
@@ -206,10 +206,12 @@ const deleteActivity = async (req, res) => {
   }
 };
 
-module.exports = {
+const activitiesController = {
   getAllActivities,
   getActivityByID,
   createActivity,
   updateActivity,
   deleteActivity,
 };
+
+export default activitiesController;

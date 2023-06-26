@@ -1,6 +1,6 @@
-const express = require('express');
-const activitiesController = require('../controllers/activity');
-const validations = require('../validations/activity');
+import express from 'express';
+import activitiesController from '../controllers/activity';
+import validations from '../validations/activity';
 
 const router = express.Router();
 
@@ -11,4 +11,4 @@ router
   .put('/:id', validations.updateValidation, activitiesController.updateActivity)
   .delete('/:id', activitiesController.deleteActivity);
 
-module.exports = router;
+export default router;

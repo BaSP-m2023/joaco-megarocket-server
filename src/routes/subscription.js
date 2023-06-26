@@ -1,6 +1,6 @@
-const express = require('express');
-const subscriptionController = require('../controllers/subscription');
-const validations = require('../validations/subscription');
+import express from 'express';
+import subscriptionController from '../controllers/subscription';
+import validations from '../validations/subscription';
 
 const router = express.Router();
 
@@ -12,4 +12,4 @@ router
   .delete('/:id', subscriptionController.deleteSubscription)
   .delete('/', subscriptionController.deleteOldSubscriptions);
 
-module.exports = router;
+export default router;

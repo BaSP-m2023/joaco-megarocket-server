@@ -1,14 +1,14 @@
-const express = require('express');
-const superAdminController = require('../controllers/super-admin');
-const validation = require('../validations/super-admin');
+import express from 'express';
+import superAdminController from '../controllers/super-admin';
+import validations from '../validations/super-admin';
 
 const router = express.Router();
 
 router
   .get('/', superAdminController.getAllSuperAdmins)
   .get('/:id', superAdminController.getSuperAdminsById)
-  .post('/', validation.validateCreation, superAdminController.createSuperAdmin)
-  .put('/:id', validation.validateUpdate, superAdminController.updateSuperAdmin)
+  .post('/', validations.validateCreation, superAdminController.createSuperAdmin)
+  .put('/:id', validations.validateUpdate, superAdminController.updateSuperAdmin)
   .delete('/:id', superAdminController.deleteSuperAdminsById);
 
-module.exports = router;
+export default router;

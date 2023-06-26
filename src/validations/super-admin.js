@@ -1,11 +1,11 @@
-const joi = require('joi');
+import Joi from 'joi';
 
 const RGXPassword = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$/;
 
 const validateCreation = (req, res, next) => {
-  const superAdminValidation = joi.object({
-    email: joi.string().email().required(),
-    password: joi.string().regex(RGXPassword)
+  const superAdminValidation = Joi.object({
+    email: Joi.string().email().required(),
+    password: Joi.string().regex(RGXPassword)
       .min(8)
       .regex(RGXPassword)
       .required()
@@ -25,9 +25,9 @@ const validateCreation = (req, res, next) => {
 };
 
 const validateUpdate = (req, res, next) => {
-  const superAdminUpdate = joi.object({
-    email: joi.string().email(),
-    password: joi.string()
+  const superAdminUpdate = Joi.object({
+    email: Joi.string().email(),
+    password: Joi.string()
       .min(8)
       .regex(RGXPassword)
       .messages({
@@ -45,7 +45,9 @@ const validateUpdate = (req, res, next) => {
   });
 };
 
-module.exports = {
+const validations = {
   validateCreation,
   validateUpdate,
 };
+
+export default validations;

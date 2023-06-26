@@ -1,10 +1,11 @@
-const express = require('express');
-const activities = require('./activity');
-const classes = require('./class');
-const members = require('./member');
-const trainers = require('./trainer');
-const admins = require('./admin');
-const SuperAdmin = require('./super-admin');
+import express from 'express';
+import activities from './activity';
+import classes from './class';
+import members from './member';
+import trainers from './trainer';
+import admins from './admin';
+import superAdmins from './super-admin';
+import subscriptions from './subscription';
 
 const router = express.Router();
 
@@ -13,10 +14,7 @@ router.use('/members', members);
 router.use('/trainers', trainers);
 router.use('/admins', admins);
 router.use('/activities', activities);
-router.use('/super-admin', SuperAdmin);
+router.use('/super-admin', superAdmins);
+router.use('/subscriptions', subscriptions);
 
-const Subscription = require('./subscription');
-
-router.use('/subscriptions', Subscription);
-
-module.exports = router;
+export default router;

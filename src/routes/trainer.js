@@ -1,16 +1,14 @@
-const express = require('express');
+import express from 'express';
+import trainerController from '../controllers/trainer';
+import validations from '../validations/trainer';
 
 const router = express.Router();
-
-const trainerController = require('../controllers/trainer');
-
-const validation = require('../validations/trainer');
 
 router
   .get('/', trainerController.getAllTrainer)
   .get('/:id', trainerController.getTrainerById)
-  .post('/', validation.validateCreation, trainerController.createTrainer)
-  .put('/:id', validation.validateUpdate, trainerController.updateTrainer)
+  .post('/', validations.validateCreation, trainerController.createTrainer)
+  .put('/:id', validations.validateUpdate, trainerController.updateTrainer)
   .delete('/:id', trainerController.deleteTrainer);
 
-module.exports = router;
+export default router;

@@ -1,5 +1,5 @@
-const mongoose = require('mongoose');
-const Admin = require('../models/Admin');
+import mongoose from 'mongoose';
+import Admin from '../models/Admin';
 
 const getAllAdmins = async (req, res) => {
   try {
@@ -219,10 +219,13 @@ const deleteAdmin = async (req, res) => {
     });
   }
 };
-module.exports = {
+
+const adminsController = {
   createAdmin,
   updateAdmin,
   getAllAdmins,
   getAdminById,
   deleteAdmin,
 };
+
+export default adminsController;

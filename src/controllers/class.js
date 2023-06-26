@@ -1,7 +1,7 @@
-const mongoose = require('mongoose');
-const Class = require('../models/Class');
-const Activity = require('../models/Activity');
-const Trainer = require('../models/Trainer');
+import mongoose from 'mongoose';
+import Class from '../models/Class';
+import Activity from '../models/Activity';
+import Trainer from '../models/Trainer';
 
 const getAllClasses = async (req, res) => {
   try {
@@ -263,10 +263,12 @@ const updateClass = async (req, res) => {
   }
 };
 
-module.exports = {
+const classController = {
   getAllClasses,
   getClassesByID,
   createClass,
   deleteClass,
   updateClass,
 };
+
+export default classController;

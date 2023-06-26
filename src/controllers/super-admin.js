@@ -1,6 +1,6 @@
-const { default: mongoose } = require('mongoose');
-const firebaseApp = require('../helper/firebase');
-const SuperAdmin = require('../models/Super-admin');
+import mongoose from 'mongoose';
+import firebaseApp from '../helper/firebase';
+import SuperAdmin from '../models/Super-admin';
 
 const getAllSuperAdmins = async (req, res) => {
   try {
@@ -225,10 +225,12 @@ const updateSuperAdmin = async (req, res) => {
   }
 };
 
-module.exports = {
+const superAdminController = {
   getAllSuperAdmins,
   getSuperAdminsById,
   createSuperAdmin,
   deleteSuperAdminsById,
   updateSuperAdmin,
 };
+
+export default superAdminController;

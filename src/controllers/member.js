@@ -1,5 +1,5 @@
-const mongoose = require('mongoose');
-const Member = require('../models/Member');
+import mongoose from 'mongoose';
+import Member from '../models/Member';
 
 const getAllMembers = async (req, res) => {
   try {
@@ -266,7 +266,7 @@ const loginMember = async (req, res) => {
   }
 };
 
-module.exports = {
+const memberController = {
   getAllMembers,
   getMembersById,
   createMember,
@@ -274,3 +274,5 @@ module.exports = {
   deleteMember,
   loginMember,
 };
+
+export default memberController;
