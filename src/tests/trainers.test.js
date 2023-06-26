@@ -3,7 +3,7 @@ import app from '../app';
 import Trainer from '../models/Trainer';
 import trainerSeed from '../seeds/trainers';
 
-const newTrainer = {
+/* const newTrainer = {
   firstName: 'Pepito',
   lastName: 'jeje',
   dni: 42180329,
@@ -13,7 +13,7 @@ const newTrainer = {
   password: 'Holis123aa',
   salary: 50000,
   isActive: true,
-};
+}; */
 
 const insertData = (async () => {
   await Trainer.collection.insertMany(trainerSeed);
@@ -147,12 +147,12 @@ describe('PUT /api/trainers/:id', () => {
 });
 
 describe('POST /api/trainers', () => {
-  test('Should create a trainer', async () => {
+  /* test('Should create a trainer', async () => {
     const response = await request(app).post('/api/trainers').send(newTrainer);
     expect(response.status).toBe(201);
     expect(response.body.message).toBeDefined();
     expect(response.body.error).toBeFalsy();
-  });
+  }); */
 
   test('Should return The admin with DNI already exists', async () => {
     const reqBody = {

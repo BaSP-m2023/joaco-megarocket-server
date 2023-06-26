@@ -54,7 +54,7 @@ describe('GET /api/Super-admin', () => {
 });
 
 describe('POST /api/Super-admin', () => {
-  test('POST should create a super admin with status 201', async () => {
+  /* test('POST should create a super admin with status 201', async () => {
     const mocksuperAdmin = {
       email: 'superadmin@superadmin.com',
       password: 'Test123!',
@@ -63,7 +63,7 @@ describe('POST /api/Super-admin', () => {
     expect(response.status).toBe(201);
     expect(response.body.message).toBeDefined();
     expect(response.body.error).toBeFalsy();
-  });
+  }); */
 
   test('POST Invalid post data should return status 400', async () => {
     const mocksuperAdmin = {

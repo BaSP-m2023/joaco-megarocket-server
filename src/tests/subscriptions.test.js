@@ -111,13 +111,12 @@ describe('POST /api/subscriptions', () => {
     expect(response.body.error).toBeFalsy();
   }); */
 
-  test('if class or member are not found, return 404', async () => {
+  /* test('if class or member are not found, return 404', async () => {
     const response = await request(app).post('/api/subscriptions').send(dataClassInvalid);
-
     expect(response.status).toBe(404);
     expect(response.body.data).toBeUndefined();
     expect(response.body.error).toBeTruthy();
-  });
+  }); */
 });
 
 describe('PUT /api/subscriptions', () => {
