@@ -36,11 +36,6 @@ const trainerSchema = new Schema({
     required: true,
     minLenght: 3,
   },
-  password: {
-    type: String,
-    required: true,
-    minLenght: 8,
-  },
   salary: {
     type: Number,
     required: true,

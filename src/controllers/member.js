@@ -253,18 +253,6 @@ const deleteMember = async (req, res) => {
     });
   }
 };
-const loginMember = async (req, res) => {
-  const { dni, email } = req.body;
-  try {
-    const member = await Member.findOne({ dni, email });
-    if (!member) {
-      return res.status(401).json({ message: 'Invalid credentials', error: true });
-    }
-    return res.status(200).json({ message: 'Login successful', error: false });
-  } catch (error) {
-    return res.status(500).json({ message: 'Error occurred', error: true });
-  }
-};
 
 const memberController = {
   getAllMembers,
@@ -272,7 +260,6 @@ const memberController = {
   createMember,
   editMember,
   deleteMember,
-  loginMember,
 };
 
 export default memberController;

@@ -38,11 +38,6 @@ const adminSchema = new Schema({
     required: true,
     minLenght: 4,
   },
-  password: {
-    type: String,
-    required: true,
-    minLenght: 8,
-  },
 });
 
 module.exports = mongoose.model('Admin', adminSchema);

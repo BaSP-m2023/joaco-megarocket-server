@@ -65,40 +65,10 @@ const validateUpdate = (req, res, next) => {
 
   return next();
 };
-const validateLogin = (req, res, next) => {
-  const memberValidation = Joi.object({
-    dni: Joi.number().integer().min(1000000).max(99999999)
-      .required()
-      .messages({
-        'number.base': 'DNI must be a number',
-        'number.empty': 'DNI is required',
-        'number.min': 'DNI must have 7-8 digits',
-        'number.max': 'DNI must have 7-8 digits',
-        'any.required': 'DNI is required',
-      }),
-    email: Joi.string().email().required().messages({
-      'string.email': 'Email must be a valid email address',
-      'any.required': 'Email is required',
-    }),
-  });
-
-  const validation = memberValidation.validate(req.body);
-
-  if (validation.error) {
-    return res.status(400).json({
-      message: `There was an error: ${validation.error.details[0].message}`,
-      data: undefined,
-      error: true,
-    });
-  }
-
-  return next();
-};
 
 const validations = {
   validateCreation,
   validateUpdate,
-  validateLogin,
 };
 
 export default validations;
