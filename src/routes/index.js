@@ -6,6 +6,7 @@ import trainers from './trainer';
 import admins from './admin';
 import superAdmins from './super-admin';
 import subscriptions from './subscription';
+import authRouter from './auth';
 
 const router = express.Router();
 
@@ -16,5 +17,6 @@ router.use('/admins', admins);
 router.use('/activities', activities);
 router.use('/super-admin', superAdmins);
 router.use('/subscriptions', subscriptions);
+router.use('/auth', authRouter);
 
 export default router;
