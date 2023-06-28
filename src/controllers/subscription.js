@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const {
-  isWithinInterval, addDays, getDay,
+  isWithinInterval, addDays,
 } = require('date-fns');
 const Subscription = require('../models/Subscription');
 const Class = require('../models/Class');
@@ -88,16 +88,16 @@ const validateDate = (date, hour) => {
   const enteredDate = new Date(date);
   if (hour) {
     const [hours, minutes] = hour.split(':');
-
     enteredDate.setUTCHours(hours);
     enteredDate.setMinutes(minutes);
   } else {
-    return ('error');
+    return false;
   }
   const currentDate = new Date();
   const maxAllowedDate = addDays(currentDate, 6);
   const currentHours = currentDate.getHours();
 
+  maxAllowedDate.setUTCHours(currentHours);
   currentDate.setUTCHours(currentHours);
 
   const dateRange = {
@@ -113,13 +113,12 @@ const validateDate = (date, hour) => {
 const validateDay = (classDay, enteredDate) => {
   if (enteredDate && classDay) {
     const date = new Date(enteredDate);
-    date.getUTCDate('00');
-    const dayNumber = getDay(date);
+    const dateInArgentina = new Date(date.toLocaleString('en-US', { timeZone: 'America/Argentina/Buenos_Aires' }));
+    const dayNumber = dateInArgentina.getDay();
     const weekDays = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
     const weekDay = weekDays[dayNumber];
-
-    return weekDay !== classDay;
-  } return 'error';
+    return weekDay === classDay;
+  } return false;
 };
 
 const createSubscription = async (req, res) => {
@@ -147,7 +146,7 @@ const createSubscription = async (req, res) => {
     const sameClassSubscription = await Subscription.find({ classes, date });
 
     if (existingClass && existingMember) {
-      if (validateDay(existingClass?.day, date)) {
+      if (!validateDay(existingClass?.day, date)) {
         return res.status(400).json({
           error: true,
           message: 'this class is not available this day',
@@ -156,18 +155,18 @@ const createSubscription = async (req, res) => {
       }
     }
 
-    if (sameClassSubscription.length >= existingClass?.slots) {
-      return res.status(400).json({
-        error: true,
-        message: 'The slots are full',
-        data: undefined,
-      });
-    }
-
     if (!validateDate(date, existingClass?.hour)) {
       return res.status(400).json({
         error: true,
         message: 'You cannot subscribe to a finished class',
+        data: undefined,
+      });
+    }
+
+    if (sameClassSubscription.length >= existingClass?.slots) {
+      return res.status(400).json({
+        error: true,
+        message: 'The slots are full',
         data: undefined,
       });
     }
