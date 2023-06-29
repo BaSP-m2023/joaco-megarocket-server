@@ -94,7 +94,7 @@ const validateDate = (date, hour) => {
     return false;
   }
   const currentDate = new Date();
-  const maxAllowedDate = addDays(currentDate, 6);
+  const maxAllowedDate = addDays(currentDate, 7);
   const currentHours = currentDate.getHours();
 
   maxAllowedDate.setUTCHours(currentHours);
@@ -322,8 +322,11 @@ const deleteSubscription = async (req, res) => {
 const deleteOldSubscriptions = async (req, res) => {
   try {
     const currentDate = new Date();
-
-    currentDate.setUTCHours('00');
+    currentDate.setUTCHours(0);
+    currentDate.setUTCMinutes(0);
+    currentDate.setUTCSeconds(0);
+    currentDate.setUTCMilliseconds(0);
+    console.log('date ', currentDate);
 
     const oldSubscriptions = await Subscription.deleteMany({ date: { $lt: currentDate } });
 
