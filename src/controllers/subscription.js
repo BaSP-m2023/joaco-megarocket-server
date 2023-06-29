@@ -326,7 +326,6 @@ const deleteOldSubscriptions = async (req, res) => {
     currentDate.setUTCMinutes(0);
     currentDate.setUTCSeconds(0);
     currentDate.setUTCMilliseconds(0);
-    console.log('date ', currentDate);
 
     const oldSubscriptions = await Subscription.deleteMany({ date: { $lt: currentDate } });
 
