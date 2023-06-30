@@ -1,5 +1,5 @@
-const { default: mongoose } = require('mongoose');
-const Trainer = require('../models/Trainer');
+import mongoose from 'mongoose';
+import Trainer from '../models/Trainer';
 
 const createTrainer = async (req, res) => {
   const {
@@ -250,10 +250,12 @@ const getTrainerById = async (req, res) => {
   }
 };
 
-module.exports = {
+const trainerController = {
   createTrainer,
   updateTrainer,
   deleteTrainer,
   getAllTrainer,
   getTrainerById,
 };
+
+export default trainerController;

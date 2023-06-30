@@ -1,10 +1,10 @@
-const mongoose = require('mongoose');
-const {
+import mongoose from 'mongoose';
+import {
   isWithinInterval, addDays,
-} = require('date-fns');
-const Subscription = require('../models/Subscription');
-const Class = require('../models/Class');
-const Member = require('../models/Member');
+} from 'date-fns';
+import Subscription from '../models/Subscription';
+import Class from '../models/Class';
+import Member from '../models/Member';
 
 const getSubscriptions = async (req, res) => {
   try {
@@ -343,7 +343,7 @@ const deleteOldSubscriptions = async (req, res) => {
   }
 };
 
-module.exports = {
+const subscriptionController = {
   getSubscriptions,
   getSubscriptionsByID,
   createSubscription,
@@ -351,3 +351,5 @@ module.exports = {
   deleteSubscription,
   deleteOldSubscriptions,
 };
+
+export default subscriptionController;

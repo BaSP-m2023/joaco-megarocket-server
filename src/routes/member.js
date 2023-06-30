@@ -1,15 +1,15 @@
-const express = require('express');
+import express from 'express';
+import memberController from '../controllers/member';
+import validations from '../validations/member';
+import verifyToken from '../middleware/authMiddleware';
 
 const router = express.Router();
-const validation = require('../validations/member');
-const memberController = require('../controllers/member');
 
 router
-  .get('/', memberController.getAllMembers)
-  .get('/:id', memberController.getMembersById)
-  .post('/userLogin', validation.validateLogin, memberController.loginMember)
-  .post('/', validation.validateCreation, memberController.createMember)
-  .put('/:id', validation.validateUpdate, memberController.editMember)
-  .delete('/:id', memberController.deleteMember);
+  .get('/', (req, res, next) => verifyToken(req, res, ['ADMIN'], next), memberController.getAllMembers)
+  .get('/:id', (req, res, next) => verifyToken(req, res, ['ADMIN', 'MEMBER', 'TRAINER'], next), memberController.getMembersById)
+  .post('/', (req, res, next) => verifyToken(req, res, ['MEMBER'], next), validations.validateCreation, memberController.createMember)
+  .put('/:id', (req, res, next) => verifyToken(req, res, ['ADMIN', 'MEMBER'], next), validations.validateUpdate, memberController.editMember)
+  .delete('/:id', (req, res, next) => verifyToken(req, res, ['ADMIN', 'MEMBER'], next), memberController.deleteMember);
 
-module.exports = router;
+export default router;

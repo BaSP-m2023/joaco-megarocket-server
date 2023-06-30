@@ -1,8 +1,10 @@
-const mongoose = require('mongoose');
-
-const { Schema } = mongoose;
+import mongoose, { Schema } from 'mongoose';
 
 const trainerSchema = new Schema({
+  firebaseUid: {
+    type: String,
+    required: true,
+  },
   firstName: {
     type: String,
     required: true,
@@ -32,11 +34,6 @@ const trainerSchema = new Schema({
     required: true,
     minLenght: 3,
   },
-  password: {
-    type: String,
-    required: true,
-    minLenght: 8,
-  },
   salary: {
     type: Number,
     required: true,
@@ -47,4 +44,4 @@ const trainerSchema = new Schema({
   },
 });
 
-module.exports = mongoose.model('Trainer', trainerSchema);
+export default mongoose.model('Trainer', trainerSchema);

@@ -1,5 +1,5 @@
-const mongoose = require('mongoose');
-const Member = require('../models/Member');
+import mongoose from 'mongoose';
+import Member from '../models/Member';
 
 const getAllMembers = async (req, res) => {
   try {
@@ -253,24 +253,13 @@ const deleteMember = async (req, res) => {
     });
   }
 };
-const loginMember = async (req, res) => {
-  const { dni, email } = req.body;
-  try {
-    const member = await Member.findOne({ dni, email });
-    if (!member) {
-      return res.status(401).json({ message: 'Invalid credentials', error: true });
-    }
-    return res.status(200).json({ message: 'Login successful', error: false });
-  } catch (error) {
-    return res.status(500).json({ message: 'Error occurred', error: true });
-  }
-};
 
-module.exports = {
+const memberController = {
   getAllMembers,
   getMembersById,
   createMember,
   editMember,
   deleteMember,
-  loginMember,
 };
+
+export default memberController;

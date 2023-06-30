@@ -1,15 +1,16 @@
-const express = require('express');
-const subscriptionController = require('../controllers/subscription');
-const validations = require('../validations/subscription');
+import express from 'express';
+import subscriptionController from '../controllers/subscription';
+import validations from '../validations/subscription';
+import verifyToken from '../middleware/authMiddleware';
 
 const router = express.Router();
 
 router
-  .get('/', subscriptionController.getSubscriptions)
-  .get('/:id', subscriptionController.getSubscriptionsByID)
-  .post('/', validations.createValidation, subscriptionController.createSubscription)
-  .put('/:id', validations.updateValidation, subscriptionController.updateSubscription)
-  .delete('/:id', subscriptionController.deleteSubscription)
+  .get('/', (req, res, next) => verifyToken(req, res, ['ADMIN', 'MEMBER'], next), subscriptionController.getSubscriptions)
+  .get('/:id', (req, res, next) => verifyToken(req, res, ['ADMIN', 'MEMBER'], next), subscriptionController.getSubscriptionsByID)
+  .post('/', (req, res, next) => verifyToken(req, res, ['MEMBER'], next), validations.createValidation, subscriptionController.createSubscription)
+  .put('/:id', (req, res, next) => verifyToken(req, res, ['SUPER_ADMIN']/* SUPER_ADMIN is here because nobody can do this put */, next), validations.updateValidation, subscriptionController.updateSubscription)
+  .delete('/:id', (req, res, next) => verifyToken(req, res, ['ADMIN', 'MEMBER'], next), subscriptionController.deleteSubscription)
   .delete('/', subscriptionController.deleteOldSubscriptions);
 
-module.exports = router;
+export default router;

@@ -1,4 +1,4 @@
-const Joi = require('joi');
+import Joi from 'joi';
 
 const createValidation = (req, res, next) => {
   const activityValidation = Joi.object({
@@ -36,7 +36,9 @@ const updateValidation = (req, res, next) => {
   });
 };
 
-module.exports = {
+const validations = {
   createValidation,
   updateValidation,
 };
+
+export default validations;

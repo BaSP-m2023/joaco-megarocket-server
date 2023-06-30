@@ -1,5 +1,6 @@
-const { default: mongoose } = require('mongoose');
-const SuperAdmin = require('../models/Super-admin');
+import mongoose from 'mongoose';
+import firebaseApp from '../helper/firebase';
+import SuperAdmin from '../models/Super-admin';
 
 const getAllSuperAdmins = async (req, res) => {
   try {
@@ -53,7 +54,7 @@ const getSuperAdminsById = async (req, res) => {
         error: false,
       });
     } catch (error) {
-      return res.status(400).json({
+      return res.status(500).json({
         message: error.message,
         data: undefined,
         error: true,
@@ -70,12 +71,25 @@ const createSuperAdmin = async (req, res) => {
     const findEmail = await SuperAdmin.findOne({ email });
 
     if (!findEmail) {
-      const superAdminCreate = await SuperAdmin.create({ email, password });
+      const newFirebaseUser = await firebaseApp.auth().createUser({
+        email: req.body.email,
+        password: req.body.password,
+      });
 
-      if (superAdminCreate) {
+      const firebaseUid = newFirebaseUser.uid;
+
+      await firebaseApp.auth().setCustomUserClaims(firebaseUid, { role: 'SUPER_ADMIN' });
+
+      const newSuperAdmin = await SuperAdmin.create({
+        firebaseUid,
+        email,
+        password,
+      });
+
+      if (newSuperAdmin) {
         return res.status(201).json({
           message: 'Super-Admin was created successfully!',
-          data: superAdminCreate,
+          data: newSuperAdmin,
           error: false,
         });
       }
@@ -87,7 +101,7 @@ const createSuperAdmin = async (req, res) => {
       });
     }
   } catch (error) {
-    return res.status(400).json({
+    return res.status(500).json({
       message: error.message,
       data: undefined,
       error: true,
@@ -122,7 +136,7 @@ const deleteSuperAdminsById = async (req, res) => {
         error: true,
       });
     } catch (error) {
-      return res.status(400).json({
+      return res.status(500).json({
         message: error.message,
         data: undefined,
         error: true,
@@ -203,7 +217,7 @@ const updateSuperAdmin = async (req, res) => {
       error: false,
     });
   } catch (error) {
-    return res.status(400).json({
+    return res.status(500).json({
       message: error.message,
       data: undefined,
       error: true,
@@ -211,10 +225,12 @@ const updateSuperAdmin = async (req, res) => {
   }
 };
 
-module.exports = {
+const superAdminController = {
   getAllSuperAdmins,
   getSuperAdminsById,
   createSuperAdmin,
   deleteSuperAdminsById,
   updateSuperAdmin,
 };
+
+export default superAdminController;

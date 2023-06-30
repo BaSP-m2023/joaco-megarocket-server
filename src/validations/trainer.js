@@ -1,4 +1,4 @@
-const Joi = require('joi');
+import Joi from 'joi';
 
 const RGXPass = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$/;
 
@@ -71,7 +71,9 @@ const validateUpdate = (req, res, next) => {
   });
 };
 
-module.exports = {
+const validations = {
   validateCreation,
   validateUpdate,
 };
+
+export default validations;
