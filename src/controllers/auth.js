@@ -5,6 +5,15 @@ import Trainer from '../models/Trainer';
 
 const getAuth = async (req, res) => {
   try {
+    const superAdmin = await SuperAdmin.findOne({ firebaseUid: req.headers.firebaseUid });
+    if (superAdmin) {
+      return res.status(201).json({
+        message: 'super admin found',
+        data: superAdmin,
+        error: false,
+      });
+    }
+
     const member = await Member.findOne({ firebaseUid: req.headers.firebaseUid });
     if (member) {
       return res.status(201).json({
@@ -19,15 +28,6 @@ const getAuth = async (req, res) => {
       return res.status(201).json({
         message: 'Admin found',
         data: admin,
-        error: false,
-      });
-    }
-
-    const superAdmin = await SuperAdmin.findOne({ firebaseUid: req.headers.firebaseUid });
-    if (superAdmin) {
-      return res.status(201).json({
-        message: 'Super Admin found',
-        data: superAdmin,
         error: false,
       });
     }

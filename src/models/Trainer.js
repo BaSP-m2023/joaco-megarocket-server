@@ -1,6 +1,4 @@
-const mongoose = require('mongoose');
-
-const { Schema } = mongoose;
+import mongoose, { Schema } from 'mongoose';
 
 const trainerSchema = new Schema({
   firebaseUid: {
@@ -46,4 +44,4 @@ const trainerSchema = new Schema({
   },
 });
 
-module.exports = mongoose.model('Trainer', trainerSchema);
+export default mongoose.model('Trainer', trainerSchema);
