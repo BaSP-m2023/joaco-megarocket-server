@@ -1,6 +1,5 @@
 import express from 'express';
 import getAuth from '../controllers/auth';
-import verifyToken from '../middleware/authMiddleware';
 import memberController from '../controllers/member';
 import memberValidations from '../validations/member';
 import trainerValidations from '../validations/trainer';
@@ -13,7 +12,7 @@ import adminsController from '../controllers/admin';
 const authRouter = express.Router();
 
 authRouter
-  .get('/login', verifyToken, getAuth)
+  .get('/login', getAuth)
   .post('/register/members', memberValidations.validateCreation, memberController.createMember)
   .post('/register/admins', adminValidations.validateCreation, adminsController.createAdmin)
   .post('/register/super-admins', superAdminValidations.validateCreation, superAdminController.createSuperAdmin)

@@ -1,15 +1,16 @@
 import express from 'express';
 import subscriptionController from '../controllers/subscription';
 import validations from '../validations/subscription';
+import verifyToken from '../middleware/authMiddleware';
 
 const router = express.Router();
 
 router
-  .get('/', subscriptionController.getSubscriptions)
-  .get('/:id', subscriptionController.getSubscriptionsByID)
-  .post('/', validations.createValidation, subscriptionController.createSubscription)
-  .put('/:id', validations.updateValidation, subscriptionController.updateSubscription)
-  .delete('/:id', subscriptionController.deleteSubscription)
+  .get('/', (req, res, next) => verifyToken(req, res, ['ADMIN', 'MEMBER'], next), subscriptionController.getSubscriptions)
+  .get('/:id', (req, res, next) => verifyToken(req, res, ['ADMIN', 'MEMBER'], next), subscriptionController.getSubscriptionsByID)
+  .post('/', (req, res, next) => verifyToken(req, res, ['ADMIN', 'MEMBER'], next), validations.createValidation, subscriptionController.createSubscription)
+  .put('/:id', (req, res, next) => verifyToken(req, res, ['ADMIN'], next), validations.updateValidation, subscriptionController.updateSubscription)
+  .delete('/:id', (req, res, next) => verifyToken(req, res, ['ADMIN', 'MEMBER'], next), subscriptionController.deleteSubscription)
   .delete('/', subscriptionController.deleteOldSubscriptions);
 
 export default router;
