@@ -62,7 +62,7 @@ const createMember = async (req, res) => {
   try {
     const found = await Member.findOne({ dni, email });
     if (found) {
-      throw Error('This member already exist');
+      throw Error('This member already exist.');
     } else {
       const newFirebaseUser = await firebaseApp.auth().createUser({
         firstName: req.body.firstName,
