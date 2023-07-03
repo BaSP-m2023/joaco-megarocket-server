@@ -1,6 +1,8 @@
 import mongoose from 'mongoose';
 import Trainer from '../models/Trainer';
+import firebaseApp from '../helper/firebase';
 
+// eslint-disable-next-line consistent-return
 const createTrainer = async (req, res) => {
   const {
     firstName, lastName, dni, phone, email, city, password, salary, isActive,
@@ -23,24 +25,39 @@ const createTrainer = async (req, res) => {
         error: true,
       });
     }
+    if (!emailExists && !dniExists) {
+      const newFirebaseUser = await firebaseApp.auth().createUser({
+        firstName: req.body.firstName,
+        lastName: req.body.lastName,
+        dni: req.body.dni,
+        phone: req.body.phone,
+        email: req.body.email,
+        password: req.body.password,
+        salary: req.body.salary,
+        isActive: req.body.isActive,
+      });
+      const firebaseUid = newFirebaseUser.uid;
 
-    const newTrainer = await Trainer.create({
-      firstName,
-      lastName,
-      dni,
-      phone,
-      email,
-      city,
-      password,
-      salary,
-      isActive,
-    });
+      await firebaseApp.auth().setCustomUserClaims(firebaseUid, { role: 'TRAINER' });
+      const newTrainer = await Trainer.create({
+        firebaseUid,
+        firstName,
+        lastName,
+        dni,
+        phone,
+        email,
+        city,
+        password,
+        salary,
+        isActive,
+      });
 
-    return res.status(201).json({
-      message: 'Trainer was created successfully!',
-      data: newTrainer,
-      error: false,
-    });
+      return res.status(201).json({
+        message: 'Trainer was created successfully!',
+        data: newTrainer,
+        error: false,
+      });
+    }
   } catch (error) {
     return res.status(400).json({
       message: error.message,

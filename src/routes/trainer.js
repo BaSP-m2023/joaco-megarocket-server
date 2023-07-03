@@ -9,7 +9,7 @@ router
   .get('/', /* (req, res, next) => verifyToken(req, res, ['ADMIN'], next), */ trainerController.getAllTrainer)
   .get('/:id', (req, res, next) => verifyToken(req, res, [/* 'ADMIN' */'TRAINER'], next), trainerController.getTrainerById)
   .post('/', /* (req, res, next) => verifyToken(req, res, ['ADMIN'], next), */ validations.validateCreation, trainerController.createTrainer)
-  .put('/:id', /* (req, res, next) => verifyToken(req, res, ['ADMIN', 'TRAINER'], next), */ validations.validateUpdate, trainerController.updateTrainer)
+  .put('/:id', (req, res, next) => verifyToken(req, res, ['TRAINER'], next), validations.validateUpdate, trainerController.updateTrainer)
   .delete('/:id', /* (req, res, next) => verifyToken(req, res, ['ADMIN'], next), */ trainerController.deleteTrainer);
 
 export default router;
