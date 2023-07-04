@@ -1,7 +1,7 @@
 import express from 'express';
 import activitiesController from '../controllers/activity';
 import validations from '../validations/activity';
-/* import verifyToken from '../middleware/authMiddleware'; */
+// import verifyToken from '../middleware/authMiddleware';
 
 const router = express.Router();
 
