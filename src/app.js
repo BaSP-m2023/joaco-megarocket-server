@@ -4,7 +4,7 @@ import router from './routes';
 
 const app = express();
 
-app.use(cors('headers'));
+app.use(cors());
 app.use(express.json());
 app.use('/api', router);
 

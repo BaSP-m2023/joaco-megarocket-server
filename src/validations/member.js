@@ -1,5 +1,7 @@
 import Joi from 'joi';
 
+const RGXPassword = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$/;
+
 const validateCreation = (req, res, next) => {
   const memberValidation = Joi.object({
     firstName: Joi.string().min(3).max(11).pattern(/^[a-zA-Z-]+$/)
@@ -20,6 +22,13 @@ const validateCreation = (req, res, next) => {
     postalCode: Joi.number().min(1000).max(99999).required(),
     isActive: Joi.boolean(),
     membership: Joi.string().required(),
+    password: Joi.string().regex(RGXPassword)
+      .min(8)
+      .regex(RGXPassword)
+      .required()
+      .messages({
+        'string.pattern.base': 'Password must contain at least one uppercase letter, one lowercase letter, and one digit',
+      }),
   });
 
   const validation = memberValidation.validate(req.body);

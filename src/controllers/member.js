@@ -1,5 +1,6 @@
 import mongoose from 'mongoose';
 import Member from '../models/Member';
+import firebaseApp from '../helper/firebase';
 
 const getAllMembers = async (req, res) => {
   try {
@@ -55,30 +56,51 @@ const getMembersById = async (req, res) => {
 const createMember = async (req, res) => {
   const {
     firstName, lastName, dni, phone, email, city, birthday, postalCode, isActive, membership,
+    password,
   } = req.body;
 
   try {
-    const found = await Member.findOne({ dni });
+    const found = await Member.findOne({ dni, email });
     if (found) {
-      throw Error('This member already exist');
+      throw Error('This member already exist.');
+    } else {
+      const newFirebaseUser = await firebaseApp.auth().createUser({
+        firstName: req.body.firstName,
+        lastName: req.body.lastName,
+        dni: req.body.dni,
+        phone: req.body.phone,
+        email: req.body.email,
+        city: req.body.city,
+        birthday: req.body.birthday,
+        postalCode: req.body.postalCode,
+        isActive: req.body.isActive,
+        membership: req.body.membership,
+        password: req.body.password,
+      });
+      const firebaseUid = newFirebaseUser.uid;
+
+      await firebaseApp.auth().setCustomUserClaims(firebaseUid, { role: 'MEMBER' });
+
+      const newMember = await Member.create({
+        firebaseUid,
+        firstName,
+        lastName,
+        dni,
+        phone,
+        email,
+        city,
+        birthday,
+        postalCode,
+        isActive,
+        membership,
+        password,
+      });
+      return res.status(201).json({
+        message: 'Member was created successfully!',
+        data: newMember,
+        error: false,
+      });
     }
-    const createdMember = await Member.create({
-      firstName,
-      lastName,
-      dni,
-      phone,
-      email,
-      city,
-      birthday,
-      postalCode,
-      isActive,
-      membership,
-    });
-    return res.status(201).json({
-      message: 'Member was created successfully!',
-      data: createdMember,
-      error: false,
-    });
   } catch (error) {
     if (error.message === 'This member already exist') {
       return res.status(400).json({
