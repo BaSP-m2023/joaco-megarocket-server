@@ -1,5 +1,7 @@
 import mongoose from 'mongoose';
+import fAdmin from 'firebase-admin';
 import Admin from '../models/Admin';
+import firebaseApp from '../helper/firebase';
 
 const getAllAdmins = async (req, res) => {
   try {
@@ -71,12 +73,32 @@ const createAdmin = async (req, res) => {
         error: true,
       });
     }
-    const result = await Admin.create({
-      firstName, lastName, dni, phone, email, city, password,
+    const newFirebaseUser = await firebaseApp.auth().createUser({
+      firstName: req.body.firstName,
+      lastName: req.body.lastName,
+      dni: req.body.dni,
+      phone: req.body.phone,
+      email: req.body.email,
+      city: req.body.city,
+      password: req.body.password,
     });
+    const firebaseUid = newFirebaseUser.uid;
+    await firebaseApp.auth().setCustomUserClaims(firebaseUid, { role: 'ADMIN' });
+
+    const newAdmin = await Admin.create({
+      firebaseUid,
+      firstName,
+      lastName,
+      dni,
+      phone,
+      email,
+      city,
+      password,
+    });
+
     return res.status(201).json({
       message: 'Admin was created successfully!',
-      data: result,
+      data: newAdmin,
       error: false,
     });
   } catch (error) {
@@ -198,17 +220,22 @@ const deleteAdmin = async (req, res) => {
         error: true,
       });
     }
-    const admin = await Admin.findByIdAndDelete(id);
-    if (!admin) {
+
+    const adminDeleted = await Admin.findByIdAndDelete(id);
+
+    if (!adminDeleted) {
       return res.status(404).json({
         message: `Admin with id ${id} was not found`,
         data: undefined,
         error: true,
       });
     }
+
+    await fAdmin.auth().deleteUser(adminDeleted.firebaseUid);
+
     return res.status(200).json({
       message: 'Admin successfully deleted!',
-      data: admin,
+      data: adminDeleted,
       error: false,
     });
   } catch (error) {

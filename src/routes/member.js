@@ -6,10 +6,10 @@ import verifyToken from '../middleware/authMiddleware';
 const router = express.Router();
 
 router
-  .get('/', /* (req, res, next) => verifyToken(req, res, ['ADMIN'], next), */ memberController.getAllMembers)
-  .get('/:id', (req, res, next) => verifyToken(req, res, ['MEMBER', 'TRAINER'/* 'ADMIN' */], next), memberController.getMembersById)
+  .get('/', (req, res, next) => verifyToken(req, res, ['ADMIN'], next), memberController.getAllMembers)
+  .get('/:id', (req, res, next) => verifyToken(req, res, ['MEMBER', 'ADMIN', 'TRAINER'], next), memberController.getMembersById)
   .post('/', (req, res, next) => verifyToken(req, res, ['MEMBER'], next), validations.validateCreation, memberController.createMember)
-  .put('/:id', (req, res, next) => verifyToken(req, res, [/* 'ADMIN',  */'MEMBER'], next), validations.validateUpdate, memberController.editMember)
-  .delete('/:id', (req, res, next) => verifyToken(req, res, [/* 'ADMIN',  */'MEMBER'], next), memberController.deleteMember);
+  .put('/:id', (req, res, next) => verifyToken(req, res, ['ADMIN', 'MEMBER'], next), validations.validateUpdate, memberController.editMember)
+  .delete('/:id', (req, res, next) => verifyToken(req, res, ['ADMIN', 'MEMBER'], next), memberController.deleteMember);
 
 export default router;

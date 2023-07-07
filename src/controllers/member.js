@@ -1,4 +1,5 @@
 import mongoose from 'mongoose';
+import fAdmin from 'firebase-admin';
 import Member from '../models/Member';
 import firebaseApp from '../helper/firebase';
 
@@ -241,6 +242,9 @@ const deleteMember = async (req, res) => {
     if (!memberDeleted) {
       throw Error('Member not found');
     }
+
+    await fAdmin.auth().deleteUser(memberDeleted.firebaseUid);
+
     return res.status(200).json({
       message: 'Member successfully deleted!',
       data: memberDeleted,

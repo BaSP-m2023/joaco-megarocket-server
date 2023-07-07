@@ -1,4 +1,5 @@
 import mongoose from 'mongoose';
+import fAdmin from 'firebase-admin';
 import Trainer from '../models/Trainer';
 import firebaseApp from '../helper/firebase';
 
@@ -194,6 +195,8 @@ const deleteTrainer = async (req, res) => {
         error: true,
       });
     }
+
+    await fAdmin.auth().deleteUser(trainerDelete.firebaseUid);
 
     return res.status(200).json({
       message: 'Trainer successfully deleted!',

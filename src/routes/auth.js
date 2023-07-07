@@ -17,6 +17,5 @@ authRouter
   .post('/register/admins', adminValidations.validateCreation, adminsController.createAdmin)
   .post('/register/super-admins', superAdminValidations.validateCreation, superAdminController.createSuperAdmin)
   .post('/register/trainers', trainerValidations.validateCreation, trainerController.createTrainer);
-// .post('/logout', getAuth);
 
 export default authRouter;
