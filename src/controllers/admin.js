@@ -1,4 +1,5 @@
 import mongoose from 'mongoose';
+import fAdmin from 'firebase-admin';
 import Admin from '../models/Admin';
 import firebaseApp from '../helper/firebase';
 
@@ -219,17 +220,22 @@ const deleteAdmin = async (req, res) => {
         error: true,
       });
     }
-    const admin = await Admin.findByIdAndDelete(id);
-    if (!admin) {
+
+    const adminDeleted = await Admin.findByIdAndDelete(id);
+
+    if (!adminDeleted) {
       return res.status(404).json({
         message: `Admin with id ${id} was not found`,
         data: undefined,
         error: true,
       });
     }
+
+    await fAdmin.auth().deleteUser(adminDeleted.firebaseUid);
+
     return res.status(200).json({
       message: 'Admin successfully deleted!',
-      data: admin,
+      data: adminDeleted,
       error: false,
     });
   } catch (error) {
