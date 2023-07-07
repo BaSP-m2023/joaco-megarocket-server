@@ -5,7 +5,7 @@ import Trainer from '../models/Trainer';
 
 const getAuth = async (req, res) => {
   try {
-    const superAdmin = await SuperAdmin.findOne({ firebaseUid: req.headers.firebaseUid });
+    const superAdmin = await SuperAdmin.findOne({ firebaseUid: req.params.firebaseUid });
     if (superAdmin) {
       return res.status(201).json({
         message: 'super admin found',
@@ -14,7 +14,7 @@ const getAuth = async (req, res) => {
       });
     }
 
-    const member = await Member.findOne({ firebaseUid: req.headers.firebaseUid });
+    const member = await Member.findOne({ firebaseUid: req.params.firebaseUid });
     if (member) {
       return res.status(201).json({
         message: 'Member found',
@@ -23,7 +23,7 @@ const getAuth = async (req, res) => {
       });
     }
 
-    const admin = await Admin.findOne({ firebaseUid: req.headers.firebaseUid });
+    const admin = await Admin.findOne({ firebaseUid: req.params.firebaseUid });
     if (admin) {
       return res.status(201).json({
         message: 'Admin found',
@@ -32,7 +32,7 @@ const getAuth = async (req, res) => {
       });
     }
 
-    const trainer = await Trainer.findOne({ firebaseUid: req.headers.firebaseUid });
+    const trainer = await Trainer.findOne({ firebaseUid: req.params.firebaseUid });
     if (trainer) {
       return res.status(201).json({
         message: 'Trainer found',
