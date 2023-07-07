@@ -12,7 +12,7 @@ import adminsController from '../controllers/admin';
 const authRouter = express.Router();
 
 authRouter
-  .get('/login', getAuth)
+  .get('/login/:firebaseUid', getAuth)
   .post('/register/members', memberValidations.validateCreation, memberController.createMember)
   .post('/register/admins', adminValidations.validateCreation, adminsController.createAdmin)
   .post('/register/super-admins', superAdminValidations.validateCreation, superAdminController.createSuperAdmin)
