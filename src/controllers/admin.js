@@ -1,6 +1,7 @@
 import mongoose from 'mongoose';
 import fAdmin from 'firebase-admin';
 import Admin from '../models/Admin';
+import firebaseApp from '../helper/firebase';
 
 const getAllAdmins = async (req, res) => {
   try {
@@ -72,12 +73,32 @@ const createAdmin = async (req, res) => {
         error: true,
       });
     }
-    const result = await Admin.create({
-      firstName, lastName, dni, phone, email, city, password,
+    const newFirebaseUser = await firebaseApp.auth().createUser({
+      firstName: req.body.firstName,
+      lastName: req.body.lastName,
+      dni: req.body.dni,
+      phone: req.body.phone,
+      email: req.body.email,
+      city: req.body.city,
+      password: req.body.password,
     });
+    const firebaseUid = newFirebaseUser.uid;
+    await firebaseApp.auth().setCustomUserClaims(firebaseUid, { role: 'ADMIN' });
+
+    const newAdmin = await Admin.create({
+      firebaseUid,
+      firstName,
+      lastName,
+      dni,
+      phone,
+      email,
+      city,
+      password,
+    });
+
     return res.status(201).json({
       message: 'Admin was created successfully!',
-      data: result,
+      data: newAdmin,
       error: false,
     });
   } catch (error) {

@@ -1,6 +1,9 @@
 import Joi from 'joi';
 
 const RGXPassword = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$/;
+const currentDate = new Date();
+const minDate = new Date();
+minDate.setFullYear(currentDate.getFullYear() - 15);
 
 const validateCreation = (req, res, next) => {
   const memberValidation = Joi.object({
@@ -18,7 +21,11 @@ const validateCreation = (req, res, next) => {
       .messages({ 'number.min': 'Phone number must have 10 digits', 'number.max': 'Phone number must have 10 digits' }),
     email: Joi.string().email().required(),
     city: Joi.string().min(3).required(),
-    birthday: Joi.date().required(),
+    birthday: Joi.date().iso().max(minDate.toISOString()).required()
+      .messages({
+        'date.format': 'Invalid birth date format',
+        'date.max': 'You must be at least 15 years old',
+      }),
     postalCode: Joi.number().min(1000).max(99999).required(),
     isActive: Joi.boolean(),
     membership: Joi.string().required(),
@@ -56,7 +63,10 @@ const validateUpdate = (req, res, next) => {
       .messages({ 'number.min': 'Phone number must have 10 digits', 'number.max': 'Phone number must have 10 digits' }),
     email: Joi.string().email(),
     city: Joi.string().min(3),
-    birthday: Joi.date().optional(),
+    birthday: Joi.date().iso().max(minDate.toISOString()).messages({
+      'date.base': 'Invalid birth date format',
+      'date.max': 'You must be at least 15 years old',
+    }),
     postalCode: Joi.number().min(1000).max(99999),
     isActive: Joi.boolean(),
     membership: Joi.string(),
