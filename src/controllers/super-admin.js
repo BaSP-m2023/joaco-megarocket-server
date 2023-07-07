@@ -1,4 +1,5 @@
 import mongoose from 'mongoose';
+import fAdmin from 'firebase-admin';
 import firebaseApp from '../helper/firebase';
 import SuperAdmin from '../models/Super-admin';
 
@@ -124,6 +125,8 @@ const deleteSuperAdminsById = async (req, res) => {
       const superAdminDeleted = await SuperAdmin.findByIdAndDelete(id);
 
       if (superAdminDeleted) {
+        await fAdmin.auth().deleteUser(superAdminDeleted.firebaseUid);
+
         return res.status(200).json({
           message: 'Super-Admin successfully deleted!',
           data: undefined,
