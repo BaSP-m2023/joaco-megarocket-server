@@ -35,7 +35,9 @@
     "joi": "^17.9.2",
     "jsonwebtoken": "^9.0.0",
     "mongoose": "^7.1.1",
-    "nodemon": "^2.0.15"
+    "nanoid": "^4.0.2",
+    "nodemon": "^2.0.15",
+    "openai": "^3.3.0"
   },
   "devDependencies": {
     "@babel/core": "^7.17.9",
