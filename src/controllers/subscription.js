@@ -327,7 +327,17 @@ const deleteOldSubscriptions = async (req, res) => {
     currentDate.setUTCSeconds(0);
     currentDate.setUTCMilliseconds(0);
 
-    const oldSubscriptions = await Subscription.deleteMany({ date: { $lt: currentDate } });
+    const classes = await Class.find();
+
+    const members = await Member.find();
+
+    const oldSubscriptions = await Subscription.deleteMany({
+      $or: [
+        { date: { $lt: currentDate } },
+        { member: { $nin: members } },
+        { classes: { $nin: classes } },
+      ],
+    });
 
     return res.status(200).json({
       error: false,

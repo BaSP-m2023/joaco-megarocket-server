@@ -262,13 +262,39 @@ const updateClass = async (req, res) => {
     });
   }
 };
+const deleteOldClasses = async (req, res) => {
+  try {
+    const trainer = await Trainer.find();
+    const activity = await Activity.find();
 
+    const oldClasses = await Class.deleteMany({
+      $or: [
+
+        { member: { $nin: trainer } },
+        { acivity: { $nin: activity } },
+      ],
+    });
+
+    return res.status(200).json({
+      error: false,
+      message: 'Old subscriptions deleted successfully!',
+      data: oldClasses,
+    });
+  } catch (error) {
+    return res.status(500).json({
+      error: true,
+      message: error.message,
+      data: undefined,
+    });
+  }
+};
 const classController = {
   getAllClasses,
   getClassesByID,
   createClass,
   deleteClass,
   updateClass,
+  deleteOldClasses,
 };
 
 export default classController;
