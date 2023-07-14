@@ -1,3 +1,4 @@
+/* eslint-disable no-underscore-dangle */
 import mongoose from 'mongoose';
 import Class from '../models/Class';
 import Activity from '../models/Activity';
@@ -263,12 +264,41 @@ const updateClass = async (req, res) => {
   }
 };
 
+const deleteOldClasses = async (req, res) => {
+  try {
+    const trainers = (await Trainer.find()).map((trainer) => trainer._id);
+    const activities = (await Activity.find()).map((activity) => activity._id);
+
+    const oldClasses = await Class.deleteMany({
+      $or: [
+        { trainer: { $exists: false } },
+        { activity: { $exists: false } },
+        { trainer: { $nin: trainers } },
+        { activity: { $nin: activities } },
+      ],
+    });
+
+    return res.status(200).json({
+      error: false,
+      message: 'Old classes deleted successfully!',
+      data: oldClasses,
+    });
+  } catch (error) {
+    return res.status(500).json({
+      error: true,
+      message: error.message,
+      data: undefined,
+    });
+  }
+};
+
 const classController = {
   getAllClasses,
   getClassesByID,
   createClass,
   deleteClass,
   updateClass,
+  deleteOldClasses,
 };
 
 export default classController;

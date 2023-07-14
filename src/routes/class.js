@@ -10,6 +10,6 @@ router
   .get('/:id', classController.getClassesByID)
   .post('/', (req, res, next) => verifyToken(req, res, ['ADMIN'], next), validations.validateCreation, classController.createClass)
   .delete('/:id', (req, res, next) => verifyToken(req, res, ['ADMIN'], next), classController.deleteClass)
-  .put('/:id', (req, res, next) => verifyToken(req, res, ['ADMIN'], next), validations.validateUpdate, classController.updateClass);
-
+  .put('/:id', (req, res, next) => verifyToken(req, res, ['ADMIN'], next), validations.validateUpdate, classController.updateClass)
+  .delete('/', classController.deleteOldClasses);
 export default router;
