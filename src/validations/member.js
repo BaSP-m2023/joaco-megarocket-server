@@ -13,9 +13,9 @@ const validateCreation = (req, res, next) => {
     lastName: Joi.string().min(4).max(25).pattern(/^[a-zA-Z-]+$/)
       .required()
       .messages({ 'string.pattern.base': 'Last name must contain letters or hyphens only' }),
-    dni: Joi.number().min(1000000).max(99999999)
+    dni: Joi.number().min(1000000).max(999999999)
       .required()
-      .messages({ 'number.min': 'DNI must have 7-8 digits', 'number.max': 'DNI must have 7-8 digits' }),
+      .messages({ 'number.min': 'DNI must have 7-9 digits', 'number.max': 'DNI must have 7-9 digits' }),
     phone: Joi.number().min(1000000000).max(9999999999)
       .required()
       .messages({ 'number.min': 'Phone number must have 10 digits', 'number.max': 'Phone number must have 10 digits' }),
@@ -57,8 +57,8 @@ const validateUpdate = (req, res, next) => {
       .messages({ 'string.pattern.base': 'First name must contain letters or hyphens only' }),
     lastName: Joi.string().min(4).max(25).pattern(/^[a-zA-Z-]+$/)
       .messages({ 'string.pattern.base': 'Last name must contain letters or hyphens only' }),
-    dni: Joi.number().min(1000000).max(99999999)
-      .messages({ 'number.min': 'DNI must have 7-8 digits', 'number.max': 'DNI must have 7-8 digits' }),
+    dni: Joi.number().min(1000000).max(999999999)
+      .messages({ 'number.min': 'DNI must have 7-9 digits', 'number.max': 'DNI must have 7-9 digits' }),
     phone: Joi.number().min(1000000000).max(9999999999)
       .messages({ 'number.min': 'Phone number must have 10 digits', 'number.max': 'Phone number must have 10 digits' }),
     email: Joi.string().email(),

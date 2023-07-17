@@ -48,7 +48,7 @@ const validateUpdate = (req, res, next) => {
       .messages({
         'string.pattern.base': 'Last name must contain only letters',
       }),
-    dni: Joi.number().min(1000000).max(99999999),
+    dni: Joi.number().min(1000000).max(999999999),
     phone: Joi.number().min(1000000000).max(9999999999),
     email: Joi.string().email(),
     city: Joi.string().min(3).regex(/^[a-zA-Z\s.,]+$/),
