@@ -331,11 +331,14 @@ const deleteOldSubscriptions = async (req, res) => {
 
     const members = await Member.find();
 
+    const inactiveMembers = await Member.find({ isActive: false });
+
     const oldSubscriptions = await Subscription.deleteMany({
       $or: [
         { date: { $lt: currentDate } },
         { member: { $nin: members } },
         { classes: { $nin: classes } },
+        { member: { $in: inactiveMembers } },
       ],
     });
 
