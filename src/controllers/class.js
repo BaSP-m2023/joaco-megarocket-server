@@ -10,6 +10,7 @@ const getAllClasses = async (req, res) => {
       firstName: 1,
       lastName: 1,
       dni: 1,
+      isActive: 1,
       name: 1,
       description: 1,
     });
@@ -42,6 +43,7 @@ const getClassesByID = async (req, res) => {
     const classFound = await Class.findById(id).populate('activity trainer', {
       firstName: 1,
       lastName: 1,
+      isActive: 1,
       dni: 1,
       name: 1,
       description: 1,
@@ -237,6 +239,7 @@ const updateClass = async (req, res) => {
     }, { new: true }).populate('activity trainer', {
       firstName: 1,
       lastName: 1,
+      isActive: 1,
       dni: 1,
       name: 1,
       description: 1,
