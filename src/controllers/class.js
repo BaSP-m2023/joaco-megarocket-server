@@ -269,12 +269,15 @@ const deleteOldClasses = async (req, res) => {
     const trainers = (await Trainer.find()).map((trainer) => trainer._id);
     const activities = (await Activity.find()).map((activity) => activity._id);
 
+    const inactiveTrainers = await Trainer.find({ isActive: false });
+
     const oldClasses = await Class.deleteMany({
       $or: [
         { trainer: { $exists: false } },
         { activity: { $exists: false } },
         { trainer: { $nin: trainers } },
         { activity: { $nin: activities } },
+        { trainer: { $in: inactiveTrainers } },
       ],
     });
 
