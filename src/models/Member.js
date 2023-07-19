@@ -43,6 +43,9 @@ const memberSchema = new Schema({
     required: true,
     minLenght: 4,
   },
+  profilePhoto: {
+    type: String,
+  },
   isActive: {
     type: Boolean,
     default: true,
