@@ -34,6 +34,9 @@ const trainerSchema = new Schema({
     required: true,
     minLenght: 3,
   },
+  profilePhoto: {
+    type: String,
+  },
   salary: {
     type: Number,
     required: true,

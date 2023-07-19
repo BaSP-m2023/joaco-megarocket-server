@@ -18,6 +18,7 @@ const validateCreation = (req, res, next) => {
     phone: Joi.number().min(1000000000).max(9999999999).required(),
     email: Joi.string().email().required(),
     city: Joi.string().min(3).regex(/^[a-zA-Z\s.,]+$/).required(),
+    profilePhoto: Joi.string(),
     password: Joi.string().regex(RGXPass)
       .min(8)
       .regex(RGXPass)
@@ -52,6 +53,7 @@ const validateUpdate = (req, res, next) => {
     phone: Joi.number().min(1000000000).max(9999999999),
     email: Joi.string().email(),
     city: Joi.string().min(3).regex(/^[a-zA-Z\s.,]+$/),
+    profilePhoto: Joi.string(),
     password: Joi.string().regex(RGXPass)
       .min(8)
       .regex(RGXPass)

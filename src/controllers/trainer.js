@@ -6,7 +6,8 @@ import firebaseApp from '../helper/firebase';
 // eslint-disable-next-line consistent-return
 const createTrainer = async (req, res) => {
   const {
-    firstName, lastName, dni, phone, email, city, password, salary, isActive,
+    firstName, lastName, dni, phone, email, city, password, profilePhoto,
+    salary, isActive,
   } = req.body;
 
   try {
@@ -34,6 +35,7 @@ const createTrainer = async (req, res) => {
         phone: req.body.phone,
         email: req.body.email,
         password: req.body.password,
+        profilePhoto: req.body.profilePhoto,
         salary: req.body.salary,
         isActive: req.body.isActive,
       });
@@ -48,6 +50,7 @@ const createTrainer = async (req, res) => {
         phone,
         email,
         city,
+        profilePhoto,
         password,
         salary,
         isActive,
@@ -80,7 +83,8 @@ const updateTrainer = async (req, res) => {
   }
 
   const {
-    firstName, lastName, dni, phone, email, city, password, salary, isActive,
+    firstName, lastName, dni, phone, email, city, password, profilePhoto,
+    salary, isActive,
   } = req.body;
 
   try {
@@ -154,6 +158,7 @@ const updateTrainer = async (req, res) => {
         phone,
         email,
         city,
+        profilePhoto,
         password,
         salary,
         isActive,

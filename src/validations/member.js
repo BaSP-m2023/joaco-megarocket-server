@@ -27,6 +27,7 @@ const validateCreation = (req, res, next) => {
         'date.max': 'You must be at least 15 years old',
       }),
     postalCode: Joi.number().min(1000).max(99999).required(),
+    profilePhoto: Joi.string(),
     isActive: Joi.boolean(),
     membership: Joi.string().required(),
     password: Joi.string().regex(RGXPassword)
@@ -68,6 +69,7 @@ const validateUpdate = (req, res, next) => {
       'date.max': 'You must be at least 15 years old',
     }),
     postalCode: Joi.number().min(1000).max(99999),
+    profilePhoto: Joi.string(),
     isActive: Joi.boolean(),
     membership: Joi.string(),
   });

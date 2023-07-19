@@ -56,8 +56,8 @@ const getMembersById = async (req, res) => {
 
 const createMember = async (req, res) => {
   const {
-    firstName, lastName, dni, phone, email, city, birthday, postalCode, isActive, membership,
-    password,
+    firstName, lastName, dni, phone, email, city, birthday, postalCode, profilePhoto, isActive,
+    membership, password,
   } = req.body;
 
   try {
@@ -74,6 +74,7 @@ const createMember = async (req, res) => {
         city: req.body.city,
         birthday: req.body.birthday,
         postalCode: req.body.postalCode,
+        profilePhoto: req.body.profilePhoto,
         isActive: req.body.isActive,
         membership: req.body.membership,
         password: req.body.password,
@@ -92,6 +93,7 @@ const createMember = async (req, res) => {
         city,
         birthday,
         postalCode,
+        profilePhoto,
         isActive,
         membership,
         password,
@@ -130,7 +132,8 @@ const editMember = async (req, res) => {
   }
 
   const {
-    firstName, lastName, dni, phone, email, city, birthday, postalCode, isActive, membership,
+    firstName, lastName, dni, phone, email, city, birthday, postalCode, profilePhoto, isActive,
+    membership,
   } = req.body;
 
   try {
@@ -207,6 +210,7 @@ const editMember = async (req, res) => {
         city,
         birthday,
         postalCode,
+        profilePhoto,
         isActive,
         membership,
       },
